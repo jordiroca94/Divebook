@@ -36,7 +36,7 @@ const RegisterForm = () => {
   });
 
   const handleRegister = async (values: RegisterValues) => {
-    console.log(values, "form submitted");
+    // console.log(values, "form submitted");
     try {
       const res = await fetch("api/register", {
         method: "POST",
