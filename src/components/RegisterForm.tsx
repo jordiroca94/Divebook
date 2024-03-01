@@ -14,7 +14,10 @@ type RegisterValues = {
 
 const RegisterForm = () => {
   const form: any = useRef();
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
+  console.log(error, "error-->");
   const registerSchema = z.object({
     email: z.string().email({ message: "An email is required" }),
     name: z.string().min(1, { message: "A name is required" }),
@@ -36,18 +39,33 @@ const RegisterForm = () => {
   });
 
   const handleRegister = async (values: RegisterValues) => {
-    // console.log(values, "form submitted");
     try {
-      const res = await fetch("api/register", {
+      const resUserExists = await fetch("api/userExists", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          values,
-        }),
+        body: JSON.stringify({ values }),
       });
-      reset();
+
+      const { user } = await resUserExists.json();
+
+      if (user) {
+        console.log("we got here --->>");
+        setError("User already existst");
+      } else {
+        await fetch("api/register", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            values,
+          }),
+        });
+        reset();
+        setSuccess("User created Successfully");
+      }
     } catch {
       throw Error("An error occurred while registering. Please try again");
     }
@@ -114,7 +132,16 @@ const RegisterForm = () => {
           >
             Register
           </button>
-
+          {error && (
+            <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
+              {error}
+            </div>
+          )}
+          {success && (
+            <div className="bg-green-600 text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
+              {success}
+            </div>
+          )}
           <Link className="text-sm mt-3 text-right" href={"/login"}>
             Already have an account ?
             <span className="underline"> Register</span>
