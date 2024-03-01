@@ -1,19 +1,19 @@
 import Link from "next/link";
 import React from "react";
 
-const Login = () => {
+const LoginFrom = () => {
   return (
     <div className="grid place-items-center h-screen">
       <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-500">
         <h1 className="text-xl font-bold my-4">Login with your credentials</h1>
         <form className="flex flex-col gap-3">
           <input
-            className="border border-gray-200 py-2 px-6"
+            className="border border-gray-200 py-2 px-6 rounded-md"
             type="text"
             placeholder="Email"
           />
           <input
-            className="border border-gray-200 py-2 px-6"
+            className="border border-gray-200 py-2 px-6 rounded-md"
             type="password"
             placeholder="Password"
           />
@@ -35,4 +35,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginFrom;
