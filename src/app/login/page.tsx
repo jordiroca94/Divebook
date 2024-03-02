@@ -1,9 +1,8 @@
-import LoginFrom from "@/components/LoginFrom";
-import RegisterForm from "@/components/RegisterForm";
+import LoginForm from "@/components/LoginForm";
 import React from "react";
 
-const Register = () => {
-  return <LoginFrom />;
+const page = () => {
+  return <LoginForm />;
 };
 
-export default Register;
+export default page;

@@ -1,12 +1,12 @@
 "use client";
-import { Inputs } from "@/types/common";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
-type RegisterValues = {
+type RegisterValuesType = {
   name: string;
   email: string;
   password: string;
@@ -15,9 +15,8 @@ type RegisterValues = {
 const RegisterForm = () => {
   const form: any = useRef();
   const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
+  const router = useRouter();
 
-  console.log(error, "error-->");
   const registerSchema = z.object({
     email: z.string().email({ message: "An email is required" }),
     name: z.string().min(1, { message: "A name is required" }),
@@ -29,7 +28,7 @@ const RegisterForm = () => {
     register,
     reset,
     formState: { errors },
-  } = useForm<RegisterValues>({
+  } = useForm<RegisterValuesType>({
     defaultValues: {
       name: "",
       email: "",
@@ -38,7 +37,7 @@ const RegisterForm = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const handleRegister = async (values: RegisterValues) => {
+  const handleRegister = async (values: RegisterValuesType) => {
     try {
       const resUserExists = await fetch("api/userExists", {
         method: "POST",
@@ -51,7 +50,6 @@ const RegisterForm = () => {
       const { user } = await resUserExists.json();
 
       if (user) {
-        console.log("we got here --->>");
         setError("User already existst");
       } else {
         await fetch("api/register", {
@@ -64,7 +62,7 @@ const RegisterForm = () => {
           }),
         });
         reset();
-        setSuccess("User created Successfully");
+        router.push("/");
       }
     } catch {
       throw Error("An error occurred while registering. Please try again");
@@ -106,7 +104,7 @@ const RegisterForm = () => {
             {...register("email")}
           />
           {errors.email?.message && (
-            <p aria-describedby="name" className="text-red pt-1">
+            <p aria-describedby="email" className="text-red pt-1">
               {errors.email?.message}
             </p>
           )}
@@ -121,7 +119,7 @@ const RegisterForm = () => {
             {...register("password")}
           />
           {errors.password?.message && (
-            <p aria-describedby="name" className="text-red pt-1">
+            <p aria-describedby="password" className="text-red pt-1">
               {errors.password?.message}
             </p>
           )}
@@ -135,11 +133,6 @@ const RegisterForm = () => {
           {error && (
             <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
               {error}
-            </div>
-          )}
-          {success && (
-            <div className="bg-green-600 text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
-              {success}
             </div>
           )}
           <Link className="text-sm mt-3 text-right" href={"/login"}>
