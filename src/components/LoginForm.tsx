@@ -30,8 +30,13 @@ const LoginForm = () => {
   });
 
   const handleLogin = async (values: LoginValuesType) => {
+    const { email, password } = values;
     try {
-      const res = await signIn("credentials", { values, redirect: false });
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
       if (res && res.status === 200) {
         return router.replace("/profile");
       }

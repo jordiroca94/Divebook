@@ -11,6 +11,7 @@ const authOptions = {
       credentials: {},
       async authorize(credentials) {
         const { email, password } = credentials;
+
         try {
           await connectMongoDB();
           const user = await User.findOne({ email });
