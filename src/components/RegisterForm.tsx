@@ -136,7 +136,7 @@ const RegisterForm = () => {
           </button>
           {error && (
             <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
-              "User already existst"
+              User already existst
             </div>
           )}
           <Link
