@@ -14,7 +14,9 @@ type RegisterValuesType = {
 
 const RegisterForm = () => {
   const form: any = useRef();
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+
   const router = useRouter();
 
   const registerSchema = z.object({
@@ -38,6 +40,8 @@ const RegisterForm = () => {
   });
 
   const handleRegister = async (values: RegisterValuesType) => {
+    setSuccess(false);
+    setError(false);
     try {
       const resUserExists = await fetch("api/userExists", {
         method: "POST",
@@ -50,7 +54,7 @@ const RegisterForm = () => {
       const { user } = await resUserExists.json();
 
       if (user) {
-        setError("User already existst");
+        setError(true);
       } else {
         await fetch("api/register", {
           method: "POST",
@@ -62,7 +66,7 @@ const RegisterForm = () => {
           }),
         });
         reset();
-        router.push("/");
+        setSuccess(true);
       }
     } catch {
       throw Error("An error occurred while registering. Please try again");
@@ -132,12 +136,18 @@ const RegisterForm = () => {
           </button>
           {error && (
             <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
-              {error}
+              "User already existst"
             </div>
           )}
-          <Link className="text-sm mt-3 text-right" href={"/login"}>
-            Already have an account ?
-            <span className="underline"> Register</span>
+          <Link
+            className={`text-sm mt-3 text-right ${success && "text-primary"}`}
+            href={`${success ? "login" : "/register"}`}
+          >
+            {success
+              ? "Registration done sucessfully"
+              : "Already have an account ?"}
+
+            <span className="underline"> {success ? "Login" : "Register"}</span>
           </Link>
         </form>
       </div>
