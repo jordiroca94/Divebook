@@ -147,7 +147,7 @@ const RegisterForm = () => {
               ? "Registration done sucessfully"
               : "Already have an account ?"}
 
-            <span className="underline"> {success ? "Login" : "Register"}</span>
+            <span className="underline"> Login</span>
           </Link>
         </form>
       </div>
