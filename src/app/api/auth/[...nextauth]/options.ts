@@ -1,15 +1,15 @@
-import NextAuth from "next-auth/next";
+import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectMongoDB } from "../../../../../lib/mongodb";
 import User from "../../../../../models/user";
 import bcrypt from "bcryptjs";
 
-export const authOptions = {
+const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         const { email, password } = credentials;
 
         try {
@@ -38,5 +38,4 @@ export const authOptions = {
   },
 };
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+export default authOptions;
