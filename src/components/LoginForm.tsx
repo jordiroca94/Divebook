@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,6 +11,7 @@ type LoginValuesType = { email: string; password: string };
 const LoginForm = () => {
   const form: any = useRef();
   const router = useRouter();
+  const [error, setError] = useState(false);
   const loginSchema = z.object({
     email: z.string().email({ message: "An email is required" }),
     password: z.string().min(1, { message: "Insert your password" }),
@@ -19,7 +20,6 @@ const LoginForm = () => {
   const {
     handleSubmit,
     register,
-    reset,
     formState: { errors },
   } = useForm<LoginValuesType>({
     defaultValues: {
@@ -32,6 +32,7 @@ const LoginForm = () => {
   const handleLogin = async (values: LoginValuesType) => {
     const { email, password } = values;
     try {
+      setError(false);
       const res = await signIn("credentials", {
         email,
         password,
@@ -39,9 +40,11 @@ const LoginForm = () => {
       });
       if (res && res.status === 200) {
         return router.replace("/profile");
+      } else {
+        setError(true);
       }
     } catch (error) {}
-    throw Error("There was an error, please try again");
+    console.log("There was an error, please try again");
   };
 
   return (
@@ -83,6 +86,7 @@ const LoginForm = () => {
               {errors.password?.message}
             </p>
           )}
+          {error && <p className="text-red pt-1">Wrong email or password</p>}
           <button
             type="submit"
             className="bg-green-600 text-white cursor-pointer px-6 py-2"

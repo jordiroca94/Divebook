@@ -1,7 +1,12 @@
 import RegisterForm from "@/components/RegisterForm";
 import React from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+const page = async () => {
+  const session = await getServerSession<any>(authOptions);
 
-const page = () => {
+  if (session) redirect("/");
   return <RegisterForm />;
 };
 
