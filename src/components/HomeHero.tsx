@@ -1,29 +1,17 @@
 "use client";
 import React from "react";
 import { useSession } from "next-auth/react";
+import TemporaryImage from "../../public/assets/temporary.avif";
+import Image from "next/image";
 
 const HomeHero = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col items-center py-10">
-      {session && <div>Hello {session.user?.name}</div>}
+    <div className="flex flex-col items-center pt-28 bg-lightGray">
+      {session && <div className="text-2xl ">Hello {session.user?.name}</div>}
       <h1 className="text-4xl pb-10">WELCOME TO MY APP </h1>
-      {!session ? (
-        <a
-          className="border-black border w-fit rounded-md py-2 px-2 cursor-pointer"
-          href="/login"
-        >
-          Not logged yet ?
-        </a>
-      ) : (
-        <a
-          className="border-black border w-fit rounded-md py-2 px-2 cursor-pointer"
-          href="/profile"
-        >
-          Go to profile
-        </a>
-      )}
+      <Image src={TemporaryImage} alt="under construction" />
     </div>
   );
 };
