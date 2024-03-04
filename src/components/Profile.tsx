@@ -18,7 +18,7 @@ const Profile = () => {
         </div>
         <button
           onClick={() => signOut()}
-          className="bg-red text-white font-bold px-6 py-2 mt-3 "
+          className="bg-primary rounded-md text-white font-bold px-6 py-2 mt-3 "
         >
           Log out
         </button>

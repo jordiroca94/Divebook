@@ -7,7 +7,7 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <header className=" bg-black/30 text-white px-10 py-6 fixed top-0 z-50 w-full p-6 flex justify-between items-center ">
+    <header className=" bg-black/25 text-white px-10 py-6 fixed top-0 z-50 w-full p-6 flex justify-between items-center ">
       <Link href={"/"}>MY-APP</Link>
       <div className="flex justify-between gap-4 items-center">
         <div>One</div>

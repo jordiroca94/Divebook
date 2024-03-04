@@ -49,7 +49,7 @@ const LoginForm = () => {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-500">
+      <div className="shadow-lg p-5 rounded-lg border-t-4 border-primary">
         <h1 className="text-xl font-bold my-4">Login with your credentials</h1>
         <form
           ref={form}
@@ -89,7 +89,7 @@ const LoginForm = () => {
           {error && <p className="text-red pt-1">Wrong email or password</p>}
           <button
             type="submit"
-            className="bg-green-600 text-white cursor-pointer px-6 py-2"
+            className="bg-primary cursor-pointer px-6 py-2 text-white rounded-md "
           >
             Login
           </button>
