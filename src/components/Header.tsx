@@ -39,14 +39,16 @@ const Header = () => {
         >
           {session ? "Profile" : "Login"}
         </a>
-        <a
-          className={`${
-            scroll && "border-white"
-          } text-white border w-fit rounded-md py-2 px-4 cursor-pointer ml-2 bg-primary`}
-          href="/register"
-        >
-          Sign up
-        </a>
+        {!session && (
+          <a
+            className={`${
+              scroll && "border-white"
+            } text-white border w-fit rounded-md py-2 px-4 cursor-pointer ml-2 bg-primary`}
+            href="/register"
+          >
+            Sign up
+          </a>
+        )}
       </div>
     </header>
   );
