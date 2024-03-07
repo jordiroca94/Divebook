@@ -9,17 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#4db5ff",
-        secondary: "#00308F",
+        primary: "#00308F",
+        secondary: "#4db5ff",
         darkBlue: "#002D62",
         red: "#ED4337",
         white: "#ffffff",
         black: "#000000",
+        gray: "#707070",
         mediumGray: "#E8E9E8",
         lightGray: "#FCFCFC",
       },
       padding: {
-        header: "72px",
+        header: "76px",
       },
     },
   },

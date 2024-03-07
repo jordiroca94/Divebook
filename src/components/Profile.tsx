@@ -24,7 +24,7 @@ const Profile = () => {
         </button>
         <a
           className="border-black border flex justify-center w-full  rounded-md py-2 px-2 cursor-pointer "
-          href="/login"
+          href="/"
         >
           Go back home
         </a>
