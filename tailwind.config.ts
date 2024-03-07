@@ -10,12 +10,16 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#4db5ff",
-        secondary: "#2c2c6c",
+        secondary: "#00308F",
+        darkBlue: "#002D62",
         red: "#ED4337",
         white: "#ffffff",
         black: "#000000",
         mediumGray: "#E8E9E8",
         lightGray: "#FCFCFC",
+      },
+      padding: {
+        header: "72px",
       },
     },
   },
