@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="px-6 min-h-header lg:px-10 py-4 fixed top-0 z-50 w-full p-6 flex justify-between items-center border border-mediumGray bg-white">
       <Link href={"/"} className="font-extrabold text-primary text-lg ">
-        Divebook
+        Diverbook
       </Link>
       <div className="flex justify-between gap-8 items-center">
         <div className="hidden lg:flex gap-4">

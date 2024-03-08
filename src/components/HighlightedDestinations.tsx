@@ -2,6 +2,8 @@ import Image from "next/image";
 import image1 from "../../public/assets/images/destination1.jpeg";
 import image2 from "../../public/assets/images/destination2.jpeg";
 import image3 from "../../public/assets/images/destination3.jpeg";
+import Container from "./ui/Container";
+import Button from "./ui/button";
 
 const HighlightedDestinations = () => {
   const items = [
@@ -37,40 +39,40 @@ const HighlightedDestinations = () => {
     },
   ];
   return (
-    <div className="grid grid-cols-4 lg:grid-cols-12 py-12 lg:py-24 px-4 lg:px-20 gap-6">
-      <h2 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
-        Some of our highlighted diving spots
-      </h2>
-      {items.map((item) => (
-        <div
-          className="col-span-4 lg:col-span-4 shadow-lg rounded-md border-mediumGray border"
-          key={item.key}
-        >
-          <Image className="rounded-t-md" src={item.image} alt={item.name} />
-          <div className="p-4">
-            <h6 className="text-lg font-semibold">{item.country}</h6>
-            <h5 className="py-2">{item.name}</h5>
-            <p className="line-clamp-3 ">{item.description}</p>
-            <div className="flex flex-col">
-              <span className="font-semibold py-2">
-                Dive Type: <span className="font-normal">{item.type}</span>
-              </span>
-              <span className="font-semibold">
-                When to go: <span className="font-normal">{item.season}</span>
-              </span>
-            </div>
-            <div className="mt-6 mb-2">
-              <a
-                className="text-base font-bold text-white border w-fit rounded-md py-2 px-4 cursor-pointer hover:bg-primary/80 bg-primary"
-                href="/item"
-              >
-                Read more
-              </a>
+    <Container>
+      <div className="grid grid-cols-4 lg:grid-cols-12 gap-6">
+        <h2 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
+          Some of our highlighted diving spots
+        </h2>
+        {items.map((item) => (
+          <div
+            className="col-span-4 lg:col-span-4 shadow-lg rounded-md border-mediumGray border"
+            key={item.key}
+          >
+            <Image className="rounded-t-md" src={item.image} alt={item.name} />
+            <div className="p-4">
+              <h6 className="text-lg font-semibold">{item.country}</h6>
+              <h5 className="py-2">{item.name}</h5>
+              <p className="line-clamp-3 ">{item.description}</p>
+              <div className="flex flex-col">
+                <span className="font-semibold py-2">
+                  Dive Type: <span className="font-normal">{item.type}</span>
+                </span>
+                <span className="font-semibold">
+                  When to go: <span className="font-normal">{item.season}</span>
+                </span>
+              </div>
+              <Button
+                openNewTab
+                className="mt-6 mb-2"
+                link="/item"
+                label="Read more"
+              />
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Container>
   );
 };
 

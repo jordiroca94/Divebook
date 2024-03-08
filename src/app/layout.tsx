@@ -6,9 +6,9 @@ import { AuthProvider } from "./Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Divebook",
+  title: "Diverbook",
   description:
-    "DiveBook is a place to discover and share the best places for diving",
+    "DiverBook is a place to discover and share the best places for diving",
 };
 
 export default function RootLayout({

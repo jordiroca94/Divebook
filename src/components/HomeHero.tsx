@@ -21,7 +21,7 @@ const HomeHero = () => {
             Divers of the World
           </h1>
           <p className="text-base 2xl:text-2xl">
-            Divebook is a place to discover and share the best places for
+            Diverbook is a place to discover and share the best places for
             diving.
           </p>
           {!session && (
