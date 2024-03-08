@@ -17,12 +17,23 @@ const RegisterForm = () => {
   const [error, setError] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const router = useRouter();
+  const hasUppercase = RegExp(/[A-Z]/);
+  const hasNumber = RegExp(/\d/);
+
+  const password = z
+    .string()
+    .min(6, { message: "Password must be more than 6 characters" })
+    .refine((value) => hasUppercase.test(value), {
+      message: "Password must have an uppercase letter",
+    })
+    .refine((value) => hasNumber.test(value), {
+      message: "Password must include at least one number",
+    });
 
   const registerSchema = z.object({
     email: z.string().email({ message: "An email is required" }),
     name: z.string().min(1, { message: "A name is required" }),
-    password: z.string().min(1, { message: "Insert your password" }),
+    password: password,
   });
 
   const {
@@ -75,19 +86,19 @@ const RegisterForm = () => {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-5 rounded-lg border-t-4 border-primary">
+      <div className="shadow-lg py-6 px-8 w-[90%] lg:w-auto rounded-lg border-t-4 border-primary">
         <h1 className="text-xl font-bold my-4">Register</h1>
         <form
           ref={form}
           onSubmit={handleSubmit(handleRegister)}
           className="flex flex-col gap-3"
         >
-          <label htmlFor="name" className="font-medium mb-2">
+          <label htmlFor="name" className="font-medium">
             Name
           </label>
           <input
             id="name"
-            className="border border-gray-200 py-2 px-6 rounded-md"
+            className="border border-mediumGray py-2 px-6 rounded-md"
             type="text"
             placeholder="Full Name"
             {...register("name")}
@@ -97,12 +108,12 @@ const RegisterForm = () => {
               {errors.name?.message}
             </p>
           )}
-          <label htmlFor="email" className="font-medium mb-2">
+          <label htmlFor="email" className="font-medium">
             Email
           </label>
           <input
             id="email"
-            className="border border-gray-200 py-2 px-6 rounded-md"
+            className="border border-mediumGray py-2 px-6 rounded-md"
             type="email"
             placeholder="Email"
             {...register("email")}
@@ -112,12 +123,12 @@ const RegisterForm = () => {
               {errors.email?.message}
             </p>
           )}
-          <label htmlFor="password" className="font-medium mb-2">
+          <label htmlFor="password" className="font-medium">
             Password
           </label>
           <input
             id="password"
-            className="border border-gray-200 py-2 px-6 rounded-md"
+            className="border border-mediumGray py-2 px-6 rounded-md"
             type="password"
             placeholder="Password"
             {...register("password")}
@@ -129,7 +140,7 @@ const RegisterForm = () => {
           )}
           <button
             type="submit"
-            className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md"
+            className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md mt-4"
             value="Send"
           >
             Register
@@ -141,11 +152,11 @@ const RegisterForm = () => {
           )}
           <Link
             className={`text-sm mt-3 text-right ${success && "text-primary"}`}
-            href={`${success ? "login" : "/register"}`}
+            href={`${success ? "register" : "/login"}`}
           >
             {success
               ? "Registration done sucessfully"
-              : "Already have an account ?"}
+              : "Already have an account?"}
 
             <span className="underline"> Login</span>
           </Link>
