@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import HighlightedDestinations from "@/components/HighlightedDestinations";
 import HomeHero from "@/components/HomeHero";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <Header />
       <HomeHero />
+      <HighlightedDestinations />
     </main>
   );
 }

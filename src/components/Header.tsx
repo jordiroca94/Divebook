@@ -7,21 +7,28 @@ import profileSvg from "../svgs/profile";
 const Header = () => {
   const { data: session } = useSession();
 
+  const navLinks = [
+    { label: "Explore", link: "/" },
+    { label: "Share", link: "/" },
+  ];
+
   return (
-    <header className="px-6 lg:px-10 py-4 fixed top-0 z-50 w-full p-6 flex justify-between items-center border border-mediumGray bg-white">
+    <header className="px-6 min-h-header lg:px-10 py-4 fixed top-0 z-50 w-full p-6 flex justify-between items-center border border-mediumGray bg-white">
       <Link href={"/"} className="font-extrabold text-primary text-lg ">
-        DiveBook
+        Divebook
       </Link>
-      <div className="flex justify-between gap-2 items-center">
+      <div className="flex justify-between gap-8 items-center">
         <div className="hidden lg:flex gap-4">
-          <div>One</div>
-          <div>Two</div>
-          <div>Three</div>
+          {navLinks.map((link) => (
+            <Link href={link.link} key={link.label}>
+              {link.label}
+            </Link>
+          ))}
         </div>
         {!session ? (
-          <>
+          <div>
             <a
-              className="text-base font-bold text-primary  w-fit rounded-md py-2 px-4 cursor-pointer ml-10 hover:text-primary/80"
+              className="text-base font-bold text-primary  w-fit rounded-md py-2 px-4 cursor-pointer hover:text-primary/80"
               href="/login"
             >
               Login
@@ -32,7 +39,7 @@ const Header = () => {
             >
               Sign up
             </a>
-          </>
+          </div>
         ) : (
           <Link href="/profile" className="flex gap-1 items-center text-gray">
             <div className="h-10 w-10">{profileSvg}</div>
