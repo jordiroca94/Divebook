@@ -3,7 +3,7 @@ import image1 from "../../public/assets/images/destination1.jpeg";
 import image2 from "../../public/assets/images/destination2.jpeg";
 import image3 from "../../public/assets/images/destination3.jpeg";
 import Container from "./ui/Container";
-import Button from "./ui/button";
+import Button from "./ui/Button";
 
 const HighlightedDestinations = () => {
   const items = [
