@@ -6,12 +6,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { BiShow } from "react-icons/bi";
+import { BiHide } from "react-icons/bi";
+
 type LoginValuesType = { email: string; password: string };
 
 const LoginForm = () => {
   const form: any = useRef();
   const router = useRouter();
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const loginSchema = z.object({
     email: z.string().email({ message: "An email is required" }),
     password: z.string().min(1, { message: "Insert your password" }),
@@ -74,13 +78,23 @@ const LoginForm = () => {
           <label htmlFor="password" className="font-medium mb-2">
             Password
           </label>
-          <input
-            className="border border-mediumGray py-2 px-6 rounded-md"
-            type="password"
-            placeholder="Password"
-            id="password"
-            {...register("password")}
-          />
+          <div className="flex gap-2 items-center">
+            <input
+              className="border border-mediumGray py-2 px-6 rounded-md"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              id="password"
+              {...register("password")}
+            />
+            <BiShow
+              onClick={() => setShowPassword(true)}
+              className={`h-8 w-8 ${showPassword && "hidden"}`}
+            />
+            <BiHide
+              onClick={() => setShowPassword(false)}
+              className={`h-8 w-8 ${!showPassword && "hidden"}`}
+            />
+          </div>
           {errors.password?.message && (
             <p aria-describedby="password" className="text-red pt-1">
               {errors.password?.message}

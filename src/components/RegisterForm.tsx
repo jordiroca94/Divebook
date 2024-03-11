@@ -4,7 +4,8 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
+import { BiShow } from "react-icons/bi";
+import { BiHide } from "react-icons/bi";
 
 type RegisterValuesType = {
   name: string;
@@ -16,6 +17,7 @@ const RegisterForm = () => {
   const form: any = useRef();
   const [error, setError] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);
@@ -126,13 +128,23 @@ const RegisterForm = () => {
           <label htmlFor="password" className="font-medium">
             Password
           </label>
-          <input
-            id="password"
-            className="border border-mediumGray py-2 px-6 rounded-md"
-            type="password"
-            placeholder="Password"
-            {...register("password")}
-          />
+          <div className="flex gap-2 items-center">
+            <input
+              id="password"
+              className="border border-mediumGray py-2 px-6 rounded-md"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              {...register("password")}
+            />
+            <BiShow
+              onClick={() => setShowPassword(true)}
+              className={`h-8 w-8 ${showPassword && "hidden"}`}
+            />
+            <BiHide
+              onClick={() => setShowPassword(false)}
+              className={`h-8 w-8 ${!showPassword && "hidden"}`}
+            />
+          </div>
           {errors.password?.message && (
             <p aria-describedby="password" className="text-red pt-1">
               {errors.password?.message}
