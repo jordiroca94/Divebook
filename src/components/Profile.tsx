@@ -1,18 +1,45 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { CiLogout } from "react-icons/ci";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoAddCircleOutline } from "react-icons/io5";
-
 import Container from "./ui/Container";
 import { useRouter } from "next/navigation";
 import Grid from "./ui/Grid";
+import CreateDiveForm from "./CreateDiveForm";
 
 const Profile = () => {
+  const [openModal, setOpenModal] = useState<Boolean>(false);
   const { data: session } = useSession();
   const { back } = useRouter();
+
+  const createDive = async () => {
+    const values = {
+      name: "Blanes port",
+      country: "Espanya",
+      location: "Blanes",
+      description: "nice and cold",
+      deepth: "12m",
+      instructor: "Didac",
+      suit: "7mm",
+    };
+
+    try {
+      await fetch("api/dive", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          values,
+        }),
+      });
+    } catch {
+      throw Error("An error ocurred while registering. Please try again ");
+    }
+  };
 
   return (
     <Container className="pt-header">
@@ -44,7 +71,7 @@ const Profile = () => {
         <div className="col-span-6 lg:col-start-8 text-lg">
           <p className="pb-6">Your dives</p>
           <button
-            onClick={() => console.log("need to add a dive hree")}
+            onClick={() => setOpenModal(true)}
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
           >
             <IoAddCircleOutline className="h-7 w-7 text-white" />
@@ -52,6 +79,7 @@ const Profile = () => {
           </button>
         </div>
       </Grid>
+      {openModal && <CreateDiveForm />}
     </Container>
   );
 };

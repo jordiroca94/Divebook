@@ -29,7 +29,7 @@ export async function POST(req) {
     return NextResponse.json({ message: "Dive saved" }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      { message: "An error occurred while registering" },
+      { message: "An error occurred while registering the dive" },
       { status: 500 }
     );
   }
