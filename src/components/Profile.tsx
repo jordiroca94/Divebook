@@ -14,7 +14,7 @@ const Profile = () => {
   const [openModal, setOpenModal] = useState<Boolean>(false);
   const { data: session } = useSession();
   const { back } = useRouter();
-
+  console.log(openModal, "Openmodal-->");
   const createDive = async () => {
     const values = {
       name: "Blanes port",
@@ -79,7 +79,7 @@ const Profile = () => {
           </button>
         </div>
       </Grid>
-      {openModal && <CreateDiveForm />}
+      {openModal && <CreateDiveForm setOpenModal={setOpenModal} />}
     </Container>
   );
 };
