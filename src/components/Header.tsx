@@ -41,7 +41,10 @@ const Header = () => {
             </a>
           </div>
         ) : (
-          <Link href="/profile" className="flex gap-1 items-center text-gray">
+          <Link
+            href="/profile"
+            className="flex gap-1 items-center text-primary"
+          >
             <div className="h-10 w-10">{profileSvg}</div>
             <p>Profile</p>
           </Link>

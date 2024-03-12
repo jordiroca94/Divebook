@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "./ui/Container";
 import { IoMdArrowBack } from "react-icons/io";
+import Grid from "./ui/Grid";
 
 const DiveForm = () => {
   return (
@@ -11,7 +12,9 @@ const DiveForm = () => {
           <p>Go back</p>
         </Link>
       </div>
-      <div>This is the form to create dives</div>
+      <Grid>
+        <div className="col-span-12">This is the form to create dives</div>
+      </Grid>
     </Container>
   );
 };
