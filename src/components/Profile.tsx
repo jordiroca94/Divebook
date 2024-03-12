@@ -8,7 +8,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import Container from "./ui/Container";
 import { useRouter } from "next/navigation";
 import Grid from "./ui/Grid";
-import CreateDiveForm from "./CreateDiveForm";
+import Link from "next/link";
 
 const Profile = () => {
   const [openModal, setOpenModal] = useState<Boolean>(false);
@@ -70,16 +70,15 @@ const Profile = () => {
         </div>
         <div className="col-span-6 lg:col-start-8 text-lg">
           <p className="pb-6">Your dives</p>
-          <button
-            onClick={() => setOpenModal(true)}
+          <Link
+            href="/dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
           >
             <IoAddCircleOutline className="h-7 w-7 text-white" />
             <p>Add a dive </p>
-          </button>
+          </Link>
         </div>
       </Grid>
-      {openModal && <CreateDiveForm setOpenModal={setOpenModal} />}
     </Container>
   );
 };
