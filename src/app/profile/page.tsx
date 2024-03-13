@@ -14,7 +14,7 @@ const page = async () => {
   return (
     <div>
       <Header />
-      <Profile />;
+      <Profile />
     </div>
   );
 };

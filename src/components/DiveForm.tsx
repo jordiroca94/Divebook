@@ -13,7 +13,12 @@ const DiveForm = () => {
         </Link>
       </div>
       <Grid>
-        <div className="col-span-12">This is the form to create dives</div>
+        <h1 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center">
+          Tell us about your last dive!
+        </h1>
+        <div className="col-span-4 lg:col-start-3 lg:col-span-8 border-primary border p-6">
+          This is the form to create dives
+        </div>
       </Grid>
     </Container>
   );

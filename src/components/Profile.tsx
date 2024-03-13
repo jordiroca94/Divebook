@@ -51,10 +51,10 @@ const Profile = () => {
           <p>Log out</p>
         </button>
       </div>
-      <h1 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
+      <h1 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center">
         Welcome to your profile
       </h1>
-      <Grid className="mt-10">
+      <Grid className="mt-4 lg:mt-16">
         <div className="col-span-4 lg:col-start-3 text-lg ">
           <div className="pb-6">Your information:</div>
           <div>
@@ -67,7 +67,10 @@ const Profile = () => {
           </div>
         </div>
         <div className="col-span-6 lg:col-start-8 text-lg">
-          <p className="pb-6">Your dives</p>
+          <p className="pb-6">Your dives:</p>
+          <p className="pb-4">
+            You have not added any dive to your profile? Let s start!
+          </p>
           <Link
             href="/dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
