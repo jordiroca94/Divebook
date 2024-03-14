@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+*:focus {
+    outline: 0 none !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+  }
+
+html{
+    scroll-behavior:smooth;
+  }
+  
+  textarea {
+    resize: none;
+  }
