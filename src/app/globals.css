@@ -4,8 +4,8 @@
 
 *:focus {
     outline: 0 none !important;
-    -webkit-appearance: none;
-    box-shadow: none !important;
+    /* -webkit-appearance: none;
+    box-shadow: none !important; */
   }
 
 html{

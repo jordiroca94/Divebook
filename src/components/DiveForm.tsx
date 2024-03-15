@@ -16,6 +16,7 @@ type DiveType = {
   location: string;
   description: string;
   deepth: string;
+  temperature: string;
   instructor: string;
   suit: string;
 };
@@ -24,11 +25,25 @@ const DiveForm = () => {
   const form: any = useRef();
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<any>("");
+  const [metricSystem, setMetricSystem] = useState<"meeters" | "feet">(
+    "meeters"
+  );
+  const [temperatureSystem, setTemperatureSystem] = useState<
+    "celsius" | "farenheit"
+  >("celsius");
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
-    country: z.string().min(1, { message: "Required" }),
+    country: z.object({
+      value: z.string(),
+      label: z.string(),
+    }),
     location: z.string().min(1, { message: "Required" }),
+    deepth: z.string().min(1, { message: "Required" }),
+    temperature: z.string().min(1, { message: "Required" }),
+    instructor: z.string().min(1, { message: "Required" }),
+    suit: z.string().min(1, { message: "Required" }),
+    description: z.string().min(1, { message: "Required" }),
   });
 
   const changeCountryValue = (value: any) => {
@@ -47,43 +62,47 @@ const DiveForm = () => {
       location: "",
       description: "",
       deepth: "",
+      temperature: "",
       instructor: "",
       suit: "",
     },
     resolver: zodResolver(diveSchema),
   });
 
-  const createDive = async (values: DiveType) => {
-    console.log(values, "form submitted ");
+  const handleMetricSystem = (event: any) => {
+    setMetricSystem(event.target.value);
   };
 
-  // const createDive = async () => {
-  //   const values = {
-  //     name: "Blanes port",
-  //     country: "Espanya",
-  //     location: "Blanes",
-  //     description: "nice and cold",
-  //     deepth: "12m",
-  //     instructor: "Didac",
-  //     suit: "7mm",
-  //   };
+  const handleTemperatureSystem = (event: any) => {
+    setTemperatureSystem(event.target.value);
+  };
 
-  //   try {
-  //     await fetch("api/dive", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         values,
-  //       }),
-  //     });
-  //   } catch {
-  //     throw Error("An error ocurred while registering. Please try again ");
-  //   }
-  // };
+  const createDive = async (values: DiveType) => {
+    console.log(values, "we did get here");
+    // const values = {
+    //   name: "Blanes port",
+    //   country: "Espanya",
+    //   location: "Blanes",
+    //   description: "nice and cold",
+    //   deepth: "12m",
+    //   instructor: "Didac",
+    //   suit: "7mm",
+    // };
 
-  // console.log(countryValue.label, "value");
+    // try {
+    //   await fetch("api/dive", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       values,
+    //     }),
+    //   });
+    // } catch {
+    //   throw Error("An error ocurred while registering. Please try again ");
+    // }
+  };
 
   return (
     <Container className="pt-header">
@@ -133,12 +152,12 @@ const DiveForm = () => {
               type="text"
               placeholder="Country"
               {...register("country")}
-            />
+            /> */}
             {errors.country?.message && (
               <p aria-describedby="country" className="text-red pt-1">
                 {errors.country?.message}
               </p>
-            )} */}
+            )}
             <label htmlFor="location" className="font-medium pt-4">
               Where was it?
             </label>
@@ -154,19 +173,75 @@ const DiveForm = () => {
                 {errors.location?.message}
               </p>
             )}
-            <label htmlFor="location" className="font-medium pt-4">
+            <label htmlFor="deepth" className="font-medium pt-4">
               How deep was it ?
             </label>
-            <input
-              id="deepth"
-              className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
-              type="text"
-              placeholder="Deepth"
-              {...register("deepth")}
-            />
+            <fieldset className="flex gap-4 items-center">
+              <input
+                id="deepth"
+                className="border border-mediumGray py-2 px-3 rounded-md w-[100px]"
+                type="number"
+                placeholder="Deepth"
+                {...register("deepth")}
+              />
+              <label htmlFor="meters">meeters</label>
+              <input
+                type="radio"
+                id="meters"
+                name="meters"
+                value="meeters"
+                checked={metricSystem === "meeters"}
+                onChange={handleMetricSystem}
+              />
+              <label htmlFor="feet">feet</label>
+              <input
+                type="radio"
+                id="feet"
+                name="feet"
+                value="feet"
+                checked={metricSystem === "feet"}
+                onChange={handleMetricSystem}
+              />
+            </fieldset>
             {errors.deepth?.message && (
               <p aria-describedby="deepth" className="text-red pt-1">
                 {errors.deepth?.message}
+              </p>
+            )}
+            <label htmlFor="deepth" className="font-medium pt-4">
+              Water temperature
+            </label>
+            <fieldset className="flex gap-4 items-center">
+              <input
+                id="temperature"
+                className="border border-mediumGray py-2 px-3 rounded-md w-[100px]"
+                type="number"
+                placeholder="Water temperature"
+                {...register("temperature")}
+              />
+              <label htmlFor="celsius">celsius</label>
+              <input
+                type="radio"
+                id="celsius"
+                name="celsius"
+                value="celsius"
+                checked={temperatureSystem === "celsius"}
+                onChange={handleTemperatureSystem}
+              />
+              <label htmlFor="farenheit">farenheit</label>
+              <input
+                type="radio"
+                id="farenheit"
+                name="farenheit"
+                value="farenheit"
+                checked={temperatureSystem === "farenheit"}
+                onChange={handleTemperatureSystem}
+              />
+            </fieldset>
+
+            {errors.temperature?.message && (
+              <p aria-describedby="temperature" className="text-red pt-1">
+                {errors.temperature?.message}
               </p>
             )}
             <label htmlFor="instructor" className="font-medium pt-4">
@@ -176,7 +251,7 @@ const DiveForm = () => {
               id="instructor"
               className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
               type="text"
-              placeholder="Instructor"
+              placeholder="Instructor name"
               {...register("instructor")}
             />
             {errors.instructor?.message && (
