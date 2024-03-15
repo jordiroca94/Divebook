@@ -3,14 +3,16 @@ import Link from "next/link";
 import Container from "./ui/Container";
 import { IoMdArrowBack } from "react-icons/io";
 import Grid from "./ui/Grid";
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 type DiveType = {
   name: string;
-  country: string;
+  country: { value: string; label: string };
   location: string;
   description: string;
   deepth: string;
@@ -20,16 +22,18 @@ type DiveType = {
 
 const DiveForm = () => {
   const form: any = useRef();
+  const options: any = useMemo(() => countryList().getData(), []);
+  const [countryValue, setCountryValue] = useState<any>("");
 
-  const registerSchema = z.object({
+  const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
     country: z.string().min(1, { message: "Required" }),
     location: z.string().min(1, { message: "Required" }),
-    description: z.string().min(1, { message: "Required" }),
-    deepth: z.string().min(1, { message: "Required" }),
-    instructor: z.string().min(1, { message: "Required" }),
-    suit: z.string().min(1, { message: "Required" }),
   });
+
+  const changeCountryValue = (value: any) => {
+    setCountryValue(value);
+  };
 
   const {
     handleSubmit,
@@ -39,19 +43,47 @@ const DiveForm = () => {
   } = useForm<DiveType>({
     defaultValues: {
       name: "",
-      country: "",
+      country: {},
       location: "",
       description: "",
       deepth: "",
       instructor: "",
       suit: "",
     },
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(diveSchema),
   });
 
   const createDive = async (values: DiveType) => {
     console.log(values, "form submitted ");
   };
+
+  // const createDive = async () => {
+  //   const values = {
+  //     name: "Blanes port",
+  //     country: "Espanya",
+  //     location: "Blanes",
+  //     description: "nice and cold",
+  //     deepth: "12m",
+  //     instructor: "Didac",
+  //     suit: "7mm",
+  //   };
+
+  //   try {
+  //     await fetch("api/dive", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         values,
+  //       }),
+  //     });
+  //   } catch {
+  //     throw Error("An error ocurred while registering. Please try again ");
+  //   }
+  // };
+
+  // console.log(countryValue.label, "value");
 
   return (
     <Container className="pt-header">
@@ -89,7 +121,13 @@ const DiveForm = () => {
             <label htmlFor="country" className="font-medium pt-4">
               Country
             </label>
-            <input
+            <Select
+              className="lg:w-1/2"
+              options={options}
+              value={countryValue}
+              onChange={changeCountryValue}
+            />
+            {/* <input
               id="country"
               className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
               type="text"
@@ -100,7 +138,7 @@ const DiveForm = () => {
               <p aria-describedby="country" className="text-red pt-1">
                 {errors.country?.message}
               </p>
-            )}
+            )} */}
             <label htmlFor="location" className="font-medium pt-4">
               Where was it?
             </label>

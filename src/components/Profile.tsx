@@ -13,31 +13,6 @@ import Link from "next/link";
 const Profile = () => {
   const { data: session } = useSession();
   const { back } = useRouter();
-  const createDive = async () => {
-    const values = {
-      name: "Blanes port",
-      country: "Espanya",
-      location: "Blanes",
-      description: "nice and cold",
-      deepth: "12m",
-      instructor: "Didac",
-      suit: "7mm",
-    };
-
-    try {
-      await fetch("api/dive", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          values,
-        }),
-      });
-    } catch {
-      throw Error("An error ocurred while registering. Please try again ");
-    }
-  };
 
   return (
     <Container className="pt-header">
