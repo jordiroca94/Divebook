@@ -9,8 +9,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Select from "react-select";
 import countryList from "react-select-country-list";
+import { useSession } from "next-auth/react";
 
 type DiveType = {
+  user: string;
   name: string;
   country: { value: string; label: string };
   location: string;
@@ -22,6 +24,7 @@ type DiveType = {
 };
 
 const DiveForm = () => {
+  const { data: session } = useSession();
   const form: any = useRef();
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<any>("");
@@ -53,6 +56,7 @@ const DiveForm = () => {
     formState: { errors },
   } = useForm<DiveType>({
     defaultValues: {
+      user: "",
       name: "",
       country: {},
       location: "",
@@ -75,6 +79,7 @@ const DiveForm = () => {
 
   const createDive = async (values: DiveType) => {
     const parsedValues = {
+      user: session?.user?.email!,
       name: values.name,
       country: countryValue.label,
       location: values.location,
@@ -84,6 +89,7 @@ const DiveForm = () => {
       suit: values.suit,
       description: values.description,
     };
+    console.log(parsedValues, "After being parsed");
 
     try {
       await fetch("api/dive", {
