@@ -89,7 +89,6 @@ const DiveForm = () => {
       suit: values.suit,
       description: values.description,
     };
-    console.log(parsedValues, "After being parsed");
 
     try {
       await fetch("api/dive", {
