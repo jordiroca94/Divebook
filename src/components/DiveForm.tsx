@@ -34,10 +34,6 @@ const DiveForm = () => {
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
-    country: z.object({
-      value: z.string(),
-      label: z.string(),
-    }),
     location: z.string().min(1, { message: "Required" }),
     deepth: z.string().min(1, { message: "Required" }),
     temperature: z.string().min(1, { message: "Required" }),
@@ -78,30 +74,31 @@ const DiveForm = () => {
   };
 
   const createDive = async (values: DiveType) => {
-    console.log(values, "we did get here");
-    // const values = {
-    //   name: "Blanes port",
-    //   country: "Espanya",
-    //   location: "Blanes",
-    //   description: "nice and cold",
-    //   deepth: "12m",
-    //   instructor: "Didac",
-    //   suit: "7mm",
-    // };
+    const parsedValues = {
+      name: values.name,
+      country: countryValue.label,
+      location: values.location,
+      deepth: values.deepth.concat(" ", metricSystem),
+      temperature: values.temperature.concat(" ", temperatureSystem),
+      instructor: values.instructor,
+      suit: values.suit,
+      description: values.description,
+    };
 
-    // try {
-    //   await fetch("api/dive", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       values,
-    //     }),
-    //   });
-    // } catch {
-    //   throw Error("An error ocurred while registering. Please try again ");
-    // }
+    try {
+      await fetch("api/dive", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          parsedValues,
+        }),
+      });
+      reset();
+    } catch {
+      throw Error("An error ocurred while registering. Please try again ");
+    }
   };
 
   return (
