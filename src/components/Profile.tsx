@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { CiLogout } from "react-icons/ci";
