@@ -12,7 +12,8 @@ import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
 
 type DiveType = {
-  user: string;
+  userEmail: string;
+  userName: string;
   name: string;
   country: { value: string; label: string };
   location: string;
@@ -34,6 +35,7 @@ const DiveForm = () => {
   const [temperatureSystem, setTemperatureSystem] = useState<
     "celsius" | "farenheit"
   >("celsius");
+  const [formSubmitted, setFormSubmitted] = useState<Boolean>(false);
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
@@ -56,7 +58,8 @@ const DiveForm = () => {
     formState: { errors },
   } = useForm<DiveType>({
     defaultValues: {
-      user: "",
+      userEmail: "",
+      userName: "",
       name: "",
       country: {},
       location: "",
@@ -79,7 +82,8 @@ const DiveForm = () => {
 
   const createDive = async (values: DiveType) => {
     const parsedValues = {
-      user: session?.user?.email!,
+      userEmail: session?.user?.email!,
+      userName: session?.user?.name!,
       name: values.name,
       country: countryValue.label,
       location: values.location,
@@ -89,6 +93,7 @@ const DiveForm = () => {
       suit: values.suit,
       description: values.description,
     };
+    console.log(parsedValues, "parsed values -->");
 
     try {
       await fetch("api/dive", {
@@ -100,6 +105,7 @@ const DiveForm = () => {
           parsedValues,
         }),
       });
+      setFormSubmitted(true);
       reset();
     } catch {
       throw Error("An error ocurred while registering. Please try again ");
@@ -148,13 +154,6 @@ const DiveForm = () => {
               value={countryValue}
               onChange={changeCountryValue}
             />
-            {/* <input
-              id="country"
-              className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
-              type="text"
-              placeholder="Country"
-              {...register("country")}
-            /> */}
             {errors.country?.message && (
               <p aria-describedby="country" className="text-red pt-1">
                 {errors.country?.message}
@@ -297,6 +296,11 @@ const DiveForm = () => {
             >
               Submit
             </button>
+            {formSubmitted && (
+              <p className="text-sm mt-3 text-primary">
+                Dive created successfully
+              </p>
+            )}
           </form>
         </div>
       </Grid>

@@ -167,7 +167,7 @@ const RegisterForm = () => {
             href={`${success ? "register" : "/login"}`}
           >
             {success
-              ? "Registration done sucessfully"
+              ? "Registration done successfully"
               : "Already have an account?"}
 
             <span className="underline"> Login</span>

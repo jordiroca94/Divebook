@@ -5,9 +5,9 @@ import Dive from "../../../../models/dive";
 export async function POST(req) {
   try {
     const res = await req.json();
-
     const {
-      user,
+      userEmail,
+      userName,
       name,
       country,
       location,
@@ -18,9 +18,10 @@ export async function POST(req) {
       description,
     } = res.parsedValues;
     await connectMongoDB();
-
+    console.log("we get here ");
     await Dive.create({
-      user,
+      userEmail,
+      userName,
       name,
       country,
       location,
@@ -30,6 +31,7 @@ export async function POST(req) {
       suit,
       description,
     });
+    console.log("we get here2 ");
 
     return NextResponse.json({ message: "Dive saved" }, { status: 201 });
   } catch (error) {
