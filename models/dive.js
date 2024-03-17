@@ -2,10 +2,9 @@ import mongoose, { Schema, models } from "mongoose";
 
 const diveSchema = new Schema(
   {
-    userEmail: { type: String, required: true },
-    userName: { type: String, required: true },
+    user: { type: Object, required: true },
     name: { type: String, required: true },
-    country: { type: String, required: true },
+    country: { type: Object, required: true },
     location: { type: String, required: true },
     deepth: { type: String, required: true },
     temperature: { type: String, required: true },

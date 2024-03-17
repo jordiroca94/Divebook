@@ -10,10 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
+import { UserType } from "@/types/common";
 
 type DiveType = {
-  userEmail: string;
-  userName: string;
+  user: UserType;
   name: string;
   country: { value: string; label: string };
   location: string;
@@ -58,8 +58,7 @@ const DiveForm = () => {
     formState: { errors },
   } = useForm<DiveType>({
     defaultValues: {
-      userEmail: "",
-      userName: "",
+      user: {},
       name: "",
       country: {},
       location: "",
@@ -82,10 +81,9 @@ const DiveForm = () => {
 
   const createDive = async (values: DiveType) => {
     const parsedValues = {
-      userEmail: session?.user?.email!,
-      userName: session?.user?.name!,
+      user: session?.user,
       name: values.name,
-      country: countryValue.label,
+      country: countryValue,
       location: values.location,
       deepth: values.deepth.concat(" ", metricSystem),
       temperature: values.temperature.concat(" ", temperatureSystem),
@@ -93,7 +91,6 @@ const DiveForm = () => {
       suit: values.suit,
       description: values.description,
     };
-    console.log(parsedValues, "parsed values -->");
 
     try {
       await fetch("api/dive", {
