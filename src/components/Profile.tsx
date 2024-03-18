@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { CiLogout } from "react-icons/ci";
@@ -9,11 +9,29 @@ import Container from "./ui/Container";
 import { useRouter } from "next/navigation";
 import Grid from "./ui/Grid";
 import Link from "next/link";
+import { DiveType } from "@/types/common";
+import Image from "next/image";
+import ProfilePlaceholder from "../../public/assets/images/profilePlaceholder.jpeg";
+import Button from "./ui/Button";
 
 const Profile = () => {
   const { data: session } = useSession();
   const { back } = useRouter();
+  const [dives, setDives] = useState<DiveType[]>([]);
+  const getProfileDives = async () => {
+    const response = await fetch("api/getDives", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const { dives } = await response.json();
+    setDives(dives);
+  };
 
+  useEffect(() => {
+    getProfileDives();
+  }, []);
   return (
     <Container className="pt-header">
       <div className="flex justify-between py-6 lg:py-12">
@@ -41,11 +59,8 @@ const Profile = () => {
             <span className="font-bold">{session?.user?.email} </span>
           </div>
         </div>
-        <div className="col-span-6 lg:col-start-8 text-lg">
+        <div className="col-span-4 lg:col-start-3 lg:col-span-full text-lg pt-10">
           <p className="pb-6">Your dives:</p>
-          <p className="pb-4">
-            You have not added any dive to your profile? Let s start!
-          </p>
           <Link
             href="/dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
@@ -54,6 +69,46 @@ const Profile = () => {
             <p>Add a dive </p>
           </Link>
         </div>
+      </Grid>
+      <Grid className="py-10 lg:py-20">
+        {dives.map((item) => {
+          const date = new Date(item.updatedAt);
+          const formattedDate = `${date.getDate()}-${
+            date.getMonth() + 1
+          }-${date.getFullYear()}`;
+          if (item.user.email == session?.user?.email) {
+            return (
+              <div
+                key={item._id}
+                className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border"
+              >
+                <div className="flex justify-center">
+                  <Image
+                    className="rounded-md"
+                    src={ProfilePlaceholder}
+                    alt="Placehodler Image"
+                  />
+                </div>
+                <div className="p-6">
+                  <h6 className="text-xl font-semibold">{item.name}</h6>
+                  <p className="mt-2">{formattedDate}</p>
+                  <div className="flex gap-2 items-center py-2 text-lg">
+                    <p>{item.country.label}</p>
+                    <small>-</small>
+                    <p>{item.location}</p>
+                  </div>
+                  <p className="text-base font-thin pb-4">{item.description}</p>
+                  <Button
+                    openNewTab
+                    className="mt-6 mb-2"
+                    link="/item"
+                    label="Read more"
+                  />
+                </div>
+              </div>
+            );
+          }
+        })}
       </Grid>
     </Container>
   );
