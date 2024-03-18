@@ -35,17 +35,18 @@ const AllDives = () => {
           const formattedDate = `${date.getDate()}-${
             date.getMonth() + 1
           }-${date.getFullYear()}`;
-
           return (
             <div
               key={item._id}
-              className="col-span-4 lg:col-span-3 shadow-lg rounded-md border-mediumGray border"
+              className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border"
             >
-              <Image
-                className="rounded-md"
-                src={ProfilePlaceholder}
-                alt="Placehodler Image"
-              />
+              <div className="flex justify-center">
+                <Image
+                  className="rounded-md"
+                  src={ProfilePlaceholder}
+                  alt="Placehodler Image"
+                />
+              </div>
               <div className="p-6">
                 <h6 className="text-xl font-semibold">{item.name}</h6>
                 <p className="mt-2">{formattedDate}</p>

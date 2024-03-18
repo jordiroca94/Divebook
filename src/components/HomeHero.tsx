@@ -4,6 +4,7 @@ import Image from "next/image";
 import heroImage from "../../public/assets/images/hero.avif";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import Grid from "./ui/Grid";
 
 const HomeHero = () => {
   const { data: session } = useSession();
@@ -15,12 +16,12 @@ const HomeHero = () => {
         src={heroImage}
         alt="Hero"
       />
-      <div className="absolute z-20 grid grid-cols-4 lg:grid-cols-12 text-white px-8 mt-[450px] lg:mt-80 2xl:mt-[400px]">
+      <Grid className="absolute z-20 text-white px-8 mt-[450px] lg:mt-80 bs:mt-[400px]">
         <div className="col-span-4 lg:col-span-4 lg:col-start-8">
-          <h1 className="text-2xl lg:text-5xl font-semibold 2xl:text-7xl pb-4">
+          <h1 className="text-bs lg:text-5xl font-semibold bs:text-7xl pb-4">
             Divers of the World
           </h1>
-          <p className="text-base 2xl:text-2xl">
+          <p className="text-base bs:text-2xl">
             Diverbook is a place to discover and share the best places for
             diving.
           </p>
@@ -33,7 +34,7 @@ const HomeHero = () => {
             </p>
           )}
         </div>
-      </div>
+      </Grid>
     </div>
   );
 };

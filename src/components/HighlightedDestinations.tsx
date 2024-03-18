@@ -4,6 +4,7 @@ import image2 from "../../public/assets/images/destination2.jpeg";
 import image3 from "../../public/assets/images/destination3.jpeg";
 import Container from "./ui/Container";
 import Button from "./ui/Button";
+import Grid from "./ui/Grid";
 
 const HighlightedDestinations = () => {
   const items = [
@@ -40,7 +41,7 @@ const HighlightedDestinations = () => {
   ];
   return (
     <Container>
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-6">
+      <Grid>
         <h2 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
           Some of our highlighted diving spots
         </h2>
@@ -71,7 +72,7 @@ const HighlightedDestinations = () => {
             </div>
           </div>
         ))}
-      </div>
+      </Grid>
     </Container>
   );
 };
