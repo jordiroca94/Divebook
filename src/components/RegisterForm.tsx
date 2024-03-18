@@ -164,7 +164,7 @@ const RegisterForm = () => {
           )}
           <Link
             className={`text-sm mt-3 text-right ${success && "text-primary"}`}
-            href={`${success ? "register" : "/login"}`}
+            href="/login"
           >
             {success
               ? "Registration done successfully"

@@ -50,7 +50,7 @@ const HighlightedDestinations = () => {
             key={item.key}
           >
             <Image className="rounded-t-md" src={item.image} alt={item.name} />
-            <div className="p-4">
+            <div className="p-6">
               <h6 className="text-lg font-semibold">{item.country}</h6>
               <h5 className="py-2">{item.name}</h5>
               <p className="line-clamp-3 ">{item.description}</p>

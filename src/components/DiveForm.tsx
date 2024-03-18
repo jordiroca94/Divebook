@@ -10,19 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
-import { UserType } from "@/types/common";
-
-type DiveType = {
-  user: UserType;
-  name: string;
-  country: { value: string; label: string };
-  location: string;
-  description: string;
-  deepth: string;
-  temperature: string;
-  instructor: string;
-  suit: string;
-};
+import { DiveType, UserType } from "@/types/common";
 
 const DiveForm = () => {
   const { data: session } = useSession();

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../lib/mongodb";
 import Dive from "../../../../models/dive";
 
-export async function GET(req) {
+export async function GET() {
   try {
     await connectMongoDB();
     const dives = await Dive.find();
