@@ -24,7 +24,6 @@ const AllDives = () => {
   useEffect(() => {
     getAllDives();
   }, []);
-  console.log(data, "dives");
   return (
     <Container>
       <Grid>

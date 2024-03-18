@@ -2,7 +2,7 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import profileSvg from "../svgs/profile";
+import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -43,9 +43,9 @@ const Header = () => {
         ) : (
           <Link
             href="/profile"
-            className="flex gap-1 items-center text-primary"
+            className="flex gap-2 items-center text-primary"
           >
-            <div className="h-10 w-10">{profileSvg}</div>
+            <CgProfile className="h-7 w-7" />
             <p>Profile</p>
           </Link>
         )}
