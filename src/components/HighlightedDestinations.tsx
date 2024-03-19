@@ -5,6 +5,7 @@ import image3 from "../../public/assets/images/destination3.jpeg";
 import Container from "./ui/Container";
 import Button from "./ui/Button";
 import Grid from "./ui/Grid";
+import Title from "./ui/Title";
 
 const HighlightedDestinations = () => {
   const items = [
@@ -42,9 +43,12 @@ const HighlightedDestinations = () => {
   return (
     <Container>
       <Grid>
-        <h2 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
+        <Title
+          className="col-span-4 lg:col-span-12 flex justify-center text-center pb-4"
+          h="h2"
+        >
           Some of our highlighted diving spots
-        </h2>
+        </Title>
         {items.map((item) => (
           <div
             className="col-span-4 lg:col-span-4 shadow-lg rounded-md border-mediumGray border"

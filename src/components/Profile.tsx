@@ -13,6 +13,7 @@ import { DiveType } from "@/types/common";
 import Image from "next/image";
 import ProfilePlaceholder from "../../public/assets/images/profilePlaceholder.jpeg";
 import Button from "./ui/Button";
+import Title from "./ui/Title";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -44,9 +45,13 @@ const Profile = () => {
           <p>Log out</p>
         </button>
       </div>
-      <h1 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center">
+      <Title
+        fontSize="text-3xl lg:text-4xl text-center"
+        className="col-span-4 lg:col-span-12 flex justify-center"
+        h="h1"
+      >
         Welcome to your profile
-      </h1>
+      </Title>
       <Grid className="mt-4 lg:mt-16">
         <div className="col-span-4 lg:col-start-3 text-lg ">
           <div className="pb-6">Your information:</div>

@@ -27,22 +27,6 @@ const Title = ({ h, children, className, fontSize }: Props) => {
           {children}
         </h2>
       );
-    case "h3":
-      return <h3 className={`${className}`}>{children}</h3>;
-    case "h4":
-      return <h4 className={`${className}`}>{children}</h4>;
-    case "h5":
-      return (
-        <h5 className={`${fontSize ? fontSize : "text-xl"} ${className}`}>
-          {children}
-        </h5>
-      );
-    case "h6":
-      return (
-        <h6 className={`${fontSize ? fontSize : "text-lg"} ${className}`}>
-          {children}
-        </h6>
-      );
   }
 };
 

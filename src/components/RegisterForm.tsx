@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
+import Title from "./ui/Title";
 
 type RegisterValuesType = {
   name: string;
@@ -89,7 +90,9 @@ const RegisterForm = () => {
   return (
     <div className="grid place-items-center h-screen">
       <div className="shadow-lg py-6 px-8 w-[90%] lg:w-auto rounded-lg border-t-4 border-primary">
-        <h1 className="text-xl font-bold my-4">Register</h1>
+        <Title fontSize="text-xl font-bold" className="my-4" h="h1">
+          Register
+        </Title>
         <form
           ref={form}
           onSubmit={handleSubmit(handleRegister)}

@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
+import Title from "./ui/Title";
 
 type LoginValuesType = { email: string; password: string };
 
@@ -54,7 +55,9 @@ const LoginForm = () => {
   return (
     <div className="grid place-items-center h-screen">
       <div className="shadow-lg py-10 px-8 rounded-lg border-t-4 border-primary">
-        <h1 className="text-xl font-bold my-4">Login with your credentials</h1>
+        <Title fontSize="text-xl font-bold" className="my-4" h="h1">
+          Login with your credentials
+        </Title>
         <form
           ref={form}
           onSubmit={handleSubmit(handleLogin)}

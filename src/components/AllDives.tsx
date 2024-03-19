@@ -7,6 +7,7 @@ import ProfilePlaceholder from "../../public/assets/images/profilePlaceholder.jp
 import Image from "next/image";
 import Button from "./ui/Button";
 import Link from "next/link";
+import Title from "./ui/Title";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
@@ -27,9 +28,14 @@ const AllDives = () => {
   return (
     <Container>
       <Grid>
-        <h2 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
-          Discover some of the dives of our users
-        </h2>
+        <Title
+          fontSize="text-3xl lg:text-4xl text-center"
+          className="col-span-4 lg:col-span-12 flex justify-center pb-4"
+          h="h2"
+        >
+          Login with your credentials
+        </Title>
+
         {data.map((item: DiveType) => {
           const date = new Date(item.updatedAt);
           const formattedDate = `${date.getDate()}-${
