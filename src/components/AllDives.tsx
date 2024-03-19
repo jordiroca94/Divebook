@@ -28,7 +28,7 @@ const AllDives = () => {
     <Container>
       <Grid>
         <h2 className="col-span-4 lg:col-span-12 flex justify-center text-3xl lg:text-4xl text-center pb-4">
-          Discover the best dives of our users
+          Discover some of the dives of our users
         </h2>
         {data.map((item: DiveType) => {
           const date = new Date(item.updatedAt);

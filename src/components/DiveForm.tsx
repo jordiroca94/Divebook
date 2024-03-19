@@ -11,6 +11,7 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
 import { DiveType, UserType } from "@/types/common";
+import Title from "./ui/Title";
 
 const DiveForm = () => {
   const { data: session } = useSession();
@@ -106,9 +107,9 @@ const DiveForm = () => {
         </Link>
       </div>
       <Grid>
-        <h1 className="col-span-4 lg:col-span-12 lg:col-start-3 text-3xl lg:text-4xl">
+        <Title className="col-span-4 lg:col-span-12 lg:col-start-3" h="h1">
           Tell us about your last dive!
-        </h1>
+        </Title>
         <div className="col-span-4 lg:col-start-3 lg:col-span-8">
           <form
             ref={form}
