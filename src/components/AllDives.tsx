@@ -33,7 +33,7 @@ const AllDives = () => {
           className="col-span-4 lg:col-span-12 flex justify-center pb-4"
           h="h2"
         >
-          Login with your credentials
+          Dives of Our Users
         </Title>
 
         {data.map((item: DiveType) => {

@@ -67,7 +67,7 @@ const Profile = () => {
         <div className="col-span-4 lg:col-start-3 lg:col-span-full text-lg pt-10">
           <p className="pb-6">Your dives:</p>
           <Link
-            href="/dive"
+            href="/create-dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
           >
             <IoAddCircleOutline className="h-7 w-7 text-white" />
