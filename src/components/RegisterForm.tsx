@@ -12,6 +12,7 @@ type RegisterValuesType = {
   name: string;
   email: string;
   password: string;
+  avatarUrl: string;
 };
 
 const RegisterForm = () => {
@@ -49,6 +50,7 @@ const RegisterForm = () => {
       name: "",
       email: "",
       password: "",
+      avatarUrl: "",
     },
     resolver: zodResolver(registerSchema),
   });
@@ -56,6 +58,7 @@ const RegisterForm = () => {
   const handleRegister = async (values: RegisterValuesType) => {
     setSuccess(false);
     setError(false);
+
     try {
       const resUserExists = await fetch("api/userExists", {
         method: "POST",
@@ -76,7 +79,10 @@ const RegisterForm = () => {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            values,
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            avatarUrl: "",
           }),
         });
         reset();
