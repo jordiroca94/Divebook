@@ -23,7 +23,6 @@ const Profile = () => {
   const [dives, setDives] = useState<DiveType[]>([]);
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
-
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {
       method: "GET",
@@ -39,7 +38,7 @@ const Profile = () => {
       if (file) {
         const res = await edgestore.myPublicImages.upload({ file });
         const avatarUrl = res.url;
-        const user = session?.user?.email;
+        const email = session?.user?.email;
         await fetch("api/updateUser", {
           method: "POST",
           headers: {
@@ -47,7 +46,7 @@ const Profile = () => {
           },
           body: JSON.stringify({
             avatarUrl,
-            user,
+            email,
           }),
         });
       }
@@ -90,16 +89,9 @@ const Profile = () => {
             <span className="font-bold">{session?.user?.email} </span>
           </div>
           <div className="pt-6">
-            <p>Image</p>
-            {/* <input
-              type="file"
-              onChange={(e) => {
-                setFile(e.target.files?.[0]);
-              }}
-            /> */}
             <SingleImageDropzone
               width={200}
-              height={200}
+              height={100}
               value={file}
               onChange={(file) => {
                 setFile(file);
@@ -112,6 +104,9 @@ const Profile = () => {
           >
             upload image
           </button>
+        </div>
+        <div className="col-span-4 lg:col-span-3 lg:col-start-8 bg-black aspect-square rounded-full">
+          {/* <Image src={session?.user.avatarUrl} alt="alt" /> */}
         </div>
         <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10">
           <p>Your dives:</p>
