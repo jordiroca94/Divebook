@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
-import { DiveType, UserType } from "@/types/common";
+import { DiveType } from "@/types/common";
 import Title from "./ui/Title";
 
 const DiveForm = () => {

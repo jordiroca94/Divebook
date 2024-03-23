@@ -14,11 +14,16 @@ import Image from "next/image";
 import ProfilePlaceholder from "../../public/assets/images/profilePlaceholder.jpeg";
 import Button from "./ui/Button";
 import Title from "./ui/Title";
+import { useEdgeStore } from "../../lib/edgestore";
+import { SingleImageDropzone } from "./ui/SingleImageDropzone";
 
 const Profile = () => {
   const { data: session } = useSession();
   const { back } = useRouter();
   const [dives, setDives] = useState<DiveType[]>([]);
+  const [file, setFile] = useState<File>();
+  const { edgestore } = useEdgeStore();
+
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {
       method: "GET",
@@ -28,6 +33,27 @@ const Profile = () => {
     });
     const { dives } = await response.json();
     setDives(dives);
+  };
+  const uploadImage = async () => {
+    try {
+      if (file) {
+        const res = await edgestore.myPublicImages.upload({ file });
+        const avatarUrl = res.url;
+        const user = session?.user?.email;
+        await fetch("api/updateUser", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            avatarUrl,
+            user,
+          }),
+        });
+      }
+    } catch {
+      throw Error("An error ocurred uploading a picture ");
+    }
   };
 
   useEffect(() => {
@@ -63,9 +89,32 @@ const Profile = () => {
             <p>Email:</p>
             <span className="font-bold">{session?.user?.email} </span>
           </div>
+          <div className="pt-6">
+            <p>Image</p>
+            {/* <input
+              type="file"
+              onChange={(e) => {
+                setFile(e.target.files?.[0]);
+              }}
+            /> */}
+            <SingleImageDropzone
+              width={200}
+              height={200}
+              value={file}
+              onChange={(file) => {
+                setFile(file);
+              }}
+            />
+          </div>
+          <button
+            className="mt-4 px-2 py-2 rounded-md bg-secondary text-white"
+            onClick={() => uploadImage()}
+          >
+            upload image
+          </button>
         </div>
-        <div className="col-span-4 lg:col-start-3 lg:col-span-full text-lg pt-10">
-          <p className="pb-6">Your dives:</p>
+        <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10">
+          <p>Your dives:</p>
           <Link
             href="/create-dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
