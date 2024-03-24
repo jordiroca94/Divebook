@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
@@ -79,7 +80,6 @@ const Profile = () => {
       </Title>
       <Grid className="mt-4 lg:mt-16">
         <div className="col-span-4 lg:col-start-3 text-lg ">
-          <div className="pb-6">Your information:</div>
           <div>
             <p>Name:</p>
             <span className="font-bold">{session?.user?.name} </span>
@@ -105,8 +105,12 @@ const Profile = () => {
             upload image
           </button>
         </div>
-        <div className="col-span-4 lg:col-span-3 lg:col-start-8 bg-black aspect-square rounded-full">
-          {/* <Image src={session?.user.avatarUrl} alt="alt" /> */}
+        <div className="col-span-4 lg:col-span-3 lg:col-start-8 ">
+          <img
+            className="aspect-square rounded-full border border-mediumGray"
+            src="https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/f3889b54-b9cc-46ac-9e83-622fa204994b.jpeg"
+            alt="alt"
+          />
         </div>
         <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10">
           <p>Your dives:</p>

@@ -82,7 +82,8 @@ const RegisterForm = () => {
             name: values.name,
             email: values.email,
             password: values.password,
-            avatarUrl: "",
+            avatarUrl:
+              "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/f3889b54-b9cc-46ac-9e83-622fa204994b.jpeg",
           }),
         });
         reset();
