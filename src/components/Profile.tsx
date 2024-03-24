@@ -24,7 +24,9 @@ const Profile = () => {
   const [dives, setDives] = useState<DiveType[]>([]);
   const [file, setFile] = useState<File>();
   const [userInfo, setUserInfo] = useState<any>("");
+  const [submitError, setSubmitError] = useState<boolean | null>(null);
   const { edgestore } = useEdgeStore();
+
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {
       method: "GET",
@@ -51,6 +53,9 @@ const Profile = () => {
             email,
           }),
         });
+        window.location.reload();
+      } else {
+        setSubmitError(true);
       }
     } catch {
       throw Error("An error ocurred uploading a picture ");
@@ -100,10 +105,17 @@ const Profile = () => {
         className="col-span-4 lg:col-span-12 flex justify-center"
         h="h1"
       >
-        Welcome to your profile
+        Profile
       </Title>
       <Grid className="mt-4 lg:mt-16">
-        <div className="col-span-4 lg:col-start-3 text-lg ">
+        <div className="lg:hidden col-span-4 py-6 px-3">
+          <img
+            className="aspect-square rounded-full border border-mediumGray"
+            src={userInfo?.avatarUrl && userInfo?.avatarUrl}
+            alt="alt"
+          />
+        </div>
+        <div className="col-span-4 lg:col-start-3 text-lg lg:mb-6">
           <div>
             <p>Name:</p>
             <span className="font-bold">{session?.user?.name} </span>
@@ -114,7 +126,7 @@ const Profile = () => {
           </div>
           <div className="pt-6">
             <SingleImageDropzone
-              width={200}
+              width={100}
               height={100}
               value={file}
               onChange={(file) => {
@@ -122,22 +134,23 @@ const Profile = () => {
               }}
             />
           </div>
-          <button
-            className="mt-4 px-2 py-2 rounded-md bg-secondary text-white"
+          <Button
+            className="font-normal mt-6"
             onClick={() => uploadImage()}
-          >
-            upload image
-          </button>
+            label="Change Image"
+          />
+          {submitError && (
+            <p className="text-red text-base mt-4">You must upload an image</p>
+          )}
         </div>
-        <div className="col-span-4 lg:col-span-3 lg:col-start-8 ">
+        <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
           <img
             className="aspect-square rounded-full border border-mediumGray"
             src={userInfo?.avatarUrl && userInfo?.avatarUrl}
             alt="alt"
           />
         </div>
-        <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10">
-          <p>Your dives:</p>
+        <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10 border-t border-mediumGray">
           <Link
             href="/create-dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
