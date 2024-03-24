@@ -23,6 +23,7 @@ const Profile = () => {
   const { back } = useRouter();
   const [dives, setDives] = useState<DiveType[]>([]);
   const [file, setFile] = useState<File>();
+  const [userInfo, setUserInfo] = useState<any>("");
   const { edgestore } = useEdgeStore();
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {
@@ -56,9 +57,32 @@ const Profile = () => {
     }
   };
 
+  const getUserImage = async () => {
+    try {
+      const email = session?.user?.email;
+      const image = await fetch("api/getUserImage", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+        }),
+      });
+      const data = await image.json();
+      setUserInfo(data.user);
+    } catch {
+      throw Error("An error ocurred uploading a picture ");
+    }
+  };
+
   useEffect(() => {
     getProfileDives();
   }, []);
+
+  useEffect(() => {
+    getUserImage();
+  }, [session]);
   return (
     <Container className="pt-header">
       <div className="flex justify-between py-6 lg:py-12">
@@ -108,7 +132,7 @@ const Profile = () => {
         <div className="col-span-4 lg:col-span-3 lg:col-start-8 ">
           <img
             className="aspect-square rounded-full border border-mediumGray"
-            src="https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/f3889b54-b9cc-46ac-9e83-622fa204994b.jpeg"
+            src={userInfo?.avatarUrl && userInfo?.avatarUrl}
             alt="alt"
           />
         </div>
