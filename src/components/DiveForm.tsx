@@ -119,7 +119,7 @@ const DiveForm = () => {
   };
 
   return (
-    <Container className="pt-header">
+    <div className="pt-header px-4 lg:px-[6.25rem] max-w-[1600px]">
       <div className="flex justify-between py-6 lg:py-12">
         <Link href="/profile" className="flex gap-2 items-center">
           <IoMdArrowBack className="h-7 w-7" />
@@ -322,7 +322,7 @@ const DiveForm = () => {
           </form>
         </div>
       </Grid>
-    </Container>
+    </div>
   );
 };
 

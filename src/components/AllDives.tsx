@@ -24,7 +24,7 @@ const AllDives = () => {
     getAllDives();
   }, []);
   return (
-    <Container className="py-12 lg:py-32">
+    <Container className="pt-header lg:py-32">
       <Grid>
         <Title
           fontSize="text-3xl lg:text-4xl text-center"

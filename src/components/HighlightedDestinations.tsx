@@ -51,7 +51,7 @@ const HighlightedDestinations = () => {
         </Title>
         {items.map((item) => (
           <div
-            className="col-span-4 lg:col-span-4 shadow-lg rounded-md border-mediumGray border"
+            className="col-span-4 md:col-span-2 lg:col-span-4 shadow-lg rounded-md border-mediumGray border"
             key={item.key}
           >
             <Image className="rounded-t-md" src={item.image} alt={item.name} />
