@@ -36,4 +36,5 @@ export type DiveCardType = {
   description: string;
   formattedDate: string;
   imageUrl: string;
+  user: UserType;
 };

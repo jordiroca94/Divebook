@@ -50,6 +50,7 @@ const AllDives = () => {
               description={item.description}
               formattedDate={formattedDate}
               imageUrl={item.imageUrl}
+              user={item.user}
             />
           );
         })}

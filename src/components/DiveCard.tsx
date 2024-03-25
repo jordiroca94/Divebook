@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { CountryType, DiveCardType, DiveType } from "@/types/common";
 import Button from "./ui/Button";
+import Link from "next/link";
 
 const DiveCard = ({
   name,
@@ -9,6 +10,7 @@ const DiveCard = ({
   description,
   formattedDate,
   imageUrl,
+  user,
 }: DiveCardType) => {
   return (
     <div className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border">
@@ -30,6 +32,12 @@ const DiveCard = ({
           <p>{location}</p>
         </div>
         <p className="text-base font-thin pb-4">{description}</p>
+        <div className="flex items-center gap-2 py-4 ">
+          <p>Posted by:</p>
+          <Link href="/" className="text-gray underline">
+            {user.name}
+          </Link>
+        </div>
         <Button
           openNewTab
           className="mt-6 mb-2"
