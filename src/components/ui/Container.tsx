@@ -9,7 +9,7 @@ const Container = ({ children, className }: Props) => {
         className ? className : "py-12 lg:py-20"
       } px-4 lg:px-[6.25rem] w-full flex justify-center`}
     >
-      <div className="max-w-[1600px]">{children}</div>
+      <div className="max-w-[1600px] w-full">{children}</div>
     </div>
   );
 };
