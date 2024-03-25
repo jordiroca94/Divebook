@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 // @ts-ignore
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const page = async () => {
   const session = await getServerSession<any>(authOptions);
@@ -15,6 +16,7 @@ const page = async () => {
     <div>
       <Header />
       <Profile />
+      <Footer />
     </div>
   );
 };

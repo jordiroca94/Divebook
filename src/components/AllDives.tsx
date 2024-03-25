@@ -4,8 +4,6 @@ import React, { useEffect, useState } from "react";
 import Container from "./ui/Container";
 import Grid from "./ui/Grid";
 import { DiveType } from "@/types/common";
-import Button from "./ui/Button";
-import Link from "next/link";
 import Title from "./ui/Title";
 import DiveCard from "./DiveCard";
 

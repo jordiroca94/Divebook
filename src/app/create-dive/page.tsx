@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Header from "@/components/Header";
 import DiveForm from "@/components/DiveForm";
+import Footer from "@/components/Footer";
 
 const page = async () => {
   const session = await getServerSession<any>(authOptions);
@@ -16,6 +17,7 @@ const page = async () => {
     <div>
       <Header />
       <DiveForm />
+      <Footer />
     </div>
   );
 };
