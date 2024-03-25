@@ -7,6 +7,7 @@ import { DiveType } from "@/types/common";
 import Button from "./ui/Button";
 import Link from "next/link";
 import Title from "./ui/Title";
+import DiveCard from "./DiveCard";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
@@ -25,7 +26,7 @@ const AllDives = () => {
     getAllDives();
   }, []);
   return (
-    <Container>
+    <Container className="py-12 lg:py-32">
       <Grid>
         <Title
           fontSize="text-3xl lg:text-4xl text-center"
@@ -41,40 +42,15 @@ const AllDives = () => {
             date.getMonth() + 1
           }-${date.getFullYear()}`;
           return (
-            <div
+            <DiveCard
               key={item._id}
-              className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border"
-            >
-              <div className="flex justify-center">
-                <img
-                  className="rounded-md"
-                  src={item.imageUrl}
-                  alt="Placehodler Image"
-                />
-              </div>
-              <div className="p-6">
-                <h6 className="text-xl font-semibold">{item.name}</h6>
-                <p className="mt-2">{formattedDate}</p>
-                <div className="flex gap-2 items-center py-2 text-lg">
-                  <p>{item.country.label}</p>
-                  <small>-</small>
-                  <p>{item.location}</p>
-                </div>
-                <p className="text-base font-thin">{item.description}</p>
-                <div className="flex items-center gap-2 py-4 ">
-                  <p>Posted by:</p>
-                  <Link href="/" className="text-gray underline">
-                    {item.user.name}
-                  </Link>
-                </div>
-                <Button
-                  openNewTab
-                  className="mt-6 mb-2"
-                  link="/item"
-                  label="Read more"
-                />
-              </div>
-            </div>
+              name={item.name}
+              country={item.country}
+              location={item.location}
+              description={item.description}
+              formattedDate={formattedDate}
+              imageUrl={item.imageUrl}
+            />
           );
         })}
       </Grid>

@@ -9,11 +9,16 @@ export type UserType = {
   email: string;
 };
 
+export type CountryType = {
+  value: string;
+  label: string;
+};
+
 export type DiveType = {
   _id: string;
   user: UserType;
   name: string;
-  country: { value: string; label: string };
+  country: CountryType;
   location: string;
   description: string;
   deepth: string;
@@ -21,5 +26,14 @@ export type DiveType = {
   instructor: string;
   suit: string;
   updatedAt: string;
+  imageUrl: string;
+};
+
+export type DiveCardType = {
+  name: string;
+  country: CountryType;
+  location: string;
+  description: string;
+  formattedDate: string;
   imageUrl: string;
 };

@@ -11,12 +11,11 @@ import { useRouter } from "next/navigation";
 import Grid from "./ui/Grid";
 import Link from "next/link";
 import { DiveType } from "@/types/common";
-import Image from "next/image";
-import ProfilePlaceholder from "../../public/assets/images/profilePlaceholder.jpeg";
 import Button from "./ui/Button";
 import Title from "./ui/Title";
 import { useEdgeStore } from "../../lib/edgestore";
 import { SingleImageDropzone } from "./ui/SingleImageDropzone";
+import DiveCard from "./DiveCard";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -174,40 +173,17 @@ const Profile = () => {
           const formattedDate = `${date.getDate()}-${
             date.getMonth() + 1
           }-${date.getFullYear()}`;
-          if (item.user.email == session?.user?.email) {
-            return (
-              <div
-                key={item._id}
-                className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border"
-              >
-                {item.imageUrl && (
-                  <div className="flex justify-center">
-                    <img
-                      className="rounded-md"
-                      src={item.imageUrl}
-                      alt="Placehodler Image"
-                    />
-                  </div>
-                )}
-                <div className="p-6">
-                  <h6 className="text-xl font-semibold">{item.name}</h6>
-                  <p className="mt-2">{formattedDate}</p>
-                  <div className="flex gap-2 items-center py-2 text-lg">
-                    <p>{item.country.label}</p>
-                    <small>-</small>
-                    <p>{item.location}</p>
-                  </div>
-                  <p className="text-base font-thin pb-4">{item.description}</p>
-                  <Button
-                    openNewTab
-                    className="mt-6 mb-2"
-                    link="/item"
-                    label="Read more"
-                  />
-                </div>
-              </div>
-            );
-          }
+          return (
+            <DiveCard
+              key={item._id}
+              name={item.name}
+              country={item.country}
+              location={item.location}
+              description={item.description}
+              formattedDate={formattedDate}
+              imageUrl={item.imageUrl}
+            />
+          );
         })}
         {!dives.length && (
           <div className="grid place-items-center col-span-full">
