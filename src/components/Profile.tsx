@@ -26,7 +26,6 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState<any>("");
   const [submitError, setSubmitError] = useState<boolean | null>(null);
   const { edgestore } = useEdgeStore();
-
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {
       method: "GET",
@@ -35,7 +34,13 @@ const Profile = () => {
       },
     });
     const { dives } = await response.json();
-    setDives(dives);
+    const profileDives: DiveType[] = [];
+    dives.map((el: DiveType) => {
+      if (el.user.email === session?.user?.email) {
+        return profileDives.push(el);
+      }
+    });
+    setDives(profileDives);
   };
   const uploadImage = async () => {
     try {
@@ -83,7 +88,7 @@ const Profile = () => {
 
   useEffect(() => {
     getProfileDives();
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     getUserImage();
@@ -151,6 +156,9 @@ const Profile = () => {
           />
         </div>
         <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10 border-t border-mediumGray">
+          <h6 className="text-xl">
+            Your dives: {dives.length > 0 && dives.length}
+          </h6>
           <Link
             href="/create-dive"
             className="flex gap-2 font-light py-2 border-gray border w-fit px-3 rounded-md bg-primary text-white"
@@ -199,6 +207,16 @@ const Profile = () => {
             );
           }
         })}
+        {!dives.length && (
+          <div className="grid place-items-center col-span-full">
+            <Link
+              href="/create-dive"
+              className="border border-mediumGray shadow-lg p-10 text-center hover:underline"
+            >
+              You do not have any dive yet. Add your first dive!
+            </Link>
+          </div>
+        )}
       </Grid>
     </Container>
   );
