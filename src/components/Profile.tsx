@@ -138,19 +138,19 @@ const Profile = () => {
                 setFile(file);
               }}
             />
+            <Button
+              className="font-normal mt-6"
+              onClick={() => uploadImage()}
+              label="Change Image"
+            />
           </div>
-          <Button
-            className="font-normal mt-6"
-            onClick={() => uploadImage()}
-            label="Change Image"
-          />
           {submitError && (
             <p className="text-red text-base mt-4">You must upload an image</p>
           )}
         </div>
         <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
           <img
-            className="aspect-square rounded-full border border-mediumGray"
+            className="aspect-square object-cover rounded-full border border-mediumGray"
             src={userInfo?.avatarUrl && userInfo?.avatarUrl}
             alt="alt"
           />
@@ -180,13 +180,15 @@ const Profile = () => {
                 key={item._id}
                 className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border"
               >
-                <div className="flex justify-center">
-                  <Image
-                    className="rounded-md"
-                    src={ProfilePlaceholder}
-                    alt="Placehodler Image"
-                  />
-                </div>
+                {item.imageUrl && (
+                  <div className="flex justify-center">
+                    <img
+                      className="rounded-md"
+                      src={item.imageUrl}
+                      alt="Placehodler Image"
+                    />
+                  </div>
+                )}
                 <div className="p-6">
                   <h6 className="text-xl font-semibold">{item.name}</h6>
                   <p className="mt-2">{formattedDate}</p>

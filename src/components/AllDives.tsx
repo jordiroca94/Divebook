@@ -1,10 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
 import Container from "./ui/Container";
 import Grid from "./ui/Grid";
 import { DiveType } from "@/types/common";
-import ProfilePlaceholder from "../../public/assets/images/profilePlaceholder.jpeg";
-import Image from "next/image";
 import Button from "./ui/Button";
 import Link from "next/link";
 import Title from "./ui/Title";
@@ -47,9 +46,9 @@ const AllDives = () => {
               className="col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border"
             >
               <div className="flex justify-center">
-                <Image
+                <img
                   className="rounded-md"
-                  src={ProfilePlaceholder}
+                  src={item.imageUrl}
                   alt="Placehodler Image"
                 />
               </div>

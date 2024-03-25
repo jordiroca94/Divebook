@@ -12,6 +12,8 @@ import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
 import { DiveType } from "@/types/common";
 import Title from "./ui/Title";
+import { SingleImageDropzone } from "./ui/SingleImageDropzone";
+import { useEdgeStore } from "../../lib/edgestore";
 
 const DiveForm = () => {
   const { data: session } = useSession();
@@ -25,15 +27,19 @@ const DiveForm = () => {
     "celsius" | "farenheit"
   >("celsius");
   const [formSubmitted, setFormSubmitted] = useState<Boolean>(false);
+  const [file, setFile] = useState<File>();
+  const { edgestore } = useEdgeStore();
+  const [avatarUrl, setAvatarUrl] = useState<any>();
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
     location: z.string().min(1, { message: "Required" }),
     deepth: z.string().min(1, { message: "Required" }),
     temperature: z.string().min(1, { message: "Required" }),
-    instructor: z.string().min(1, { message: "Required" }),
+    // instructor: z.string(),
     suit: z.string().min(1, { message: "Required" }),
     description: z.string().min(1, { message: "Required" }),
+    // imageUrl: z.string(),
   });
 
   const changeCountryValue = (value: any) => {
@@ -68,6 +74,17 @@ const DiveForm = () => {
     setTemperatureSystem(event.target.value);
   };
 
+  const uploadFile = async (file: any) => {
+    try {
+      if (file) {
+        const res = await edgestore.myPublicImages.upload({ file });
+        setAvatarUrl(res.url);
+      }
+    } catch {
+      throw Error("An error ocurred while uploading a file. Please try again ");
+    }
+  };
+
   const createDive = async (values: DiveType) => {
     const parsedValues = {
       user: session?.user,
@@ -79,6 +96,9 @@ const DiveForm = () => {
       instructor: values.instructor,
       suit: values.suit,
       description: values.description,
+      imageUrl: avatarUrl
+        ? avatarUrl
+        : "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/4563940c-50b7-496e-977b-c3153f282d23.png",
     };
 
     try {
@@ -276,6 +296,18 @@ const DiveForm = () => {
                 {errors.description?.message}
               </p>
             )}
+            <label htmlFor="file" className="font-medium pt-4">
+              Add an Image
+            </label>
+            <SingleImageDropzone
+              width={100}
+              height={100}
+              value={file}
+              onChange={(file) => {
+                setFile(file);
+                uploadFile(file);
+              }}
+            />
             <button
               type="submit"
               className="bg-primary cursor-pointer px-16 py-2 text-white rounded-md my-4 lg:w-fit"

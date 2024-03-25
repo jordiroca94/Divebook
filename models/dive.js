@@ -8,9 +8,10 @@ const diveSchema = new Schema(
     location: { type: String, required: true },
     deepth: { type: String, required: true },
     temperature: { type: String, required: true },
-    instructor: { type: String, required: true },
+    instructor: { type: String },
     suit: { type: String, required: true },
     description: { type: String, required: true },
+    imageUrl: { type: String },
   },
   { timestamps: true }
 );

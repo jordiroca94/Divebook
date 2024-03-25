@@ -21,4 +21,5 @@ export type DiveType = {
   instructor: string;
   suit: string;
   updatedAt: string;
+  imageUrl: string;
 };

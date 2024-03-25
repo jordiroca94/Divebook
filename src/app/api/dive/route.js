@@ -15,6 +15,7 @@ export async function POST(req) {
       instructor,
       suit,
       description,
+      imageUrl,
     } = res.parsedValues;
     await connectMongoDB();
     await Dive.create({
@@ -27,6 +28,7 @@ export async function POST(req) {
       instructor,
       suit,
       description,
+      imageUrl,
     });
 
     return NextResponse.json({ message: "Dive saved" }, { status: 201 });
