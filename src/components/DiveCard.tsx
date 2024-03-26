@@ -4,6 +4,7 @@ import Button from "./ui/Button";
 import Link from "next/link";
 
 const DiveCard = ({
+  _id,
   name,
   country,
   location,
@@ -41,7 +42,7 @@ const DiveCard = ({
         <Button
           openNewTab
           className="mt-6 mb-2"
-          link="/item"
+          link={`/dives/${_id}`}
           label="Read more"
         />
       </div>

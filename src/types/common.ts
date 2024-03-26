@@ -30,6 +30,7 @@ export type DiveType = {
 };
 
 export type DiveCardType = {
+  _id: string;
   name: string;
   country: CountryType;
   location: string;

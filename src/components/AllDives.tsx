@@ -42,6 +42,7 @@ const AllDives = () => {
           return (
             <DiveCard
               key={item._id}
+              _id={item._id}
               name={item.name}
               country={item.country}
               location={item.location}
