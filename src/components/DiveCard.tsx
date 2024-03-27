@@ -16,7 +16,7 @@ const DiveCard = ({
   return (
     <div className="col-span-4 md:col-span-2 lg:col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border">
       {imageUrl && (
-        <div className="flex justify-center">
+        <div className="flex justify-center border-b border-mediumGray">
           <img
             className="rounded-md aspect-[4/3]"
             src={imageUrl}
@@ -32,7 +32,7 @@ const DiveCard = ({
           <small>-</small>
           <p>{location}</p>
         </div>
-        <p className="text-base font-thin pb-4">{description}</p>
+        <p className="text-base font-thin mb-4 line-clamp-2">{description}</p>
         <div className="flex items-center gap-2 py-4 ">
           <p>Posted by:</p>
           <Link href="/" className="text-gray underline">

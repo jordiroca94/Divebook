@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Container from "./ui/Container";
 
 type Props = {
   id: string;
@@ -26,8 +27,11 @@ const DiveDetail = ({ id }: Props) => {
   useEffect(() => {
     getDives();
   }, []);
-  console.log(item, "item-->");
-  return <div>{item?.name}</div>;
+  return (
+    <div className="pt-header">
+      <Container>{item?.name}</Container>
+    </div>
+  );
 };
 
 export default DiveDetail;

@@ -19,7 +19,6 @@ import DiveCard from "./DiveCard";
 
 const Profile = () => {
   const { data: session } = useSession();
-  const { back } = useRouter();
   const [dives, setDives] = useState<DiveType[]>([]);
   const [file, setFile] = useState<File>();
   const [userInfo, setUserInfo] = useState<any>("");
@@ -95,10 +94,10 @@ const Profile = () => {
   return (
     <Container className="pt-header">
       <div className="flex justify-between py-6 lg:py-12">
-        <button className="flex gap-2 items-center" onClick={() => back()}>
+        <Link href="/" className="flex gap-2 items-center">
           <IoMdArrowBack className="h-7 w-7" />
           <p>Go back</p>
-        </button>
+        </Link>
         <button className="flex gap-2 items-center" onClick={() => signOut()}>
           <CiLogout className="h-7 w-7" />
           <p>Log out</p>
@@ -175,6 +174,7 @@ const Profile = () => {
           }-${date.getFullYear()}`;
           return (
             <DiveCard
+              _id={item._id}
               key={item._id}
               name={item.name}
               country={item.country}

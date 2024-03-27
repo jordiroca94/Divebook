@@ -8,7 +8,10 @@ import Image from "next/image";
 const Header = () => {
   const { data: session } = useSession();
 
-  const navLinks = [{ label: "Dives", link: "/dives" }];
+  const navLinks = [
+    { label: "Dives", link: "/dives" },
+    { label: "Contact", link: "/" },
+  ];
 
   return (
     <header className="px-6 min-h-header lg:px-10 py-4 fixed top-0 z-50 w-full p-6 flex justify-between items-center border border-mediumGray bg-white">
