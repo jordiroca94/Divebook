@@ -6,6 +6,7 @@ import Grid from "./ui/Grid";
 import { DiveType } from "@/types/common";
 import Title from "./ui/Title";
 import DiveCard from "./DiveCard";
+import formatteDate from "@/utils/util";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
@@ -35,10 +36,7 @@ const AllDives = () => {
         </Title>
 
         {data.map((item: DiveType) => {
-          const date = new Date(item.updatedAt);
-          const formattedDate = `${date.getDate()}-${
-            date.getMonth() + 1
-          }-${date.getFullYear()}`;
+          const date = formatteDate(item.updatedAt);
           return (
             <DiveCard
               key={item._id}
@@ -47,7 +45,7 @@ const AllDives = () => {
               country={item.country}
               location={item.location}
               description={item.description}
-              formattedDate={formattedDate}
+              date={date}
               imageUrl={item.imageUrl}
               user={item.user}
             />

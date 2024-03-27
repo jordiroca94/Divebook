@@ -9,7 +9,7 @@ const DiveCard = ({
   country,
   location,
   description,
-  formattedDate,
+  date,
   imageUrl,
   user,
 }: DiveCardType) => {
@@ -26,7 +26,7 @@ const DiveCard = ({
       )}
       <div className="p-6">
         <h6 className="text-xl font-semibold">{name}</h6>
-        <p className="mt-2">{formattedDate}</p>
+        <p className="mt-2">{date}</p>
         <div className="flex gap-2 items-center py-2 text-lg">
           <p>{country.label}</p>
           <small>-</small>
@@ -40,7 +40,6 @@ const DiveCard = ({
           </Link>
         </div>
         <Button
-          openNewTab
           className="mt-6 mb-2"
           link={`/dives/${_id}`}
           label="Read more"

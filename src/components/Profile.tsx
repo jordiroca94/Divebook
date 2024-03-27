@@ -7,7 +7,6 @@ import { CiLogout } from "react-icons/ci";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoAddCircleOutline } from "react-icons/io5";
 import Container from "./ui/Container";
-import { useRouter } from "next/navigation";
 import Grid from "./ui/Grid";
 import Link from "next/link";
 import { DiveType } from "@/types/common";
@@ -16,6 +15,7 @@ import Title from "./ui/Title";
 import { useEdgeStore } from "../../lib/edgestore";
 import { SingleImageDropzone } from "./ui/SingleImageDropzone";
 import DiveCard from "./DiveCard";
+import formatteDate from "@/utils/util";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -168,10 +168,7 @@ const Profile = () => {
       </Grid>
       <Grid className="py-10 lg:py-20">
         {dives.map((item) => {
-          const date = new Date(item.updatedAt);
-          const formattedDate = `${date.getDate()}-${
-            date.getMonth() + 1
-          }-${date.getFullYear()}`;
+          const date = formatteDate(item.updatedAt);
           return (
             <DiveCard
               _id={item._id}
@@ -180,7 +177,7 @@ const Profile = () => {
               country={item.country}
               location={item.location}
               description={item.description}
-              formattedDate={formattedDate}
+              date={date}
               imageUrl={item.imageUrl}
               user={item.user}
             />

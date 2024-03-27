@@ -4,6 +4,9 @@ import Container from "./ui/Container";
 import { DiveType } from "@/types/common";
 import Title from "./ui/Title";
 import Grid from "./ui/Grid";
+import formatteDate from "@/utils/util";
+import { IoMdArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 type Props = {
   id: string;
@@ -11,6 +14,8 @@ type Props = {
 
 const DiveDetail = ({ id }: Props) => {
   const [item, setItem] = useState<DiveType>();
+  const { back } = useRouter();
+
   const getDives = async () => {
     try {
       const data = await fetch("/api/getDiveById", {
@@ -30,10 +35,15 @@ const DiveDetail = ({ id }: Props) => {
   useEffect(() => {
     getDives();
   }, []);
-  console.log(item, "item-->");
   return (
     <div className="pt-header">
       <Container>
+        <div className="flex justify-between">
+          <button onClick={() => back()} className="flex gap-2 items-center">
+            <IoMdArrowBack className="h-7 w-7" />
+            <p>Go back</p>
+          </button>
+        </div>
         {item && (
           <>
             <Grid>
@@ -81,15 +91,12 @@ const DiveDetail = ({ id }: Props) => {
             </Grid>
             <Grid>
               <p className="lg:col-span-7 lg:col-start-2 text-lg py-10">
-                {item?.description}
+                {item.description}
               </p>
               <div className="lg:col-span-3 lg:col-start-9 text-lg py-10">
-                <div className="flex gap-2 justify-end">
-                  <div className="text-lg font-semibold">Posted by:</div>
-                  <p>{item?.user.name}</p>
-                </div>
-                <div className="flex gap-2 justify-end">
-                  <p>{item?.updatedAt}</p>
+                <div className="flex flex-col gap-2 items-end">
+                  <p>{item.user.name}</p>
+                  <p>{formatteDate(item.updatedAt)}</p>
                 </div>
               </div>
             </Grid>

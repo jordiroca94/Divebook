@@ -35,7 +35,7 @@ export type DiveCardType = {
   country: CountryType;
   location: string;
   description: string;
-  formattedDate: string;
+  date: string;
   imageUrl: string;
   user: UserType;
 };

@@ -26,7 +26,7 @@ const config: Config = {
         lightGray: "#FCFCFC",
       },
       padding: {
-        header: "100px",
+        header: "76px",
       },
       minHeight: {
         header: "76px",
