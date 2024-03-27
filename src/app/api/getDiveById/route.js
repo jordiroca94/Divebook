@@ -2,14 +2,17 @@ import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../lib/mongodb";
 import Dive from "../../../../models/dive";
 
-export async function POST() {
+export async function POST(req) {
   try {
     await connectMongoDB();
-    console.log("heeere-->");
     const res = await req.json();
+    const { id } = res;
     const dive = await Dive.findById(id);
-    return NextResponse.json("response");
+    return NextResponse.json({ dive });
   } catch (error) {
-    console.log(error);
+    return NextResponse.json(
+      { message: "An error occurred while uploading an image" },
+      { status: 500 }
+    );
   }
 }
