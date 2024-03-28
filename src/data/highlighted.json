@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": "ss-thistlegorm",
+      "name": "SS Thistlegorm - Ras Mohammed",
+      "country": "Egypt",
+      "description": "One of the best wreck dives in the world (and probably one of the most famous dive sites), the SS Thistlegorm lies in the northern section of the Red Sea. As a popular day trip and liveaboard stop, it’s easily accessible from Sharm El-Sheikh. The wreck itself was previously a 420-foot (128-meter) British transport ship. Unfortunately, she met her fate in 1941 when she was sunk by a German air attack. Today, she remains a window into history with a visible cargo of trucks, jeeps, motorcycles, tanks, and even a locomotive. For this reason, many divers consider it one of the top 3 dive sites in the world.",
+      "type": "Wreck",
+      "season": "March to May, September to November",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/a25194d7-f825-4ce1-85cb-558bd3b70ae3.jpeg"
+    },
+    {
+      "id": "bajo-alcyone",
+      "name": "Bajo Alcyone - Cocos Island",
+      "country": "Costa Rica",
+      "description": "Cocos Island, which lies far from the Costa Rican Pacific coast, is only accessible by liveaboard but is consistently ranked as the top destination in the world for hammerhead diving with this first-class dive site",
+      "type": "Shark",
+      "season": "June to November",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/9639e359-17c1-4d30-b542-f3b6d1c9ef14.jpeg"
+    },
+    {
+      "id": "tiger-beach",
+      "name": "Tiger Beach - Grand Bahama Island",
+      "country": "Bahamas",
+      "description": "Known for shark diving, the Bahamas is a wonderland country of fantastic dive sites and home to some of the best diving in the Caribbean. While you can swim with hammerheads, oceanic whitetips, and reef sharks, at Tiger Beach, you’ll find daily encounters with several tiger sharks all at once. While you wait on the sandy bottom, these large sharks circle around the group in an experience that will delight thrill-seekers and underwater photographers alike. There’s also a chance to see nurse, lemon, and Caribbean reef sharks at this famous Bahamas shark dive site.",
+      "type": "Shark",
+      "season": "October to January",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/27f755fe-af44-438f-b8a0-ae1e496eb7c5.jpeg"
+    }
+  ]
+}
