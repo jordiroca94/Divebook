@@ -9,6 +9,7 @@ const Header = () => {
   const { data: session } = useSession();
 
   const navLinks = [
+    { label: "Community", link: "/divers" },
     { label: "Dives", link: "/dives" },
     { label: "Contact", link: "/" },
   ];

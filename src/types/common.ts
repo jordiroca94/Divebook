@@ -5,8 +5,10 @@ export type Inputs = {
 };
 
 export type UserType = {
+  _id: string;
   name: string;
   email: string;
+  avatarUrl?: string;
 };
 
 export type CountryType = {
