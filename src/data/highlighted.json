@@ -10,12 +10,12 @@
       "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/a25194d7-f825-4ce1-85cb-558bd3b70ae3.jpeg"
     },
     {
-      "id": "bajo-alcyone",
-      "name": "Bajo Alcyone - Cocos Island",
-      "country": "Costa Rica",
-      "description": "Cocos Island, which lies far from the Costa Rican Pacific coast, is only accessible by liveaboard but is consistently ranked as the top destination in the world for hammerhead diving with this first-class dive site",
-      "type": "Shark",
-      "season": "June to November",
+      "id": "ngemelis-island",
+      "name": "Blue Corner - Ngemelis Island",
+      "country": "Palaos",
+      "description": "Blue Corner is a dive for the ages. It consists of a reef-covered wall that runs along the side of Ngemelis Island in Palau. While the dive is great at any time due to the massive schools of fish, this drift-diving site shows its best face when the currents are strong (think more current, more fish – it’s never been more apt). Divers use reef hooks to carefully attach to the wall and watch a number of pelagic species swim past. Common sights include tuna, sharks, and eagle rays. This is undoubtedly some of the best reef diving in the world, and many Blue Corner alumni claim that they have never seen so many sharks on a single dive.",
+      "type": "Drift",
+      "season": "October to May",
       "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/9639e359-17c1-4d30-b542-f3b6d1c9ef14.jpeg"
     },
     {
@@ -26,6 +26,60 @@
       "type": "Shark",
       "season": "October to January",
       "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/27f755fe-af44-438f-b8a0-ae1e496eb7c5.jpeg"
+    },
+    {
+      "id": "manta-night-dive",
+      "name": "Manta Night Dive - Kona, Hawaii",
+      "country": "United State",
+      "description": "Certainly one of the most unique night dives, the Manta Night Dive is a ballet for manta rays which lands this Hawaiian destination on countless lists of the top 10 dive sites worldwide. Just off the coast of Kona is an artificially illuminated area where divers descend to the sandy observation areas. As the light attracts plankton, mantas arrive to take advantage of the feast. All the divers need to do is relax and enjoy the show while the graceful manta rays turn and spin overhead.",
+      "type": "Night",
+      "season": "April to October",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/54f6b86c-abdb-4403-a892-5f33c0b2f6de.jpeg"
+    },
+    {
+      "id": "bajo-alcyone",
+      "name": "Bajo Alcyone - Cocos Island",
+      "country": "Costa Rica",
+      "description": "Cocos Island, which lies far from the Costa Rican Pacific coast, is only accessible by liveaboard but is consistently ranked as the top destination in the world for hammerhead diving with this first-class dive site. The seamount known as Bajo Alcyone rises to 82 feet (25 meters) below the surface and is regularly home to large shoals of hammerhead sharks. The diving can be tricky, but the plan is simple. Divers descend to the top of the seamount, wedge themselves between the rocks, and watch the action above. This is truly an epic site and worthy of a place on every “best dive sites” list!",
+      "type": "Shark",
+      "season": "June to November",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/70b8f4dc-c3e3-4dd9-b625-fe715374ec88.jpeg"
+    },
+    {
+      "id": "cenote-angelita",
+      "name": "Cenote Angelita - Tulum, Mexico",
+      "country": "Costa Rica",
+      "description": "Mexico is unquestionably one of the best diving countries in the world, and thousands of cenotes are scattered throughout its Yucatan Peninsula. While many of them could easily find a spot on this list, the mystical quality of Cenote Angelita makes it hard to ignore. At approximately 100 feet (30 meters), the clear freshwater is separated from the saltwater below by a layer of hydrogen sulfide. The appearance of this cloudy substance is otherworldly and makes for fantastic underwater photography.",
+      "type": "Cave",
+      "season": "May to September",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/7ac12b49-08b4-4100-b23e-782e17a1f4f5.webp"
+    },
+    {
+      "id": "secret-bay",
+      "name": "Secret Bay (Manit Muck) - Anilao",
+      "country": "Philippines",
+      "description": "A wonderland for macro lovers and underwater photographers, Secret Bay (or Manit Muck as it’s known locally) is often cited as one of the top 10 dive sites in the Philippines. This site is quite shallow at between only 10 and 70 feet (3 and 21 meters), but it is abundantly productive for macro marine life and critters. In fact, many divers have reported sightings of mantis shrimp, rare nudibranchs, gobies of all types, and even wonderpus octopuses. This is also one of the area’s best dive sites for night diving, when Ambon scorpionfish, Bobbit worms, seahorses, frogfish, and other nocturnal species become active.      ",
+      "type": "Muck/Macro",
+      "season": "October to May",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/c150b5e1-de27-461a-8697-3a878ddcf6ab.jpeg"
+    },
+    {
+      "id": "silfra-fissure",
+      "name": "Silfra Fissure - Thingvellir National Park",
+      "country": "Iceland",
+      "description": "Diving between continental plates may sound risky, but scuba divers flock to the Silfra Fissure year-round for the pleasure. Granted, these plates are moving so slowly that you will never know it. With 300-foot (100-meter) visibility, exploring the space between the North American and Eurasian tectonic plates in Iceland is a dream. Glide along with the aquatic grasses full of blues and greens before snapping a picture between the rock faces of the plates. This is without a doubt one of the best places to scuba dive in Europe.",
+      "type": "Freshwater",
+      "season": "June to September",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/86cc27b4-90a9-4e0f-a60a-e6efcc95bac9.jpeg"
+    },
+    {
+      "id": "north-horn",
+      "name": "North Horn - Great Barrier Reef",
+      "country": "Australia",
+      "description": "We couldn’t talk about the planet’s best dive sites without mentioning the Great Barrier Reef. Indeed, this natural wonder could fill a list of Australia‘s top 10 dive sites all by itself. In Osprey Reef, North Horn is one of the area’s most sought-after dives, especially for pelagic action. Drift dives along vibrant, coral-encrusted walls regularly bring encounters with gray, silvertip, hammerhead, tiger, and wobbegong sharks—sometimes in a single dive! You might also spot barracuda, giant trevallies, tuna, eagle rays, and even manta rays gliding past.",
+      "type": "Shark/Drift",
+      "season": "June to November",
+      "image": "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/89e0674f-ccd0-4115-a65a-1480345219c0.jpeg"
     }
   ]
 }

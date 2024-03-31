@@ -15,7 +15,7 @@ const HighlightedDestinations = () => {
         >
           Some of our highlighted diving spots
         </Title>
-        {data.items.map((item) => (
+        {data.items.slice(0, 3).map((item) => (
           <div
             className="col-span-4 md:col-span-2 lg:col-span-4 shadow-lg rounded-md border-mediumGray border"
             key={item.id}
