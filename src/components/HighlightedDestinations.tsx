@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Container from "./ui/Container";
 import Button from "./ui/Button";
 import Grid from "./ui/Grid";
 import Title from "./ui/Title";
 import data from "../data/highlighted.json";
+import Link from "next/link";
 
 const HighlightedDestinations = () => {
   return (
@@ -41,6 +41,9 @@ const HighlightedDestinations = () => {
             </div>
           </div>
         ))}
+        <div className="col-span-4 lg:col-span-12 flex justify-center text-center">
+          <Button link="/highlighted-dives" label="See more" secondary />
+        </div>
       </Grid>
     </Container>
   );

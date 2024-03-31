@@ -1,11 +1,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AllHighlightedDestinations from "@/components/AllHighlightedDestinations";
 
 const page = async () => {
   return (
     <div>
       <Header />
-      <div className="pt-header">This will be highlighted-dives page </div>
+      <AllHighlightedDestinations />
       <Footer />
     </div>
   );

@@ -7,6 +7,7 @@ type Props = {
   openNewTab?: boolean;
   submit?: boolean;
   onClick?: () => void;
+  secondary?: Boolean;
 };
 
 const Button = ({
@@ -16,15 +17,18 @@ const Button = ({
   openNewTab,
   submit,
   onClick,
+  secondary,
 }: Props) => {
   const styles =
     "text-base font-bold text-white border rounded-md py-3 px-6 cursor-pointer hover:bg-primary/80 bg-primary";
+  const secondaryStyles =
+    "text-base lg:text-lg text-primary border-b-2 border-b-primary hover:text-primary/60 hover:border-b-primary/60";
   if (link) {
     return (
       <div className={`${className}`}>
         <Link
           target={openNewTab ? "_blank" : undefined}
-          className={`${styles}`}
+          className={`${secondary ? secondaryStyles : styles}`}
           href={link}
         >
           {label}
