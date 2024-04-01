@@ -38,7 +38,10 @@ const Button = ({
   }
 
   return (
-    <button onClick={onClick} className={`${className} ${styles}`}>
+    <button
+      onClick={onClick}
+      className={`${className} ${secondary ? secondaryStyles : styles}`}
+    >
       {label}
     </button>
   );

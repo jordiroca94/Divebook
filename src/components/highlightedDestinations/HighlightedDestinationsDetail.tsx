@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { HighlightedDestinationType } from "@/types/common";
 import Grid from "../ui/Grid";
 import Title from "../ui/Title";
+import BackButton from "../ui/BackButton";
 
 const HighlightedDestinationDetail = ({ id }: { id: string }) => {
   const [item, setItem] = useState<HighlightedDestinationType>();
@@ -20,6 +21,7 @@ const HighlightedDestinationDetail = ({ id }: { id: string }) => {
   return (
     <div className="pt-header">
       <Container>
+        <BackButton />
         <Grid>
           {item && (
             <>

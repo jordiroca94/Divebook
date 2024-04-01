@@ -8,9 +8,11 @@ import Title from "../ui/Title";
 import DiveCard from "./DiveCard";
 import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
+import Button from "../ui/Button";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
+  const [loadItems, setLoadItems] = useState<number>(8);
   const getAllDives = async () => {
     const data = await fetch("api/getDives", {
       method: "GET",
@@ -39,7 +41,7 @@ const AllDives = () => {
           Dives of Our Users
         </Title>
 
-        {data.map((item: DiveType) => {
+        {data.slice(0, loadItems).map((item: DiveType) => {
           const date = formatteDate(item.updatedAt);
           return (
             <DiveCard
@@ -55,6 +57,15 @@ const AllDives = () => {
             />
           );
         })}
+        {loadItems < data.length && (
+          <div className="col-span-4 lg:col-span-12 flex justify-center text-center mt-4 bs:mt-10">
+            <Button
+              onClick={() => setLoadItems(loadItems + 4)}
+              label="See more"
+              secondary
+            />
+          </div>
+        )}
       </Grid>
     </Container>
   );
