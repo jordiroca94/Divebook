@@ -1,4 +1,4 @@
-import AllDives from "@/components/AllDives";
+import AllDives from "@/components/dives/AllDives";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 

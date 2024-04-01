@@ -5,6 +5,7 @@ import Grid from "./ui/Grid";
 import Title from "./ui/Title";
 import { UserType } from "@/types/common";
 import DiverCard from "./DiverCard";
+import BackButton from "./ui/BackButton";
 
 const AllDivers = () => {
   const [data, setData] = useState<UserType[]>([]);
@@ -24,6 +25,7 @@ const AllDivers = () => {
   }, []);
   return (
     <Container className="pt-header lg:py-32">
+      <BackButton />
       <Grid>
         <Title
           fontSize="text-3xl lg:text-4xl text-center"

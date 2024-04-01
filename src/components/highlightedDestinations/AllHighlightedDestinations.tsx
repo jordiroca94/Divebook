@@ -3,11 +3,15 @@ import Grid from "../ui/Grid";
 import Title from "../ui/Title";
 import data from "../../data/highlighted.json";
 import HighlightedCard from "./HighlightedDestinationsCard";
+import BackButton from "../ui/BackButton";
 
 const AllHighlightedDestinations = () => {
   return (
-    <div className="pt-header">
+    <div>
       <Container>
+        <div className="mt-10 my-6">
+          <BackButton />
+        </div>
         <Grid>
           <Title
             className="col-span-4 lg:col-span-12 flex justify-center pb-4"

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { DiveCardType } from "@/types/common";
-import Button from "./ui/Button";
+import Button from "../ui/Button";
 import Link from "next/link";
 
 const DiveCard = ({

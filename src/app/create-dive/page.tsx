@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 // @ts-ignore
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Header from "@/components/Header";
-import DiveForm from "@/components/DiveForm";
+import DiveForm from "@/components/dives/DiveForm";
 import Footer from "@/components/Footer";
 
 const page = async () => {

@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
-import Container from "./ui/Container";
-import Grid from "./ui/Grid";
+import Container from "../ui/Container";
+import Grid from "../ui/Grid";
 import { DiveType } from "@/types/common";
-import Title from "./ui/Title";
+import Title from "../ui/Title";
 import DiveCard from "./DiveCard";
 import formatteDate from "@/utils/util";
+import BackButton from "../ui/BackButton";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
@@ -26,6 +27,9 @@ const AllDives = () => {
   }, []);
   return (
     <Container className="pt-header lg:py-32">
+      <div className="mt-10 my-6">
+        <BackButton />
+      </div>
       <Grid>
         <Title
           fontSize="text-3xl lg:text-4xl text-center"

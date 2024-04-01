@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { CiLogout } from "react-icons/ci";
-import { IoMdArrowBack } from "react-icons/io";
 import { IoAddCircleOutline } from "react-icons/io5";
 import Container from "./ui/Container";
 import Grid from "./ui/Grid";
@@ -14,8 +13,9 @@ import Button from "./ui/Button";
 import Title from "./ui/Title";
 import { useEdgeStore } from "../../lib/edgestore";
 import { SingleImageDropzone } from "./ui/SingleImageDropzone";
-import DiveCard from "./DiveCard";
+import DiveCard from "./dives/DiveCard";
 import formatteDate from "@/utils/util";
+import BackButton from "./ui/BackButton";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -94,10 +94,7 @@ const Profile = () => {
   return (
     <Container className="pt-header">
       <div className="flex justify-between py-6 lg:py-12">
-        <Link href="/" className="flex gap-2 items-center">
-          <IoMdArrowBack className="h-7 w-7" />
-          <p>Go back</p>
-        </Link>
+        <BackButton />
         <button className="flex gap-2 items-center" onClick={() => signOut()}>
           <CiLogout className="h-7 w-7" />
           <p>Log out</p>

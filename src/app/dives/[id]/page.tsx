@@ -1,4 +1,4 @@
-import DiveDetail from "@/components/DiveDetail";
+import DiveDetail from "@/components/dives/DiveDetail";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 

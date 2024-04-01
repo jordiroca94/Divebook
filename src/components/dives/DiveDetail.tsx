@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Container from "./ui/Container";
+import Container from "../ui/Container";
 import { DiveType } from "@/types/common";
-import Title from "./ui/Title";
-import Grid from "./ui/Grid";
+import Title from "../ui/Title";
+import Grid from "../ui/Grid";
 import formatteDate from "@/utils/util";
-import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import BackButton from "../ui/BackButton";
 
 type Props = {
   id: string;
@@ -38,12 +38,7 @@ const DiveDetail = ({ id }: Props) => {
   return (
     <div className="pt-header">
       <Container>
-        <div className="flex justify-between">
-          <button onClick={() => back()} className="flex gap-2 items-center">
-            <IoMdArrowBack className="h-7 w-7" />
-            <p>Go back</p>
-          </button>
-        </div>
+        <BackButton />
         {item && (
           <>
             <Grid>
@@ -85,7 +80,7 @@ const DiveDetail = ({ id }: Props) => {
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="rounded-lg"
+                  className="rounded-lg aspect-square object-cover"
                 />
               </div>
             </Grid>

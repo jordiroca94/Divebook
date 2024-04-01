@@ -1,4 +1,4 @@
-import AllDives from "@/components/AllDives";
+import HomeDives from "@/components/dives/HomeDives";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HighlightedDestinations from "@/components/highlightedDestinations/HighlightedDestinations";
@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <HomeHero />
       <HighlightedDestinations />
-      <AllDives />
+      <HomeDives />
       <Footer />
     </main>
   );

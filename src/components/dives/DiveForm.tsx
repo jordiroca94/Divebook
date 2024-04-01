@@ -1,8 +1,6 @@
 "use client";
-import Link from "next/link";
-import Container from "./ui/Container";
-import { IoMdArrowBack } from "react-icons/io";
-import Grid from "./ui/Grid";
+import Container from "../ui/Container";
+import Grid from "../ui/Grid";
 import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,9 +9,10 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useSession } from "next-auth/react";
 import { DiveType } from "@/types/common";
-import Title from "./ui/Title";
-import { SingleImageDropzone } from "./ui/SingleImageDropzone";
-import { useEdgeStore } from "../../lib/edgestore";
+import Title from "../ui/Title";
+import { SingleImageDropzone } from "../ui/SingleImageDropzone";
+import { useEdgeStore } from "../../../lib/edgestore";
+import BackButton from "../ui/BackButton";
 
 const DiveForm = () => {
   const { data: session } = useSession();
@@ -120,11 +119,8 @@ const DiveForm = () => {
 
   return (
     <Container className="pt-header">
-      <div className="flex justify-between py-6 lg:py-12">
-        <Link href="/profile" className="flex gap-2 items-center">
-          <IoMdArrowBack className="h-7 w-7" />
-          <p>Go back</p>
-        </Link>
+      <div className="py-6 lg:py-12">
+        <BackButton />
       </div>
       <Grid>
         <Title className="col-span-4 lg:col-span-12 lg:col-start-3" h="h1">
