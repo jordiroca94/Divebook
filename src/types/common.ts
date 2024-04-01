@@ -41,3 +41,13 @@ export type DiveCardType = {
   imageUrl: string;
   user: UserType;
 };
+
+export type HighlightedDestination = {
+  id: string;
+  name: string;
+  country: string;
+  description: string;
+  type: string;
+  season: string;
+  image: string;
+};

@@ -10,7 +10,9 @@ const Header = () => {
 
   const navLinks = [
     { label: "Community", link: "/divers" },
+    { label: "Recommendation", link: "/highlighted-dives" },
     { label: "Dives", link: "/dives" },
+
     { label: "Contact", link: "/" },
   ];
 
