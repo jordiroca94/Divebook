@@ -1,4 +1,4 @@
-import { HighlightedDestination } from "@/types/common";
+import { HighlightedDestinationType } from "@/types/common";
 import Button from "../ui/Button";
 
 const HighlightedDestinationCard = ({
@@ -9,7 +9,7 @@ const HighlightedDestinationCard = ({
   type,
   season,
   image,
-}: HighlightedDestination) => {
+}: HighlightedDestinationType) => {
   return (
     <div className="col-span-4 md:col-span-2 lg:col-span-4 shadow-lg rounded-md border-mediumGray border">
       <img className="rounded-t-md" src={image} alt={name} />

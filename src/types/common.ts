@@ -42,7 +42,7 @@ export type DiveCardType = {
   user: UserType;
 };
 
-export type HighlightedDestination = {
+export type HighlightedDestinationType = {
   id: string;
   name: string;
   country: string;
@@ -50,4 +50,8 @@ export type HighlightedDestination = {
   type: string;
   season: string;
   image: string;
+};
+
+export type ParamsType = {
+  params: { id: string };
 };

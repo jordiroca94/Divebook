@@ -1,5 +1,4 @@
 import Container from "../ui/Container";
-import Button from "../ui/Button";
 import Grid from "../ui/Grid";
 import Title from "../ui/Title";
 import data from "../../data/highlighted.json";
@@ -11,7 +10,7 @@ const AllHighlightedDestinations = () => {
       <Container>
         <Grid>
           <Title
-            className="col-span-4 lg:col-span-12 flex justify-center text-center pb-4"
+            className="col-span-4 lg:col-span-12 flex justify-center pb-4"
             h="h1"
           >
             Some of our highlighted diving spots

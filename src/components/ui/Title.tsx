@@ -11,7 +11,7 @@ const Title = ({ h, children, className, fontSize }: Props) => {
       return (
         <h1
           className={`${
-            fontSize ? fontSize : "text-3xl lg:text-5xl text-center"
+            fontSize ? fontSize : "text-3xl lg:text-4xl text-center"
           } ${className}`}
         >
           {children}
