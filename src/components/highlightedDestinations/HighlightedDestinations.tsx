@@ -1,10 +1,10 @@
-import Container from "./ui/Container";
-import Button from "./ui/Button";
-import Grid from "./ui/Grid";
-import Title from "./ui/Title";
-import data from "../data/highlighted.json";
+import Container from "../ui/Container";
+import Button from "../ui/Button";
+import Grid from "../ui/Grid";
+import Title from "../ui/Title";
+import data from "../../data/highlighted.json";
 import Link from "next/link";
-import HighlightedCard from "./HighlightedCard";
+import HighlightedCard from "./HighlightedDestinationsCard";
 
 const HighlightedDestinations = () => {
   return (

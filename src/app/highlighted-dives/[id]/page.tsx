@@ -1,13 +1,12 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import HighlightedDestinationDetail from "@/components/highlightedDestinations/HighlightedDestinationsDetail";
 
 const page = ({ params }: any) => {
   return (
     <div>
       <Header />
-      <div className="pt-header">
-        This is the page of highlighted dive {params.id}
-      </div>
+      <HighlightedDestinationDetail id={params.id} />
       <Footer />
     </div>
   );

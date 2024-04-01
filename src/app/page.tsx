@@ -1,7 +1,7 @@
 import AllDives from "@/components/AllDives";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import HighlightedDestinations from "@/components/HighlightedDestinations";
+import HighlightedDestinations from "@/components/highlightedDestinations/HighlightedDestinations";
 import HomeHero from "@/components/HomeHero";
 
 export default function Home() {

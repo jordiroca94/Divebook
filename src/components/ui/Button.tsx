@@ -20,9 +20,9 @@ const Button = ({
   secondary,
 }: Props) => {
   const styles =
-    "text-base font-bold text-white border rounded-md py-3 px-6 cursor-pointer hover:bg-primary/80 bg-primary";
+    "text-base font-bold capitalize text-white border rounded-md py-3 px-6 cursor-pointer hover:bg-primary/80 bg-primary";
   const secondaryStyles =
-    "text-base lg:text-lg text-primary border-b-2 border-b-primary hover:text-primary/60 hover:border-b-primary/60";
+    "text-base capitalize lg:text-lg text-primary border-b-2 border-b-primary hover:text-primary/60 hover:border-b-primary/60";
   if (link) {
     return (
       <div className={`${className}`}>

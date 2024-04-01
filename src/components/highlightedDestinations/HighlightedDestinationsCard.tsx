@@ -1,7 +1,7 @@
 import { HighlightedDestination } from "@/types/common";
-import Button from "./ui/Button";
+import Button from "../ui/Button";
 
-const HighlightedCard = ({
+const HighlightedDestinationCard = ({
   id,
   name,
   country,
@@ -21,7 +21,7 @@ const HighlightedCard = ({
           <span className="font-semibold py-2">
             Dive Type: <span className="font-normal">{type}</span>
           </span>
-          <span className="font-semibold">
+          <span className="font-semibold line-clamp-1">
             When to go: <span className="font-normal">{season}</span>
           </span>
         </div>
@@ -35,4 +35,4 @@ const HighlightedCard = ({
   );
 };
 
-export default HighlightedCard;
+export default HighlightedDestinationCard;
