@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Container from "./ui/Container";
-import Grid from "./ui/Grid";
-import Title from "./ui/Title";
+import Container from "../ui/Container";
+import Grid from "../ui/Grid";
+import Title from "../ui/Title";
 import { UserType } from "@/types/common";
 import DiverCard from "./DiverCard";
-import BackButton from "./ui/BackButton";
+import BackButton from "../ui/BackButton";
 
 const AllDivers = () => {
   const [data, setData] = useState<UserType[]>([]);

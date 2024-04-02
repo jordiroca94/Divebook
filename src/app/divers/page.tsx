@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AllDivers from "@/components/AllDivers";
+import AllDivers from "@/components/divers/AllDivers";
 
 const page = async () => {
   return (

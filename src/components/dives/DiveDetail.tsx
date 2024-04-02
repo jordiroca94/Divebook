@@ -5,7 +5,6 @@ import { DiveType } from "@/types/common";
 import Title from "../ui/Title";
 import Grid from "../ui/Grid";
 import formatteDate from "@/utils/util";
-import { useRouter } from "next/navigation";
 import BackButton from "../ui/BackButton";
 
 type Props = {
@@ -14,7 +13,6 @@ type Props = {
 
 const DiveDetail = ({ id }: Props) => {
   const [item, setItem] = useState<DiveType>();
-  const { back } = useRouter();
 
   const getDives = async () => {
     try {

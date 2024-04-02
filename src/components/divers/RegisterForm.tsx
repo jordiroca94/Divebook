@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
-import Title from "./ui/Title";
+import Title from "../ui/Title";
 
 type RegisterValuesType = {
   name: string;
