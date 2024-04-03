@@ -16,12 +16,16 @@ import { SingleImageDropzone } from "./ui/SingleImageDropzone";
 import DiveCard from "./dives/DiveCard";
 import formatteDate from "@/utils/util";
 import BackButton from "./ui/BackButton";
+import { IoSettingsOutline } from "react-icons/io5";
+import Modal from "./ui/Modal";
+import { RxCross2 } from "react-icons/rx";
 
 const Profile = () => {
   const { data: session } = useSession();
   const [dives, setDives] = useState<DiveType[]>([]);
   const [file, setFile] = useState<File>();
   const [userInfo, setUserInfo] = useState<any>("");
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<boolean | null>(null);
   const { edgestore } = useEdgeStore();
   const getProfileDives = async () => {
@@ -95,10 +99,21 @@ const Profile = () => {
     <Container className="pt-header">
       <div className="flex justify-between py-6 lg:py-12">
         <BackButton />
-        <button className="flex gap-2 items-center" onClick={() => signOut()}>
-          <CiLogout className="h-7 w-7" />
-          <p>Log out</p>
-        </button>
+        <div className="flex gap-8 ">
+          <div className="hidden lg:block">
+            <button
+              className="flex gap-2 items-center"
+              onClick={() => setOpenModal(true)}
+            >
+              <IoSettingsOutline className="h-7 w-7" />
+              <p>Edit profile</p>
+            </button>
+          </div>
+          <button className="flex gap-2 items-center" onClick={() => signOut()}>
+            <CiLogout className="h-7 w-7" />
+            <p>Log out</p>
+          </button>
+        </div>
       </div>
       <Title
         fontSize="text-3xl lg:text-4xl text-center"
@@ -123,21 +138,6 @@ const Profile = () => {
           <div className="pt-6">
             <p>Email:</p>
             <span className="font-bold">{session?.user?.email} </span>
-          </div>
-          <div className="pt-6">
-            <SingleImageDropzone
-              width={100}
-              height={100}
-              value={file}
-              onChange={(file) => {
-                setFile(file);
-              }}
-            />
-            <Button
-              className="font-normal mt-6"
-              onClick={() => uploadImage()}
-              label="Change Image"
-            />
           </div>
           {submitError && (
             <p className="text-red text-base mt-4">You must upload an image</p>
@@ -191,6 +191,36 @@ const Profile = () => {
           </div>
         )}
       </Grid>
+      {openModal && (
+        <Modal>
+          <div className="flex justify-between items-center">
+            <h5 className="text-2xl">Edit Profile</h5>
+            <button
+              className="rounded-full border-mediumGray border p-2 "
+              onClick={() => setOpenModal(false)}
+            >
+              <RxCross2 className="size-5" />
+            </button>
+          </div>
+          <div>
+            <div className="pt-6">
+              <SingleImageDropzone
+                width={100}
+                height={100}
+                value={file}
+                onChange={(file) => {
+                  setFile(file);
+                }}
+              />
+              <Button
+                className="font-normal mt-6"
+                onClick={() => uploadImage()}
+                label="Change Image"
+              />
+            </div>
+          </div>
+        </Modal>
+      )}
     </Container>
   );
 };
