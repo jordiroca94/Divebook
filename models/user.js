@@ -6,6 +6,10 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     avatarUrl: { type: String },
+    description: { type: String },
+    country: { type: Object },
+    certificates: { type: Array },
+    instructor: { type: Boolean },
   },
   { timestamps: true }
 );

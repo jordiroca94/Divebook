@@ -7,13 +7,7 @@ import { z } from "zod";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
 import Title from "../ui/Title";
-
-type RegisterValuesType = {
-  name: string;
-  email: string;
-  password: string;
-  avatarUrl: string;
-};
+import { UserType } from "@/types/common";
 
 const RegisterForm = () => {
   const form: any = useRef();
@@ -45,17 +39,21 @@ const RegisterForm = () => {
     register,
     reset,
     formState: { errors },
-  } = useForm<RegisterValuesType>({
+  } = useForm<UserType>({
     defaultValues: {
       name: "",
       email: "",
       password: "",
       avatarUrl: "",
+      description: "",
+      country: { value: "", label: "" },
+      certificates: [],
+      instructor: "",
     },
     resolver: zodResolver(registerSchema),
   });
 
-  const handleRegister = async (values: RegisterValuesType) => {
+  const handleRegister = async (values: UserType) => {
     setSuccess(false);
     setError(false);
 
@@ -84,6 +82,10 @@ const RegisterForm = () => {
             password: values.password,
             avatarUrl:
               "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/f3889b54-b9cc-46ac-9e83-622fa204994b.jpeg",
+            description: "",
+            country: { label: "", value: "" },
+            certificates: [],
+            instructor: false,
           }),
         });
         reset();

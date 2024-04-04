@@ -8,7 +8,12 @@ export type UserType = {
   _id: string;
   name: string;
   email: string;
+  password?: string;
   avatarUrl?: string;
+  description?: string;
+  country?: CountryType;
+  certificates?: [];
+  instructor?: Boolean;
 };
 
 export type CountryType = {
