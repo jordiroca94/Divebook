@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { CiLogout } from "react-icons/ci";
@@ -8,8 +8,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import Container from "./ui/Container";
 import Grid from "./ui/Grid";
 import Link from "next/link";
-import { DiveType } from "@/types/common";
-import Button from "./ui/Button";
+import { CountryType, DiveType, UserType } from "@/types/common";
 import Title from "./ui/Title";
 import { useEdgeStore } from "../../lib/edgestore";
 import { SingleImageDropzone } from "./ui/SingleImageDropzone";
@@ -19,6 +18,18 @@ import BackButton from "./ui/BackButton";
 import { IoSettingsOutline } from "react-icons/io5";
 import Modal from "./ui/Modal";
 import { RxCross2 } from "react-icons/rx";
+import { useForm } from "react-hook-form";
+import Select from "react-select";
+import countryList from "react-select-country-list";
+
+type EditFormTypes = {
+  avatarUrl: string;
+  description: string;
+  country: CountryType;
+  birthDate: Date | null;
+  certificates: string;
+  instructor: string;
+};
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -28,6 +39,28 @@ const Profile = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<boolean | null>(null);
   const { edgestore } = useEdgeStore();
+  const form: any = useRef();
+  const options: any = useMemo(() => countryList().getData(), []);
+  const [countryValue, setCountryValue] = useState<any>("");
+
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EditFormTypes>({
+    defaultValues: {
+      avatarUrl: userInfo?.avatarUrl,
+      description: "",
+      country: { value: "", label: "" },
+      birthDate: null,
+      certificates: "",
+      instructor: "",
+    },
+  });
+
+  const changeCountryValue = (value: any) => {
+    setCountryValue(value);
+  };
+
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {
       method: "GET",
@@ -44,7 +77,8 @@ const Profile = () => {
     });
     setDives(profileDives);
   };
-  const uploadImage = async () => {
+  const uploadImage = async (values: EditFormTypes) => {
+    console.log("here-->");
     try {
       if (file) {
         const res = await edgestore.myPublicImages.upload({ file });
@@ -202,23 +236,91 @@ const Profile = () => {
               <RxCross2 className="size-5" />
             </button>
           </div>
-          <div>
+          <form ref={form} onSubmit={handleSubmit(uploadImage)}>
+            <div className="flex flex-col lg:flex-row lg:gap-6">
+              <div className="flex flex-col gap-4 w-full lg:w-1/2">
+                <label htmlFor="certificate" className="font-medium pt-4">
+                  What is you highest certificate?
+                </label>
+                <input
+                  id="certificate"
+                  className="border border-mediumGray py-2 px-3 rounded-md"
+                  type="text"
+                  placeholder="Highest certificate"
+                />
+              </div>
+              <div className="flex flex-col gap-4 w-full lg:w-1/2">
+                <label htmlFor="instructor" className="font-medium pt-4">
+                  Are you an instructor?
+                </label>
+                <select
+                  name="instructor"
+                  className="border border-mediumGray py-2 px-3 rounded-md "
+                >
+                  <option selected value="no">
+                    No
+                  </option>
+                  <option value="yes">Yes</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex flex-col lg:flex-row lg:gap-6">
+              <div className="flex flex-col gap-4 w-full lg:w-1/2">
+                <label htmlFor="country" className="font-medium pt-4">
+                  Where are you from?
+                </label>
+                <Select
+                  options={options}
+                  value={countryValue}
+                  onChange={changeCountryValue}
+                />
+              </div>
+              <div className="flex flex-col gap-4 w-full lg:w-1/2">
+                <label htmlFor="instructor" className="font-medium pt-4">
+                  When where you born?
+                </label>
+                <input
+                  id="instructor"
+                  className="border border-mediumGray py-2 px-3 rounded-md"
+                  type="date"
+                />
+              </div>
+            </div>
             <div className="pt-6">
+              <label htmlFor="image" className="font-medium">
+                Add an image
+              </label>
               <SingleImageDropzone
+                className="my-4"
                 width={100}
-                height={100}
+                height={80}
                 value={file}
                 onChange={(file) => {
                   setFile(file);
                 }}
               />
-              <Button
-                className="font-normal mt-6"
-                onClick={() => uploadImage()}
-                label="Change Image"
+            </div>
+            <div className="flex flex-col ">
+              <label htmlFor="description" className="font-medium pb-4">
+                Description
+              </label>
+              <textarea
+                id="description"
+                className="border border-mediumGray py-2 px-3 rounded-md"
+                placeholder="Description"
+                rows={3}
               />
             </div>
-          </div>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md mt-4 w-full lg:w-auto"
+                value="Send"
+              >
+                Edit profile
+              </button>
+            </div>
+          </form>
         </Modal>
       )}
     </Container>

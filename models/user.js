@@ -8,7 +8,8 @@ const userSchema = new Schema(
     avatarUrl: { type: String },
     description: { type: String },
     country: { type: Object },
-    certificates: { type: Array },
+    birthDate: { type: Date || null },
+    certificates: { type: String },
     instructor: { type: Boolean },
   },
   { timestamps: true }

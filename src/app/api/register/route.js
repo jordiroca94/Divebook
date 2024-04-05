@@ -14,6 +14,7 @@ export async function POST(req) {
       description,
       country,
       certificates,
+      birthDate,
       instructor,
     } = res;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,6 +27,7 @@ export async function POST(req) {
       description,
       country,
       certificates,
+      birthDate,
       instructor,
     });
     return NextResponse.json({ message: "User registered." }, { status: 201 });

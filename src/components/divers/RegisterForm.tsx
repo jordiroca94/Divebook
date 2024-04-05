@@ -47,7 +47,8 @@ const RegisterForm = () => {
       avatarUrl: "",
       description: "",
       country: { value: "", label: "" },
-      certificates: [],
+      birthDate: null,
+      certificates: "",
       instructor: "",
     },
     resolver: zodResolver(registerSchema),
@@ -81,10 +82,11 @@ const RegisterForm = () => {
             email: values.email,
             password: values.password,
             avatarUrl:
-              "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/f3889b54-b9cc-46ac-9e83-622fa204994b.jpeg",
+              "https://files.edgestore.dev/0ajhytejvs3pwkiy/myPublicImages/_public/b82160aa-8396-4688-b234-cd7e1daba2ba.jpeg",
             description: "",
             country: { label: "", value: "" },
-            certificates: [],
+            certificates: "",
+            birthDate: null,
             instructor: false,
           }),
         });
