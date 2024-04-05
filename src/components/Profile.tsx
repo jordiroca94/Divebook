@@ -78,7 +78,7 @@ const Profile = () => {
     setDives(profileDives);
   };
   const uploadImage = async (values: EditFormTypes) => {
-    console.log("here-->");
+    console.log(values, "here-->");
     try {
       if (file) {
         const res = await edgestore.myPublicImages.upload({ file });
@@ -173,10 +173,17 @@ const Profile = () => {
             <p>Email:</p>
             <span className="font-bold">{session?.user?.email} </span>
           </div>
-          {submitError && (
-            <p className="text-red text-base mt-4">You must upload an image</p>
-          )}
         </div>
+        <div className="flex justify-center py-6 lg:hidden col-span-4">
+          <button
+            className="flex gap-2 items-center"
+            onClick={() => setOpenModal(true)}
+          >
+            <IoSettingsOutline className="h-7 w-7" />
+            <p>Edit profile</p>
+          </button>
+        </div>
+
         <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
           <img
             className="aspect-square object-cover rounded-full border border-mediumGray"
@@ -242,12 +249,31 @@ const Profile = () => {
                 <label htmlFor="certificate" className="font-medium pt-4">
                   What is you highest certificate?
                 </label>
-                <input
-                  id="certificate"
-                  className="border border-mediumGray py-2 px-3 rounded-md"
-                  type="text"
-                  placeholder="Highest certificate"
-                />
+                <select
+                  name="certificate"
+                  className="border border-mediumGray py-2 px-3 rounded-md "
+                >
+                  <option selected value="openWater">
+                    Open water diver
+                  </option>
+                  <option value="advancedDiver">
+                    Advanced Open Water Diver
+                  </option>
+                  <option value="rescueDiver">Rescue Diver</option>
+                  <option value="scubaMaster">Master Scuba Diver</option>
+                  <option value="diveMaster">Master Scuba Diver</option>
+                  <option value="scubaMaster">Divemaster</option>
+                  <option value="assistantInstructor">
+                    Assistant Instructor
+                  </option>
+                  <option value="scubaInstructor">
+                    Open Water Scuba Instructor
+                  </option>
+                  <option value="scubaTrainer">
+                    Master Scuba Diver Trainer
+                  </option>
+                  <option value="director">Course Director</option>
+                </select>
               </div>
               <div className="flex flex-col gap-4 w-full lg:w-1/2">
                 <label htmlFor="instructor" className="font-medium pt-4">
