@@ -52,6 +52,16 @@ const Profile = () => {
     },
   });
 
+  const getBirthDate = (date: any) => {
+    const birthdate: any = new Date(date);
+    const today: any = new Date();
+    const differenceInMilliseconds = today - birthdate;
+    const age = Math.floor(
+      differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
+    );
+    return age;
+  };
+
   const changeCountryValue = (value: any) => {
     setCountryValue(value);
   };
@@ -202,8 +212,10 @@ const Profile = () => {
           )}
           {userInfo?.birthDate && (
             <div className="pt-6">
-              <p className="font-semibold">Date of Birth:</p>
-              <span className="font-light">{userInfo.birthDate} </span>
+              <p className="font-semibold">Age:</p>
+              <span className="font-light">
+                {getBirthDate(userInfo.birthDate)}
+              </span>
             </div>
           )}
           {userInfo?.certificate && (
