@@ -134,10 +134,10 @@ const Profile = () => {
     }
   };
 
-  const getUserImage = async () => {
+  const getUserData = async () => {
     try {
       const email = session?.user?.email;
-      const image = await fetch("api/getUserImage", {
+      const userData = await fetch("api/getUserData", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -146,7 +146,7 @@ const Profile = () => {
           email,
         }),
       });
-      const data = await image.json();
+      const data = await userData.json();
       setUserInfo(data.user);
     } catch {
       throw Error("An error ocurred uploading a picture ");
@@ -158,7 +158,7 @@ const Profile = () => {
   }, [session]);
 
   useEffect(() => {
-    getUserImage();
+    getUserData();
   }, [session]);
   return (
     <Container className="pt-header">
