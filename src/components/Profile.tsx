@@ -27,7 +27,7 @@ type EditFormTypes = {
   description: string;
   country: CountryType;
   birthDate: Date | null;
-  certificates: string;
+  certificate: string;
   instructor: string;
 };
 
@@ -37,22 +37,19 @@ const Profile = () => {
   const [file, setFile] = useState<File>();
   const [userInfo, setUserInfo] = useState<any>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<boolean | null>(null);
+  const [imageUploaded, setImageUploaded] = useState<string | null>(null);
   const { edgestore } = useEdgeStore();
   const form: any = useRef();
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<any>("");
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EditFormTypes>({
+  const { handleSubmit, register, reset } = useForm<EditFormTypes>({
     defaultValues: {
-      avatarUrl: userInfo?.avatarUrl,
+      avatarUrl: "",
       description: "",
       country: { value: "", label: "" },
       birthDate: null,
-      certificates: "",
+      certificate: "",
       instructor: "",
     },
   });
@@ -77,12 +74,20 @@ const Profile = () => {
     });
     setDives(profileDives);
   };
-  const uploadImage = async (values: EditFormTypes) => {
-    console.log(values, "here-->");
+
+  const editProfile = async (values: EditFormTypes) => {
     try {
       if (file) {
         const res = await edgestore.myPublicImages.upload({ file });
         const avatarUrl = res.url;
+        const parsedValues = {
+          avatarUrl: avatarUrl,
+          description: values.description,
+          country: countryValue,
+          birthDate: values.birthDate,
+          certificate: values.certificate,
+          instructor: values.instructor,
+        };
         const email = session?.user?.email;
         await fetch("api/updateUser", {
           method: "POST",
@@ -90,17 +95,55 @@ const Profile = () => {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
-            avatarUrl,
+            parsedValues,
             email,
           }),
         });
         window.location.reload();
       } else {
-        setSubmitError(true);
+        const parsedValues = {
+          description: values.description,
+          country: countryValue,
+          birthDate: values.birthDate,
+          certificate: values.certificate,
+          instructor: values.instructor,
+        };
+        const email = session?.user?.email;
+        await fetch("api/updateUser", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            parsedValues,
+            email,
+          }),
+        });
+        window.location.reload();
       }
     } catch {
-      throw Error("An error ocurred uploading a picture ");
+      throw Error("An error ocurred updating your profile");
     }
+    // try {
+    //   if (file) {
+    //     const res = await edgestore.myPublicImages.upload({ file });
+    //     const avatarUrl = res.url;
+    //   }
+    //   const email = session?.user?.email;
+    //   await fetch("api/updateUser", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       avatarUrl,
+    //       email,
+    //     }),
+    //   });
+    //   window.location.reload();
+    // } catch {
+    //   throw Error("An error ocurred uploading a picture ");
+    // }
   };
 
   const getUserImage = async () => {
@@ -159,7 +202,7 @@ const Profile = () => {
       <Grid className="mt-4 lg:mt-16">
         <div className="lg:hidden col-span-4 py-6 px-3">
           <img
-            className="aspect-square rounded-full border border-mediumGray"
+            className="aspect-square object-cover rounded-full border border-mediumGray"
             src={userInfo?.avatarUrl && userInfo?.avatarUrl}
             alt="alt"
           />
@@ -243,19 +286,17 @@ const Profile = () => {
               <RxCross2 className="size-5" />
             </button>
           </div>
-          <form ref={form} onSubmit={handleSubmit(uploadImage)}>
+          <form ref={form} onSubmit={handleSubmit(editProfile)}>
             <div className="flex flex-col lg:flex-row lg:gap-6">
               <div className="flex flex-col gap-4 w-full lg:w-1/2">
                 <label htmlFor="certificate" className="font-medium pt-4">
                   What is you highest certificate?
                 </label>
                 <select
-                  name="certificate"
+                  {...register("certificate")}
                   className="border border-mediumGray py-2 px-3 rounded-md "
                 >
-                  <option selected value="openWater">
-                    Open water diver
-                  </option>
+                  <option value="openWater">Open water diver</option>
                   <option value="advancedDiver">
                     Advanced Open Water Diver
                   </option>
@@ -280,12 +321,10 @@ const Profile = () => {
                   Are you an instructor?
                 </label>
                 <select
-                  name="instructor"
+                  {...register("instructor")}
                   className="border border-mediumGray py-2 px-3 rounded-md "
                 >
-                  <option selected value="no">
-                    No
-                  </option>
+                  <option value="no">No</option>
                   <option value="yes">Yes</option>
                 </select>
               </div>
@@ -302,11 +341,11 @@ const Profile = () => {
                 />
               </div>
               <div className="flex flex-col gap-4 w-full lg:w-1/2">
-                <label htmlFor="instructor" className="font-medium pt-4">
+                <label htmlFor="birthDate" className="font-medium pt-4">
                   When where you born?
                 </label>
                 <input
-                  id="instructor"
+                  {...register("birthDate")}
                   className="border border-mediumGray py-2 px-3 rounded-md"
                   type="date"
                 />
@@ -331,7 +370,7 @@ const Profile = () => {
                 Description
               </label>
               <textarea
-                id="description"
+                {...register("description")}
                 className="border border-mediumGray py-2 px-3 rounded-md"
                 placeholder="Description"
                 rows={3}

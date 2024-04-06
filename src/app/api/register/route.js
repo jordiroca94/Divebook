@@ -13,7 +13,7 @@ export async function POST(req) {
       avatarUrl,
       description,
       country,
-      certificates,
+      certificate,
       birthDate,
       instructor,
     } = res;
@@ -26,7 +26,7 @@ export async function POST(req) {
       avatarUrl,
       description,
       country,
-      certificates,
+      certificate,
       birthDate,
       instructor,
     });

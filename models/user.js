@@ -9,7 +9,7 @@ const userSchema = new Schema(
     description: { type: String },
     country: { type: Object },
     birthDate: { type: Date || null },
-    certificates: { type: String },
+    certificate: { type: String },
     instructor: { type: Boolean },
   },
   { timestamps: true }

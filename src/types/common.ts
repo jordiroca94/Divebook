@@ -12,7 +12,7 @@ export type UserType = {
   avatarUrl?: string;
   description?: string;
   country?: CountryType;
-  certificates?: string;
+  certificate?: string;
   birthDate?: Date | null;
   instructor?: Boolean;
 };
