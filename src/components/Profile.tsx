@@ -89,12 +89,18 @@ const Profile = () => {
         const res = await edgestore.myPublicImages.upload({ file });
         const avatarUrl = res.url;
         const parsedValues = {
-          avatarUrl: avatarUrl,
-          description: values.description,
-          country: countryValue,
-          birthDate: values.birthDate,
-          certificate: values.certificate,
-          instructor: values.instructor,
+          avatarUrl: avatarUrl ? avatarUrl : userInfo?.avatarUrl,
+          description: values.description
+            ? values.description
+            : userInfo?.description,
+          country: countryValue ? countryValue : userInfo?.country,
+          birthDate: values.birthDate ? values.birthDate : userInfo?.birthDate,
+          certificate: values.certificate
+            ? values.certificate
+            : userInfo?.certificate,
+          instructor: values.instructor
+            ? values.instructor
+            : userInfo?.instructor,
         };
         const email = session?.user?.email;
         await fetch("api/updateUser", {
@@ -110,11 +116,17 @@ const Profile = () => {
         window.location.reload();
       } else {
         const parsedValues = {
-          description: values.description,
-          country: countryValue,
-          birthDate: values.birthDate,
-          certificate: values.certificate,
-          instructor: values.instructor,
+          description: values.description
+            ? values.description
+            : userInfo?.description,
+          country: countryValue ? countryValue : userInfo?.country,
+          birthDate: values.birthDate ? values.birthDate : userInfo?.birthDate,
+          certificate: values.certificate
+            ? values.certificate
+            : userInfo?.certificate,
+          instructor: values.instructor
+            ? values.instructor
+            : userInfo?.instructor,
         };
         const email = session?.user?.email;
         await fetch("api/updateUser", {
