@@ -26,7 +26,7 @@ type EditFormTypes = {
   avatarUrl: string;
   description: string;
   country: CountryType;
-  birthDate: Date | null;
+  birthDate: null | string;
   certificate: string;
   instructor: string;
 };
@@ -35,15 +35,13 @@ const Profile = () => {
   const { data: session } = useSession();
   const [dives, setDives] = useState<DiveType[]>([]);
   const [file, setFile] = useState<File>();
-  const [userInfo, setUserInfo] = useState<any>("");
+  const [userInfo, setUserInfo] = useState<UserType>();
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [imageUploaded, setImageUploaded] = useState<string | null>(null);
   const { edgestore } = useEdgeStore();
   const form: any = useRef();
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<any>("");
-
-  const { handleSubmit, register, reset } = useForm<EditFormTypes>({
+  const { handleSubmit, register } = useForm<EditFormTypes>({
     defaultValues: {
       avatarUrl: "",
       description: "",
@@ -124,26 +122,6 @@ const Profile = () => {
     } catch {
       throw Error("An error ocurred updating your profile");
     }
-    // try {
-    //   if (file) {
-    //     const res = await edgestore.myPublicImages.upload({ file });
-    //     const avatarUrl = res.url;
-    //   }
-    //   const email = session?.user?.email;
-    //   await fetch("api/updateUser", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       avatarUrl,
-    //       email,
-    //     }),
-    //   });
-    //   window.location.reload();
-    // } catch {
-    //   throw Error("An error ocurred uploading a picture ");
-    // }
   };
 
   const getUserImage = async () => {
@@ -209,14 +187,52 @@ const Profile = () => {
         </div>
         <div className="col-span-4 lg:col-start-3 text-lg lg:mb-6">
           <div>
-            <p>Name:</p>
-            <span className="font-bold">{session?.user?.name} </span>
+            <p className="font-semibold">Name:</p>
+            <span className="font-light">{userInfo?.name} </span>
           </div>
           <div className="pt-6">
-            <p>Email:</p>
-            <span className="font-bold">{session?.user?.email} </span>
+            <p className="font-semibold">Email:</p>
+            <span className="font-light">{userInfo?.email} </span>
           </div>
+          {userInfo?.country?.label && (
+            <div className="pt-6">
+              <p className="font-semibold">Country:</p>
+              <span className="font-light">{userInfo.country.label} </span>
+            </div>
+          )}
+          {userInfo?.birthDate && (
+            <div className="pt-6">
+              <p className="font-semibold">Date of Birth:</p>
+              <span className="font-light">{userInfo.birthDate} </span>
+            </div>
+          )}
+          {userInfo?.certificate && (
+            <div className="pt-6">
+              <p className="font-semibold">Diving expertice:</p>
+              <span className="font-light">{userInfo.certificate} </span>
+            </div>
+          )}
         </div>
+        <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
+          <img
+            className="aspect-square object-cover rounded-full border border-mediumGray"
+            src={userInfo?.avatarUrl && userInfo?.avatarUrl}
+            alt="alt"
+          />
+          {userInfo?.instructor && (
+            <div className="flex justify-center pt-3">
+              <div className="py-2 px-6 rounded-full font-light bg-green text-white">
+                Instructor
+              </div>
+            </div>
+          )}
+        </div>
+        {userInfo?.description && (
+          <div className="lg:col-start-3 lg:col-span-8 col-span-4">
+            <p className="font-semibold">About you:</p>
+            <span className="font-light">{userInfo.description} </span>
+          </div>
+        )}
         <div className="flex justify-center py-6 lg:hidden col-span-4">
           <button
             className="flex gap-2 items-center"
@@ -225,14 +241,6 @@ const Profile = () => {
             <IoSettingsOutline className="h-7 w-7" />
             <p>Edit profile</p>
           </button>
-        </div>
-
-        <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
-          <img
-            className="aspect-square object-cover rounded-full border border-mediumGray"
-            src={userInfo?.avatarUrl && userInfo?.avatarUrl}
-            alt="alt"
-          />
         </div>
         <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10 border-t border-mediumGray">
           <h6 className="text-xl">
@@ -297,23 +305,23 @@ const Profile = () => {
                   className="border border-mediumGray py-2 px-3 rounded-md "
                 >
                   <option value="openWater">Open water diver</option>
-                  <option value="advancedDiver">
+                  <option value="Advanced Open Water Diver">
                     Advanced Open Water Diver
                   </option>
-                  <option value="rescueDiver">Rescue Diver</option>
-                  <option value="scubaMaster">Master Scuba Diver</option>
-                  <option value="diveMaster">Master Scuba Diver</option>
-                  <option value="scubaMaster">Divemaster</option>
-                  <option value="assistantInstructor">
+                  <option value="Rescue Diver">Rescue Diver</option>
+                  <option value="Master Scuba Diver">Master Scuba Diver</option>
+                  <option value="Master Scuba Diver">Master Scuba Diver</option>
+                  <option value="Divemaster">Divemaster</option>
+                  <option value="Assistant Instructor">
                     Assistant Instructor
                   </option>
-                  <option value="scubaInstructor">
+                  <option value="Open Water Scuba Instructor">
                     Open Water Scuba Instructor
                   </option>
-                  <option value="scubaTrainer">
+                  <option value="Master Scuba Diver Trainer">
                     Master Scuba Diver Trainer
                   </option>
-                  <option value="director">Course Director</option>
+                  <option value="Course Director">Course Director</option>
                 </select>
               </div>
               <div className="flex flex-col gap-4 w-full lg:w-1/2">

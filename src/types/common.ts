@@ -13,7 +13,7 @@ export type UserType = {
   description?: string;
   country?: CountryType;
   certificate?: string;
-  birthDate?: Date | null;
+  birthDate?: string | null;
   instructor?: Boolean;
 };
 

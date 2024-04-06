@@ -12,6 +12,7 @@ export async function POST(req) {
       description: parsedValues.description,
       country: parsedValues.country,
       birthDate: parsedValues.birthDate,
+      certificate: parsedValues.certificate,
       instructor: parsedValues.instructor,
     });
     return NextResponse.json({ message: "Image uploaded" }, { status: 201 });
