@@ -729,6 +729,11 @@
   resolved "https://registry.yarnpkg.com/@edgestore/shared/-/shared-0.1.6.tgz#5ea0552cabf857e84509036021dd320ad1016f1b"
   integrity sha512-KmM+C3uQvK1M5ehqPsIQxokIhPxF3ZmvefqL2ecY+bjN6XllU3/56wr3/xicxfuy1/BEh2VV3pzCusVO4IxxNA==
 
+"@emailjs/browser@^4.3.3":
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-4.3.3.tgz#edf759fc68f1628d7192bed689b1bb0651890f57"
+  integrity sha512-ltpt2S/WVREIBXptxYAVYBvXb2O6yTUYiRUWF8OLikMxlmiGsIgKpgHppikNd4Df0uAav7jCsQKcOJ3TJFUx5g==
+
 "@emotion/babel-plugin@^11.11.0":
   version "11.11.0"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.11.0.tgz#c2d872b6a7767a9d176d007f5b31f7d504bb5d6c"
@@ -2155,6 +2160,11 @@ electron-to-chromium@^1.4.668:
   version "1.4.689"
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.689.tgz"
   integrity sha512-GatzRKnGPS1go29ep25reM94xxd1Wj8ritU0yRhCJ/tr1Bg8gKnm6R9O/yPOhGQBoLMZ9ezfrpghNaTw97C/PQ==
+
+emailjs@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/emailjs/-/emailjs-4.0.3.tgz#ea0a3bc67a9fa4f489cda739691b4644c5a48b75"
+  integrity sha512-1CDXoE3FxkSg7QRTlLsDCYG9elFNu/JQsYWu3Xfrk77ubbg5zYgFGg+JRUKQJ56mceM8o3rHHX0VB4wo9XsyLQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
