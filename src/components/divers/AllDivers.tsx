@@ -42,6 +42,9 @@ const AllDivers = () => {
               name={item.name}
               email={item.email}
               avatarUrl={item.avatarUrl}
+              instructor={item.instructor}
+              country={item.country}
+              certificate={item.certificate}
             />
           );
         })}

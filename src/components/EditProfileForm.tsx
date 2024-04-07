@@ -134,7 +134,7 @@ const EditProfileForm = ({ userInfo, openModal, setOpenModal }: Props) => {
               <option value="" disabled selected>
                 Select ...
               </option>
-              <option value="openWater">Open water diver</option>
+              <option value="Open water diver">Open water diver</option>
               <option value="Advanced Open Water Diver">
                 Advanced Open Water Diver
               </option>
