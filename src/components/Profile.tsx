@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { CiLogout } from "react-icons/ci";
@@ -8,49 +8,19 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import Container from "./ui/Container";
 import Grid from "./ui/Grid";
 import Link from "next/link";
-import { CountryType, DiveType, UserType } from "@/types/common";
+import { DiveType, UserType } from "@/types/common";
 import Title from "./ui/Title";
-import { useEdgeStore } from "../../lib/edgestore";
-import { SingleImageDropzone } from "./ui/SingleImageDropzone";
 import DiveCard from "./dives/DiveCard";
 import formatteDate from "@/utils/util";
 import BackButton from "./ui/BackButton";
 import { IoSettingsOutline } from "react-icons/io5";
-import Modal from "./ui/Modal";
-import { RxCross2 } from "react-icons/rx";
-import { useForm } from "react-hook-form";
-import Select from "react-select";
-import countryList from "react-select-country-list";
-
-type EditFormTypes = {
-  avatarUrl: string;
-  description: string;
-  country: CountryType;
-  birthDate: null | string;
-  certificate: string;
-  instructor: string;
-};
+import EditProfileForm from "./EditProfileForm";
 
 const Profile = () => {
   const { data: session } = useSession();
   const [dives, setDives] = useState<DiveType[]>([]);
-  const [file, setFile] = useState<File>();
   const [userInfo, setUserInfo] = useState<UserType>();
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const { edgestore } = useEdgeStore();
-  const form: any = useRef();
-  const options: any = useMemo(() => countryList().getData(), []);
-  const [countryValue, setCountryValue] = useState<any>("");
-  const { handleSubmit, register } = useForm<EditFormTypes>({
-    defaultValues: {
-      avatarUrl: "",
-      description: "",
-      country: { value: "", label: "" },
-      birthDate: null,
-      certificate: "",
-      instructor: "",
-    },
-  });
 
   const getBirthDate = (date: any) => {
     const birthdate: any = new Date(date);
@@ -60,10 +30,6 @@ const Profile = () => {
       differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
     );
     return age;
-  };
-
-  const changeCountryValue = (value: any) => {
-    setCountryValue(value);
   };
 
   const getProfileDives = async () => {
@@ -81,69 +47,6 @@ const Profile = () => {
       }
     });
     setDives(profileDives);
-  };
-
-  const editProfile = async (values: EditFormTypes) => {
-    try {
-      if (file) {
-        const res = await edgestore.myPublicImages.upload({ file });
-        const avatarUrl = res.url;
-        const parsedValues = {
-          avatarUrl: avatarUrl ? avatarUrl : userInfo?.avatarUrl,
-          description: values.description
-            ? values.description
-            : userInfo?.description,
-          country: countryValue ? countryValue : userInfo?.country,
-          birthDate: values.birthDate ? values.birthDate : userInfo?.birthDate,
-          certificate: values.certificate
-            ? values.certificate
-            : userInfo?.certificate,
-          instructor: values.instructor
-            ? values.instructor
-            : userInfo?.instructor,
-        };
-        const email = session?.user?.email;
-        await fetch("api/updateUser", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            parsedValues,
-            email,
-          }),
-        });
-        window.location.reload();
-      } else {
-        const parsedValues = {
-          description: values.description
-            ? values.description
-            : userInfo?.description,
-          country: countryValue ? countryValue : userInfo?.country,
-          birthDate: values.birthDate ? values.birthDate : userInfo?.birthDate,
-          certificate: values.certificate
-            ? values.certificate
-            : userInfo?.certificate,
-          instructor: values.instructor
-            ? values.instructor
-            : userInfo?.instructor,
-        };
-        const email = session?.user?.email;
-        await fetch("api/updateUser", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            parsedValues,
-            email,
-          }),
-        });
-        window.location.reload();
-      }
-    } catch {
-      throw Error("An error ocurred updating your profile");
-    }
   };
 
   const getUserData = async () => {
@@ -208,14 +111,18 @@ const Profile = () => {
           />
         </div>
         <div className="col-span-4 lg:col-start-3 text-lg lg:mb-6">
-          <div>
-            <p className="font-semibold">Name:</p>
-            <span className="font-light">{userInfo?.name} </span>
-          </div>
-          <div className="pt-6">
-            <p className="font-semibold">Email:</p>
-            <span className="font-light">{userInfo?.email} </span>
-          </div>
+          {userInfo?.name && (
+            <div>
+              <p className="font-semibold">Name:</p>
+              <span className="font-light">{userInfo.name} </span>
+            </div>
+          )}
+          {userInfo?.email && (
+            <div className="pt-6">
+              <p className="font-semibold">Email:</p>
+              <span className="font-light">{userInfo.email} </span>
+            </div>
+          )}
           {userInfo?.country?.label && (
             <div className="pt-6">
               <p className="font-semibold">Country:</p>
@@ -308,117 +215,7 @@ const Profile = () => {
         )}
       </Grid>
       {openModal && (
-        <Modal>
-          <div className="flex justify-between items-center">
-            <h5 className="text-2xl">Edit Profile</h5>
-            <button
-              className="rounded-full border-mediumGray border p-2 "
-              onClick={() => setOpenModal(false)}
-            >
-              <RxCross2 className="size-5" />
-            </button>
-          </div>
-          <form ref={form} onSubmit={handleSubmit(editProfile)}>
-            <div className="flex flex-col lg:flex-row lg:gap-6">
-              <div className="flex flex-col gap-4 w-full lg:w-1/2">
-                <label htmlFor="certificate" className="font-medium pt-4">
-                  What is you highest certificate?
-                </label>
-                <select
-                  {...register("certificate")}
-                  className="border border-mediumGray py-2 px-3 rounded-md "
-                >
-                  <option value="openWater">Open water diver</option>
-                  <option value="Advanced Open Water Diver">
-                    Advanced Open Water Diver
-                  </option>
-                  <option value="Rescue Diver">Rescue Diver</option>
-                  <option value="Master Scuba Diver">Master Scuba Diver</option>
-                  <option value="Master Scuba Diver">Master Scuba Diver</option>
-                  <option value="Divemaster">Divemaster</option>
-                  <option value="Assistant Instructor">
-                    Assistant Instructor
-                  </option>
-                  <option value="Open Water Scuba Instructor">
-                    Open Water Scuba Instructor
-                  </option>
-                  <option value="Master Scuba Diver Trainer">
-                    Master Scuba Diver Trainer
-                  </option>
-                  <option value="Course Director">Course Director</option>
-                </select>
-              </div>
-              <div className="flex flex-col gap-4 w-full lg:w-1/2">
-                <label htmlFor="instructor" className="font-medium pt-4">
-                  Are you an instructor?
-                </label>
-                <select
-                  {...register("instructor")}
-                  className="border border-mediumGray py-2 px-3 rounded-md "
-                >
-                  <option value="no">No</option>
-                  <option value="yes">Yes</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex flex-col lg:flex-row lg:gap-6">
-              <div className="flex flex-col gap-4 w-full lg:w-1/2">
-                <label htmlFor="country" className="font-medium pt-4">
-                  Where are you from?
-                </label>
-                <Select
-                  options={options}
-                  value={countryValue}
-                  onChange={changeCountryValue}
-                />
-              </div>
-              <div className="flex flex-col gap-4 w-full lg:w-1/2">
-                <label htmlFor="birthDate" className="font-medium pt-4">
-                  When where you born?
-                </label>
-                <input
-                  {...register("birthDate")}
-                  className="border border-mediumGray py-2 px-3 rounded-md"
-                  type="date"
-                />
-              </div>
-            </div>
-            <div className="pt-6">
-              <label htmlFor="image" className="font-medium">
-                Add an image
-              </label>
-              <SingleImageDropzone
-                className="my-4"
-                width={100}
-                height={80}
-                value={file}
-                onChange={(file) => {
-                  setFile(file);
-                }}
-              />
-            </div>
-            <div className="flex flex-col ">
-              <label htmlFor="description" className="font-medium pb-4">
-                Description
-              </label>
-              <textarea
-                {...register("description")}
-                className="border border-mediumGray py-2 px-3 rounded-md"
-                placeholder="Description"
-                rows={3}
-              />
-            </div>
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md mt-4 w-full lg:w-auto"
-                value="Send"
-              >
-                Edit profile
-              </button>
-            </div>
-          </form>
-        </Modal>
+        <EditProfileForm userInfo={userInfo} setOpenModal={setOpenModal} />
       )}
     </Container>
   );
