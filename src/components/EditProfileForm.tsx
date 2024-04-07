@@ -1,7 +1,7 @@
 import { RxCross2 } from "react-icons/rx";
 import Modal from "./ui/Modal";
 import { CountryType, UserType } from "@/types/common";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useEdgeStore } from "../../lib/edgestore";
 import countryList from "react-select-country-list";
 import { useForm } from "react-hook-form";
@@ -20,10 +20,11 @@ type EditFormTypes = {
 
 type Props = {
   userInfo: any;
+  openModal: any;
   setOpenModal: any;
 };
 
-const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
+const EditProfileForm = ({ userInfo, openModal, setOpenModal }: Props) => {
   const { data: session } = useSession();
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
@@ -108,6 +109,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
       throw Error("An error ocurred updating your profile");
     }
   };
+
   return (
     <Modal>
       <div className="flex justify-between items-center">
@@ -129,6 +131,9 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
               {...register("certificate")}
               className="border border-mediumGray py-2 px-3 rounded-md "
             >
+              <option value="" disabled selected>
+                Select ...
+              </option>
               <option value="openWater">Open water diver</option>
               <option value="Advanced Open Water Diver">
                 Advanced Open Water Diver
@@ -155,6 +160,9 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
               {...register("instructor")}
               className="border border-mediumGray py-2 px-3 rounded-md "
             >
+              <option value="" disabled selected>
+                Select ...
+              </option>
               <option value="no">No</option>
               <option value="yes">Yes</option>
             </select>

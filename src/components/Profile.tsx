@@ -66,6 +66,13 @@ const Profile = () => {
   useEffect(() => {
     getUserData();
   }, [session]);
+
+  useEffect(() => {
+    openModal
+      ? document.body.classList.add("overflow-y-hidden")
+      : document.body.classList.remove("overflow-y-hidden");
+  }, [openModal]);
+
   return (
     <Container className="pt-header">
       <div className="flex justify-between py-6 lg:py-12">
@@ -153,7 +160,11 @@ const Profile = () => {
         )}
       </Grid>
       {openModal && (
-        <EditProfileForm userInfo={userInfo} setOpenModal={setOpenModal} />
+        <EditProfileForm
+          userInfo={userInfo}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
       )}
     </Container>
   );
