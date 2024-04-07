@@ -1,4 +1,4 @@
-import Profile from "@/components/Profile";
+import Profile from "@/components/profile/Profile";
 import React from "react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

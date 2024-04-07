@@ -1,11 +1,11 @@
 import { RxCross2 } from "react-icons/rx";
-import Modal from "./ui/Modal";
+import Modal from "../ui/Modal";
 import { CountryType, UserType } from "@/types/common";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useEdgeStore } from "../../lib/edgestore";
+import { useEdgeStore } from "../../../lib/edgestore";
 import countryList from "react-select-country-list";
 import { useForm } from "react-hook-form";
-import { SingleImageDropzone } from "./ui/SingleImageDropzone";
+import { SingleImageDropzone } from "../ui/SingleImageDropzone";
 import Select from "react-select";
 import { useSession } from "next-auth/react";
 
