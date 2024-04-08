@@ -8,6 +8,7 @@ import Loader from "./ui/Loader";
 import Container from "./ui/Container";
 import Title from "./ui/Title";
 import BackButton from "./ui/BackButton";
+import Grid from "./ui/Grid";
 
 type Inputs = {
   name: string;
@@ -66,16 +67,16 @@ const Contact = () => {
   };
 
   return (
-    <Container className="pt-header">
+    <Container className="pt-header bs:h-[85vh]">
       <div className="py-6 lg:py-12">
         <BackButton />
       </div>
       <Title className="bs:pb-4" h="h1">
         Contact us!
       </Title>
-      <div className="grid place-items-center h-screen bs:h-[70vh]">
+      <Grid className="py-12">
         <form
-          className="flex flex-col items-start lg:w-2/5 text-lg"
+          className="flex flex-col items-start text-lg col-span-4 lg:col-span-6 lg:col-start-4"
           ref={form}
           onSubmit={handleSubmit(sendEmail)}
         >
@@ -147,7 +148,7 @@ const Contact = () => {
             </p>
           )}
         </form>
-      </div>
+      </Grid>
     </Container>
   );
 };
