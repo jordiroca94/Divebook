@@ -93,11 +93,7 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <Title
-        fontSize="text-3xl lg:text-4xl text-center"
-        className="col-span-4 lg:col-span-12 flex justify-center"
-        h="h1"
-      >
+      <Title className="col-span-4 lg:col-span-12 flex justify-center" h="h1">
         Profile
       </Title>
       <Grid className="mt-4 lg:mt-16">

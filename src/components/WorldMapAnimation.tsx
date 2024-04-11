@@ -9,7 +9,7 @@ const WorldMapAnimation = ({ children }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={ref} className="text-gray max-w-4xl mx-auto">
+    <div ref={ref} className="text-mapGray max-w-7xl mx-auto">
       {children}
     </div>
   );

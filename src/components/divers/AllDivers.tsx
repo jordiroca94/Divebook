@@ -28,9 +28,8 @@ const AllDivers = () => {
       <BackButton />
       <Grid>
         <Title
-          fontSize="text-3xl lg:text-4xl text-center"
           className="col-span-4 lg:col-span-12 flex justify-center pb-4"
-          h="h2"
+          h="h1"
         >
           Discover the community
         </Title>

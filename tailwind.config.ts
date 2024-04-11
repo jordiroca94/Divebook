@@ -23,6 +23,7 @@ const config: Config = {
         white: "#ffffff",
         black: "#000000",
         gray: "#707070",
+        mapGray: "#c5c2bf",
         mediumGray: "#E8E9E8",
         lightGray: "#FCFCFC",
       },
