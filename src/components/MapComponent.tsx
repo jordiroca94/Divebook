@@ -7,7 +7,7 @@ import Title from "./ui/Title";
 import { CountryType } from "@/types/common";
 
 const MapComponent = () => {
-  const [data, setData] = useState<CountryType[]>();
+  const [countries, setCountries] = useState<CountryType[]>();
 
   const getDiversByCountry = async () => {
     const data = await fetch("/api/getUsersByCountry", {
@@ -17,9 +17,8 @@ const MapComponent = () => {
       },
     });
     const { countries } = await data.json();
-    setData(countries);
+    setCountries(countries);
   };
-  console.log(data, "countries");
 
   useEffect(() => {
     getDiversByCountry();
@@ -29,7 +28,10 @@ const MapComponent = () => {
       <Title className="flex justify-center pb-10" h="h1">
         Where is our community from ?
       </Title>
-      <WorldMapAnimation>
+      <p className="font-light text-2xl  text-center pb-6 ">
+        {countries?.map((country) => country.label).join(", ")}
+      </p>
+      <WorldMapAnimation countries={countries}>
         <WorldMap />
       </WorldMapAnimation>
     </Container>
