@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import WorldMapAnimation from "./WorldMapAnimation";
 import WorldMap from "./WorldMap";
-import Container from "./ui/Container";
-import Title from "./ui/Title";
+import Container from "../ui/Container";
+import Title from "../ui/Title";
 import { CountryType } from "@/types/common";
-import BackButton from "./ui/BackButton";
+import BackButton from "../ui/BackButton";
 
 const MapComponent = () => {
   const [countries, setCountries] = useState<CountryType[]>();
