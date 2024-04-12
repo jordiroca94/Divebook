@@ -38,12 +38,15 @@ const MapComponent = () => {
       <Title className="flex justify-center pb-4 lg:pb-10" h="h1">
         Where is our community from ?
       </Title>
-      <p className="font-light text-base lg:text-2xl text-center pb-6">
+      <p className="hidden lg:block font-light lg:text-2xl text-center pb-6">
         {uniqueCountries?.map((country) => country).join(", ")}
       </p>
       <WorldMapAnimation countries={countries}>
         <WorldMap />
       </WorldMapAnimation>
+      <p className=" lg:hidden font-light text-base text-center pt-6">
+        {uniqueCountries?.map((country) => country).join(", ")}
+      </p>
     </Container>
   );
 };

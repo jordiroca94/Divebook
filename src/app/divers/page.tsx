@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AllDivers from "@/components/divers/AllDivers";
 import MapComponent from "@/components/MapComponent";
+import JoinUs from "@/components/JoinUs";
 
 const page = async () => {
   return (
@@ -9,6 +10,7 @@ const page = async () => {
       <Header />
       <MapComponent />
       <AllDivers />
+      <JoinUs />
       <Footer />
     </div>
   );

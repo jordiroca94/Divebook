@@ -6,6 +6,7 @@ import Title from "../ui/Title";
 import { UserType } from "@/types/common";
 import DiverCard from "./DiverCard";
 import BackButton from "../ui/BackButton";
+import DiverSkeleton from "./DiverSkeleton";
 
 const AllDivers = () => {
   const [data, setData] = useState<UserType[]>([]);
@@ -32,20 +33,22 @@ const AllDivers = () => {
         >
           Discover the community
         </Title>
-        {data.map((item: UserType) => {
-          return (
-            <DiverCard
-              key={item._id}
-              _id={item._id}
-              name={item.name}
-              email={item.email}
-              avatarUrl={item.avatarUrl}
-              instructor={item.instructor}
-              country={item.country}
-              certificate={item.certificate}
-            />
-          );
-        })}
+        {data.length
+          ? data.map((item: UserType) => {
+              return (
+                <DiverCard
+                  key={item._id}
+                  _id={item._id}
+                  name={item.name}
+                  email={item.email}
+                  avatarUrl={item.avatarUrl}
+                  instructor={item.instructor}
+                  country={item.country}
+                  certificate={item.certificate}
+                />
+              );
+            })
+          : new Array(8).fill(0).map((_, i) => <DiverSkeleton key={i} />)}
       </Grid>
     </Container>
   );

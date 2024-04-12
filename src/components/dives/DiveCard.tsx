@@ -18,7 +18,7 @@ const DiveCard = ({
       {imageUrl && (
         <div className="flex justify-center border-b border-mediumGray">
           <img
-            className="rounded-md aspect-[4/3]"
+            className="rounded-md aspect-[4/3] object-cover"
             src={imageUrl}
             alt="Placehodler Image"
           />

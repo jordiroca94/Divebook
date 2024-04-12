@@ -25,7 +25,7 @@ const WorldMapAnimation = ({ children, countries }: Props) => {
   }, [countries]);
 
   return (
-    <div ref={ref} className="text-mapGray max-w-6xl bs:max-w-7xl mx-auto">
+    <div ref={ref} className="text-mediumGray2 max-w-6xl bs:max-w-7xl mx-auto">
       {children}
     </div>
   );

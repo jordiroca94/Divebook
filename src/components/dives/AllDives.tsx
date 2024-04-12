@@ -9,6 +9,7 @@ import DiveCard from "./DiveCard";
 import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
 import Button from "../ui/Button";
+import DiveSkeleton from "./DiveSkeleton";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
@@ -40,22 +41,24 @@ const AllDives = () => {
           Dives of Our Users
         </Title>
 
-        {data.slice(0, loadItems).map((item: DiveType) => {
-          const date = formatteDate(item.updatedAt);
-          return (
-            <DiveCard
-              key={item._id}
-              _id={item._id}
-              name={item.name}
-              country={item.country}
-              location={item.location}
-              description={item.description}
-              date={date}
-              imageUrl={item.imageUrl}
-              user={item.user}
-            />
-          );
-        })}
+        {data.length
+          ? data.slice(0, loadItems).map((item: DiveType) => {
+              const date = formatteDate(item.updatedAt);
+              return (
+                <DiveCard
+                  key={item._id}
+                  _id={item._id}
+                  name={item.name}
+                  country={item.country}
+                  location={item.location}
+                  description={item.description}
+                  date={date}
+                  imageUrl={item.imageUrl}
+                  user={item.user}
+                />
+              );
+            })
+          : new Array(8).fill(0).map((_, i) => <DiveSkeleton key={i} />)}
         {loadItems < data.length && (
           <div className="col-span-4 lg:col-span-12 flex justify-center text-center mt-4 bs:mt-10">
             <Button
