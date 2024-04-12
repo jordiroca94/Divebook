@@ -6,7 +6,10 @@ const BackButton = () => {
   const { back } = useRouter();
 
   return (
-    <button onClick={() => back()} className="flex gap-2 items-center">
+    <button
+      onClick={() => back()}
+      className="flex gap-2 items-center pb-4 lg:pb-0"
+    >
       <IoMdArrowBack className="h-7 w-7" />
       <p>Go back</p>
     </button>

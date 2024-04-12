@@ -19,13 +19,13 @@ const WorldMapAnimation = ({ children, countries }: Props) => {
       path?.classList.add(
         "text-primary/70",
         "transition-colors",
-        "duration-700"
+        "duration-[2000ms]"
       );
     });
   }, [countries]);
 
   return (
-    <div ref={ref} className="text-mapGray max-w-7xl mx-auto">
+    <div ref={ref} className="text-mapGray max-w-6xl bs:max-w-7xl mx-auto">
       {children}
     </div>
   );

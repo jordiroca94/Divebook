@@ -5,9 +5,11 @@ import WorldMap from "./WorldMap";
 import Container from "./ui/Container";
 import Title from "./ui/Title";
 import { CountryType } from "@/types/common";
+import BackButton from "./ui/BackButton";
 
 const MapComponent = () => {
   const [countries, setCountries] = useState<CountryType[]>();
+  const [uniqueCountries, setUniqueCountries] = useState<string[]>();
 
   const getDiversByCountry = async () => {
     const data = await fetch("/api/getUsersByCountry", {
@@ -21,15 +23,23 @@ const MapComponent = () => {
   };
 
   useEffect(() => {
+    const countriesList = countries?.map((country) => country.label).sort();
+    // @ts-ignore
+    const uniqueArray = [...new Set(countriesList)];
+    setUniqueCountries(uniqueArray);
+  }, [countries]);
+
+  useEffect(() => {
     getDiversByCountry();
   }, []);
   return (
-    <Container className="lg:py-20 py-10">
-      <Title className="flex justify-center pb-10" h="h1">
+    <Container className="lg:pt-32 pb-10 pt-24">
+      <BackButton />
+      <Title className="flex justify-center pb-4 lg:pb-10" h="h1">
         Where is our community from ?
       </Title>
-      <p className="font-light text-2xl  text-center pb-6 ">
-        {countries?.map((country) => country.label).join(", ")}
+      <p className="font-light text-base lg:text-2xl text-center pb-6">
+        {uniqueCountries?.map((country) => country).join(", ")}
       </p>
       <WorldMapAnimation countries={countries}>
         <WorldMap />

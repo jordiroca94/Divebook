@@ -24,12 +24,11 @@ const AllDivers = () => {
     getAllDivers();
   }, []);
   return (
-    <Container className="pt-header lg:py-32">
-      <BackButton />
+    <Container className="lg:py-20">
       <Grid>
         <Title
           className="col-span-4 lg:col-span-12 flex justify-center pb-4"
-          h="h1"
+          h="h2"
         >
           Discover the community
         </Title>

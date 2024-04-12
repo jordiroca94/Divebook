@@ -10,7 +10,7 @@ const config: Config = {
     screens: {
       md: "768px", // tablet size
       lg: "1024px", // first standard size for desktop
-      xlg: "1400px", // first standard size for desktop
+      xlg: "1400px",
       bs: "1600px",
     },
     extend: {

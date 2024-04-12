@@ -7,8 +7,8 @@ const page = async () => {
   return (
     <div>
       <Header />
-      <AllDivers />
       <MapComponent />
+      <AllDivers />
       <Footer />
     </div>
   );
