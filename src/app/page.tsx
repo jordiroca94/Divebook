@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HighlightedDestinations from "@/components/highlightedDestinations/HighlightedDestinations";
 import HomeHero from "@/components/HomeHero";
+import JoinUs from "@/components/JoinUs";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <HomeHero />
       <HighlightedDestinations />
+      <JoinUs />
       <HomeDives />
       <Footer />
     </main>

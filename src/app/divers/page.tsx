@@ -9,8 +9,8 @@ const page = async () => {
     <div>
       <Header />
       <MapComponent />
-      <AllDivers />
       <JoinUs />
+      <AllDivers />
       <Footer />
     </div>
   );

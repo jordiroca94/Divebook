@@ -15,14 +15,14 @@ const Footer = () => {
             href="/https://www.linkedin.com/in/jordi-roca-soler/"
             target="_blank"
           >
-            <BsLinkedin className="h-8 w-8 hover:animate-bounce" />
+            <BsLinkedin className="h-8 w-8" />
           </a>
           <Link
             aria-label="Github"
             href="/https://github.com/jordiroca94"
             target="_blank"
           >
-            <FaGithub className="h-8 w-8 hover:animate-bounce" />
+            <FaGithub className="h-8 w-8" />
           </Link>
         </div>
         <small>Copyright &copy; {year} Jordi Roca</small>

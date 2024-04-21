@@ -26,7 +26,7 @@ const HomeDives = () => {
     getAllDives();
   }, []);
   return (
-    <Container className="pt-header lg:py-32">
+    <Container className="pb-20 lg:pb-32">
       <Grid>
         <Title
           fontSize="text-3xl lg:text-4xl text-center"
