@@ -1,13 +1,15 @@
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../ui/Modal";
-import { CountryType, UserType } from "@/types/common";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { CountryType } from "@/types/common";
+import { useMemo, useRef, useState } from "react";
 import { useEdgeStore } from "../../../lib/edgestore";
 import countryList from "react-select-country-list";
 import { useForm } from "react-hook-form";
 import { SingleImageDropzone } from "../ui/SingleImageDropzone";
 import Select from "react-select";
 import { useSession } from "next-auth/react";
+import { RiDeleteBinLine } from "react-icons/ri";
+import Button from "../ui/Button";
 
 type EditFormTypes = {
   avatarUrl: string;
@@ -112,6 +114,17 @@ const EditProfileForm = ({ userInfo, openModal, setOpenModal }: Props) => {
 
   return (
     <Modal>
+      <div className=" group flex lg:hidden justify-end items-center gap-4 mb-4">
+        <RiDeleteBinLine className="h-5 w-5 text-red group-hover:text-red/50" />
+        <div>
+          <Button
+            onClick={() => console.log("delete user")}
+            secondary
+            label="Delete account"
+            className="text-red border-b-red group-hover:text-red/50 group-hover:border-b-red/50"
+          />
+        </div>
+      </div>
       <div className="flex justify-between items-center">
         <h5 className="text-2xl">Edit Profile</h5>
         <button
@@ -215,10 +228,21 @@ const EditProfileForm = ({ userInfo, openModal, setOpenModal }: Props) => {
             rows={3}
           />
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <div className="hidden group lg:flex items-center gap-4 mt-4">
+            <RiDeleteBinLine className="h-6 w-6 text-red group-hover:text-red/50" />
+            <div>
+              <Button
+                onClick={() => console.log("delete user")}
+                secondary
+                label="Delete account"
+                className="text-red border-b-red group-hover:text-red/50 group-hover:border-b-red/50"
+              />
+            </div>
+          </div>
           <button
             type="submit"
-            className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md mt-4 w-full lg:w-auto"
+            className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md mt-4  w-full lg:w-auto"
             value="Send"
           >
             Edit profile
