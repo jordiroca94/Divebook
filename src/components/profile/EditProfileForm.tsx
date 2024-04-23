@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Button from "../ui/Button";
 import { signOut } from "next-auth/react";
+import Loader from "../ui/Loader";
 
 type EditFormTypes = {
   avatarUrl: string;
@@ -36,6 +37,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   const [countryValue, setCountryValue] = useState<CountryType>();
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [deleteValue, setDeleteValue] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
   const { handleSubmit, register } = useForm<EditFormTypes>({
     defaultValues: {
       avatarUrl: "",
@@ -48,16 +50,16 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   });
 
   const handleDelete = async () => {
-    console.log(userInfo._id, "USERIDIINFO");
+    setLoading(true);
     try {
-      const deleteUser = await fetch("/api/deleteUser", {
+      await fetch("/api/deleteUser", {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({ userId: userInfo._id }),
       });
-      console.log(deleteUser, "we get here ");
+      setLoading(false);
       signOut();
     } catch (err) {
       console.log("There was an error", err);
@@ -297,7 +299,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
                   deleteValue === session?.user?.email ? "bg-red" : "bg-gray"
                 }`}
               >
-                Delete account
+                {loading ? <Loader /> : <div>Delete account</div>}
               </button>
             </Modal>
           )}
