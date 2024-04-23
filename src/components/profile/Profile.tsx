@@ -156,11 +156,7 @@ const Profile = () => {
         )}
       </Grid>
       {openModal && (
-        <EditProfileForm
-          userInfo={userInfo}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-        />
+        <EditProfileForm userInfo={userInfo} setOpenModal={setOpenModal} />
       )}
     </Container>
   );
