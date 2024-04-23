@@ -10,7 +10,6 @@ import BackButton from "../ui/BackButton";
 const MapComponent = () => {
   const [countries, setCountries] = useState<CountryType[]>();
   const [uniqueCountries, setUniqueCountries] = useState<string[]>();
-
   const getDiversByCountry = async () => {
     const data = await fetch("/api/getUsersByCountry", {
       method: "GET",
@@ -19,7 +18,10 @@ const MapComponent = () => {
       },
     });
     const { countries } = await data.json();
-    setCountries(countries);
+    const filteredCountries = await countries?.filter(
+      (item: CountryType) => item.value !== "" && item.label !== ""
+    );
+    setCountries(filteredCountries);
   };
 
   useEffect(() => {
