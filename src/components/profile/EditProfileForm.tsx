@@ -263,7 +263,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
           {deleteModal && (
             <Modal width="col-span-4 lg:col-start-5">
               <div className="flex justify-between items-start">
-                <h5 className="text-2xl pb-4">
+                <h5 className="text-2xl pb-6">
                   Are you sure you want to delete your account?
                 </h5>
                 <button
@@ -275,7 +275,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
                   <RxCross2 className="size-5" />
                 </button>
               </div>
-              <p className="mb-4">
+              <p className="mb-6">
                 This action is irreversible. To confirm type{" "}
                 <span className="text-red">{session?.user?.email}</span> in the
                 box below
@@ -295,7 +295,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
                 onClick={handleDelete}
                 type="button"
                 disabled={deleteValue === session?.user?.email ? false : true}
-                className={` text-white cursor-pointer px-6 py-2 rounded-md mt-4  w-full lg:w-auto ${
+                className={` text-white cursor-pointer px-6 py-2 rounded-md mt-10  w-full lg:w-auto ${
                   deleteValue === session?.user?.email ? "bg-red" : "bg-gray"
                 }`}
               >
