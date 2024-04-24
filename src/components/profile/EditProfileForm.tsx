@@ -58,6 +58,15 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
         },
         body: JSON.stringify({ userEmail: session?.user?.email }),
       });
+      await fetch("/api/deleteUser", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ userId: userInfo._id }),
+      });
+      setLoading(false);
+      signOut();
     } catch (err) {
       console.log("There was an error", err);
     }
