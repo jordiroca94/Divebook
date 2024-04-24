@@ -48,22 +48,33 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
       instructor: "",
     },
   });
-
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await fetch("/api/deleteUser", {
+      await fetch("/api/deleteUserDives", {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ userId: userInfo._id }),
+        body: JSON.stringify({ userEmail: session?.user?.email }),
       });
-      setLoading(false);
-      signOut();
     } catch (err) {
       console.log("There was an error", err);
     }
+
+    // try {
+    //   await fetch("/api/deleteUser", {
+    //     method: "DELETE",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //     body: JSON.stringify({ userId: userInfo._id }),
+    //   });
+    //   setLoading(false);
+    //   signOut();
+    // } catch (err) {
+    //   console.log("There was an error", err);
+    // }
   };
 
   const changeCountryValue = (value: any) => {
