@@ -2,7 +2,7 @@
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../ui/Modal";
 import { CountryType } from "@/types/common";
-import { useMemo, useRef, useState, ChangeEvent } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useEdgeStore } from "../../../lib/edgestore";
 import countryList from "react-select-country-list";
 import { useForm } from "react-hook-form";

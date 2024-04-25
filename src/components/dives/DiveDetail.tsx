@@ -6,6 +6,12 @@ import Title from "../ui/Title";
 import Grid from "../ui/Grid";
 import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
+import { IoSettingsOutline } from "react-icons/io5";
+import Modal from "../ui/Modal";
+import { RiDeleteBinLine } from "react-icons/ri";
+import Loader from "../ui/Loader";
+import { RxCross2 } from "react-icons/rx";
+import { useRouter } from "next/navigation";
 
 type Props = {
   id: string;
@@ -13,6 +19,10 @@ type Props = {
 
 const DiveDetail = ({ id }: Props) => {
   const [item, setItem] = useState<DiveType>();
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { push } = useRouter();
 
   const getDives = async () => {
     try {
@@ -30,13 +40,42 @@ const DiveDetail = ({ id }: Props) => {
     }
   };
 
+  const deleteDive = async () => {
+    setLoading(true);
+
+    try {
+      await fetch("/api/deleteDive", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+      setLoading(false);
+      push("/profile");
+    } catch {
+      throw Error("An error occurred while fetching data.");
+    }
+  };
+
   useEffect(() => {
     getDives();
   }, []);
   return (
     <div className="pt-header">
       <Container>
-        <BackButton />
+        <div className="flex justify-between">
+          <BackButton />
+          <div className="hidden lg:block">
+            <button
+              className="flex gap-2 items-center"
+              onClick={() => setOpenModal(true)}
+            >
+              <IoSettingsOutline className="h-7 w-7" />
+              <p>Edit Dive</p>
+            </button>
+          </div>
+        </div>
         {item && (
           <>
             <Grid>
@@ -96,6 +135,51 @@ const DiveDetail = ({ id }: Props) => {
           </>
         )}
       </Container>
+      {openModal && (
+        <Modal>
+          <div className="flex justify-between items-center">
+            <h5 className="text-2xl">Edit Dive</h5>
+            <button
+              className="rounded-full border-mediumGray border p-2 "
+              onClick={() => setOpenModal(false)}
+            >
+              <RxCross2 className="size-5" />
+            </button>
+          </div>
+          <button
+            onClick={() => setDeleteModal(true)}
+            type="button"
+            className="hidden group lg:flex items-center gap-4 mt-4"
+          >
+            <RiDeleteBinLine className="h-6 w-6 text-red group-hover:text-red/50" />
+            <p className="text-red border-b-red group-hover:text-red/50 group-hover:border-b-red/50">
+              Delete account
+            </p>
+          </button>
+        </Modal>
+      )}
+      {deleteModal && (
+        <Modal>
+          <div className="flex justify-between items-center">
+            <h5 className="text-2xl">
+              Are you sure you want to delete your account?
+            </h5>
+            <button
+              className="rounded-full border-mediumGray border p-2 "
+              onClick={() => setDeleteModal(false)}
+            >
+              <RxCross2 className="size-5" />
+            </button>
+          </div>
+          <button
+            onClick={deleteDive}
+            type="button"
+            className="text-white cursor-pointer px-6 py-2 rounded-md mt-10  w-full  lg:w-1/2 bg-red "
+          >
+            {loading ? <Loader /> : <div>Delete dive</div>}
+          </button>
+        </Modal>
+      )}
     </div>
   );
 };
