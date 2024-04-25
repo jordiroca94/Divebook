@@ -12,6 +12,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import Loader from "../ui/Loader";
 import { RxCross2 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 type Props = {
   id: string;
@@ -23,7 +24,7 @@ const DiveDetail = ({ id }: Props) => {
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { push } = useRouter();
-
+  const { data: session } = useSession();
   const getDives = async () => {
     try {
       const data = await fetch("/api/getDiveById", {
@@ -66,7 +67,7 @@ const DiveDetail = ({ id }: Props) => {
       <Container>
         <div className="flex justify-between">
           <BackButton />
-          <div className="hidden lg:block">
+          {session?.user?.email === item?.user.email && (
             <button
               className="flex gap-2 items-center"
               onClick={() => setOpenModal(true)}
@@ -74,7 +75,7 @@ const DiveDetail = ({ id }: Props) => {
               <IoSettingsOutline className="h-7 w-7" />
               <p>Edit Dive</p>
             </button>
-          </div>
+          )}
         </div>
         {item && (
           <>
