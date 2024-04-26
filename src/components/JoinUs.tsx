@@ -12,7 +12,7 @@ const JoinUs = () => {
     <Container>
       <div className="w-full flex justify-center">
         <Link
-          href="/login"
+          href="/register"
           className="border border-mediumGray text-primary shadow-lg p-6 lg:py-10 lg:text-2xl lg:px-32 w-fit text-center hover:underline"
         >
           Register and join our community!!

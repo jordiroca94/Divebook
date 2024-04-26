@@ -10,6 +10,7 @@ import Title from "../ui/Title";
 import { UserType } from "@/types/common";
 import Modal from "../ui/Modal";
 import { RxCross2 } from "react-icons/rx";
+import Button from "../ui/Button";
 
 const RegisterForm = () => {
   const form: any = useRef();
@@ -212,8 +213,8 @@ const RegisterForm = () => {
         </form>
       </div>
       {openTermsModal && (
-        <Modal height="h-screen md:max-h-[80vh]">
-          <div className="flex justify-between items-center">
+        <Modal height="h-screen md:h-auto md:max-h-[80vh]">
+          <div className="flex justify-between items-center pt-4 md:pt-0">
             <h5 className="text-2xl">Terms & conditions</h5>
             <button
               className="rounded-full border-mediumGray border p-2 "
@@ -256,14 +257,14 @@ const RegisterForm = () => {
             </p>
             <br></br>
             <p>
-              <strong>4. Account Termination: :</strong> Diverbook reserves the
+              <strong>4. Account Termination:</strong> Diverbook reserves the
               right to terminate or suspend your account and access at any time
               and for any reason, including but not limited to violations of
               these Terms or misuse of the platform.
             </p>
             <br></br>
             <p>
-              <strong>5. Modification of Terms: :</strong> Diverbook may modify
+              <strong>5. Modification of Terms:</strong> Diverbook may modify
               these Terms at any time without prior notice. It is your
               responsibility to review these Terms regularly to stay informed of
               any changes. Your continued use of Diverbook after the posting of
@@ -278,11 +279,11 @@ const RegisterForm = () => {
             </p>
             <br></br>
             <p>
-              <strong>7. Limitation of Liability:</strong> Diverbook is provided
-              as it is and without warranty of any kind. Diverbook makes no
-              representations or warranties regarding the accuracy,
-              completeness, or reliability of Diverbook or any content posted on
-              the platform.
+              <strong>7. Limitation of Liability:</strong> In no event shall
+              Diverbook or its affiliates be liable for any direct, indirect,
+              incidental, special, or consequential damages arising out of or in
+              any way connected with your use of Diverbook or any content posted
+              on the platform.
             </p>
             <br></br>
             <p>
@@ -300,6 +301,12 @@ const RegisterForm = () => {
             </p>
             <br></br>
             <p>Thank you for using Diverbook!</p>
+
+            <Button
+              onClick={() => setOpenTermsModal(false)}
+              className="w-fit mt-6"
+              label="Accept terms "
+            />
           </div>
         </Modal>
       )}

@@ -9,6 +9,9 @@ const Footer = () => {
   return (
     <Container className="bg-primary py-12 lg:py-20">
       <footer className="text-white flex items-center flex-col gap-4">
+        <a className="hover:underline" href="/terms-and-conditions">
+          Terms and Conditions
+        </a>
         <div className="flex gap-6">
           <a
             aria-label="Linkedin"
@@ -25,6 +28,7 @@ const Footer = () => {
             <FaGithub className="h-8 w-8" />
           </Link>
         </div>
+
         <small>Copyright &copy; {year} Jordi Roca</small>
       </footer>
     </Container>
