@@ -67,7 +67,7 @@ const Contact = () => {
   };
 
   return (
-    <Container className="pt-header xl:h-[85vh]">
+    <Container className="pt-header h-screen">
       <div className="py-6 lg:py-12">
         <BackButton />
       </div>

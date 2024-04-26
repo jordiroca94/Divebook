@@ -3,12 +3,11 @@ import Button from "../ui/Button";
 import Grid from "../ui/Grid";
 import Title from "../ui/Title";
 import data from "../../data/highlighted.json";
-import Link from "next/link";
 import HighlightedCard from "./HighlightedDestinationsCard";
 
 const HighlightedDestinations = () => {
   return (
-    <Container className="pt-12 lg:pt-20">
+    <Container className="py-12 lg:pt-20">
       <Grid>
         <Title
           className="col-span-4 lg:col-span-12 flex justify-center text-center pb-4"
