@@ -9,9 +9,7 @@ const AllHighlightedDestinations = () => {
   return (
     <div>
       <Container>
-        <div className="mt-10 my-6">
-          <BackButton />
-        </div>
+        <BackButton />
         <Grid>
           <Title
             className="col-span-4 lg:col-span-12 flex justify-center pb-4"

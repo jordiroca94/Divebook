@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
-import Icon from "../../public/assets/images/icon.png";
-import Image from "next/image";
 import BurgerButton from "./BurgerButton";
-import Button from "./ui/Button";
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -17,7 +14,6 @@ const Header = () => {
     { label: "Community", link: "/divers" },
     { label: "Recommendation", link: "/highlighted-dives" },
     { label: "Dives", link: "/dives" },
-
     { label: "Contact", link: "/contact" },
   ];
 
@@ -26,14 +22,9 @@ const Header = () => {
       <div className="flex justify-between items-center px-6 min-h-header lg:px-10 py-4 p-6 border border-mediumGray bg-white">
         <Link
           href={"/"}
-          className="font-extrabold text-primary text-base lg:text-2xl flex items-center gap-4  "
+          className="font-extrabold text-primary text-base lg:text-2xl"
         >
           <span>Diverbook</span>
-          <Image
-            className="size-10 hidden lg:block"
-            src={Icon}
-            alt="Home Icon"
-          />
         </Link>
         <div className="flex justify-between gap-3 lg:gap-8 items-center">
           <div className="hidden lg:flex gap-4">

@@ -35,7 +35,7 @@ const MapComponent = () => {
     getDiversByCountry();
   }, []);
   return (
-    <Container className="lg:pt-32 pb-10 pt-24">
+    <Container>
       <BackButton />
       <Title className="flex justify-center pb-4 lg:pb-10" h="h1">
         Where is our community from ?

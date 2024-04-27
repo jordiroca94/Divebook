@@ -29,10 +29,8 @@ const AllDives = () => {
     getAllDives();
   }, []);
   return (
-    <Container className="pt-header lg:py-32">
-      <div className="mt-10 my-6">
-        <BackButton />
-      </div>
+    <Container>
+      <BackButton />
       <Grid>
         <Title
           className="col-span-4 lg:col-span-12 flex justify-center pb-4"

@@ -1,6 +1,6 @@
 "use client";
 import { CountryType } from "@/types/common";
-import React, { ComponentProps, ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 
 type Props = {
   countries: CountryType[] | undefined;
