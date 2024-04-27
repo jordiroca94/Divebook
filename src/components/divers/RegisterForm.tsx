@@ -104,7 +104,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="grid pt-16 md:pt-0 place-items-center h-screen">
+    <div className="grid pt-20 md:pt-0 place-items-center h-screen">
       <div className="shadow-lg  py-6 px-8 w-[90%] lg:w-auto rounded-lg border-t-4 border-primary max-w-[370px]">
         <Title fontSize="text-xl font-bold" className="my-4" h="h1">
           Register

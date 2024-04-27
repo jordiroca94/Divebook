@@ -54,7 +54,7 @@ const LoginForm = () => {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg py-10 px-8 rounded-lg border-t-4 border-primary">
+      <div className="shadow-lg py-10 px-8 rounded-lg border-t-4 border-primary max-w-[370px]">
         <Title fontSize="text-xl font-bold" className="my-4" h="h1">
           Login with your credentials
         </Title>
