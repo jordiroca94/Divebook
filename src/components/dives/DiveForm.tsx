@@ -118,10 +118,8 @@ const DiveForm = () => {
   };
 
   return (
-    <Container className="pt-header">
-      <div className="py-6 lg:py-12">
-        <BackButton />
-      </div>
+    <Container>
+      <BackButton />
       <Grid>
         <Title className="col-span-4 lg:col-span-12 lg:col-start-3" h="h1">
           Tell us about your last dive!

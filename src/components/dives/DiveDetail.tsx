@@ -63,13 +63,13 @@ const DiveDetail = ({ id }: Props) => {
     getDives();
   }, []);
   return (
-    <div className="pt-header">
+    <>
       <Container>
         <div className="flex justify-between">
           <BackButton />
           {session?.user?.email === item?.user.email && (
             <button
-              className="flex gap-2 items-center"
+              className="pt-6 lg:pt-0 flex gap-2 items-center"
               onClick={() => setOpenModal(true)}
             >
               <IoSettingsOutline className="h-7 w-7" />
@@ -81,12 +81,12 @@ const DiveDetail = ({ id }: Props) => {
           <>
             <Grid>
               <Title
-                className="col-span-4 lg:col-span-12 flex justify-center pb-10"
+                className="col-span-4 lg:col-span-12 flex justify-center lg:pb-10"
                 h="h1"
               >
                 {item.name}
               </Title>
-              <div className="lg:col-span-4 lg:col-start-2 flex flex-col justify-evenly">
+              <div className="col-span-4 lg:col-start-2 flex flex-col justify-evenly">
                 <div className="flex items-center text-xl font-semibold gap-2 pb-6">
                   <p>{item.location}</p>
                   <p>-</p>
@@ -123,11 +123,11 @@ const DiveDetail = ({ id }: Props) => {
               </div>
             </Grid>
             <Grid>
-              <p className="lg:col-span-7 lg:col-start-2 text-lg py-10">
+              <p className="col-span-4 lg:col-span-7 lg:col-start-2 text-lg pt-2 lg:py-10">
                 {item.description}
               </p>
-              <div className="lg:col-span-3 lg:col-start-9 text-lg py-10">
-                <div className="flex flex-col gap-2 items-end">
+              <div className="col-span-4 lg:col-span-3 lg:col-start-9 text-lg lg:py-10">
+                <div className="flex lg:flex-col gap-2 justify-end lg:items-end">
                   <p>{item.user.name}</p>
                   <p>{formatteDate(item.updatedAt)}</p>
                 </div>
@@ -154,7 +154,7 @@ const DiveDetail = ({ id }: Props) => {
           >
             <RiDeleteBinLine className="h-6 w-6 text-red group-hover:text-red/50" />
             <p className="text-red border-b-red group-hover:text-red/50 group-hover:border-b-red/50">
-              Delete account
+              Delete dive
             </p>
           </button>
         </Modal>
@@ -163,7 +163,7 @@ const DiveDetail = ({ id }: Props) => {
         <Modal>
           <div className="flex justify-between items-center">
             <h5 className="text-2xl">
-              Are you sure you want to delete your account?
+              Are you sure you want to delete your dive?
             </h5>
             <button
               className="rounded-full border-mediumGray border p-2 "
@@ -181,7 +181,7 @@ const DiveDetail = ({ id }: Props) => {
           </button>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 
