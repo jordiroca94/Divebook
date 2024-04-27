@@ -20,7 +20,7 @@ const HomeHero = () => {
       <Grid className="absolute z-20 text-white px-8 mt-[450px] lg:mt-80 bs:mt-[400px]">
         <div className="col-span-4 lg:col-span-4 lg:col-start-8">
           <Title
-            fontSize="text-bs lg:text-5xl bs:text-7xl font-semibold"
+            fontSize="text-2xl lg:text-5xl bs:text-7xl font-semibold"
             className="pb-4"
             h="h1"
           >
@@ -31,7 +31,7 @@ const HomeHero = () => {
             diving.
           </p>
           {!session && (
-            <p className="pt-4">
+            <p className="pt-4 text-base bs:text-2xl">
               <Link className="hover:underline" href={"/register"}>
                 Register
               </Link>{" "}
