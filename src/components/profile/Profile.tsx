@@ -74,10 +74,10 @@ const Profile = () => {
   }, [openModal]);
 
   return (
-    <Container className="pt-header">
-      <div className="flex justify-between py-6 lg:py-12">
+    <Container>
+      <div className="flex justify-between ">
         <BackButton />
-        <div className="flex gap-8 ">
+        <div className="mt-7 lg:mt-0 flex items-center gap-8 ">
           <div className="hidden lg:block">
             <button
               className="flex gap-2 items-center"

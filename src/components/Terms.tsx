@@ -7,9 +7,7 @@ import BackButton from "./ui/BackButton";
 const Terms = () => {
   return (
     <Container>
-      <div className="pt-10 lg:pt-6">
-        <BackButton />
-      </div>
+      <BackButton />
       <Grid>
         <Title className="col-span-4 lg:col-span-12 lg:mb-10" h="h1">
           Terms and conditions

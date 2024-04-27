@@ -7,7 +7,7 @@ import HighlightedCard from "./HighlightedDestinationsCard";
 
 const HighlightedDestinations = () => {
   return (
-    <Container className="py-12 lg:pt-20">
+    <Container>
       <Grid>
         <Title
           className="col-span-4 lg:col-span-12 flex justify-center text-center pb-4"

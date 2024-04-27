@@ -26,7 +26,7 @@ const HomeDives = () => {
     getAllDives();
   }, []);
   return (
-    <Container className="pb-20 lg:pb-32">
+    <Container className="pb-12 lg:pb-20">
       <Grid>
         <Title
           fontSize="text-3xl lg:text-4xl text-center"

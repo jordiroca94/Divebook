@@ -25,7 +25,7 @@ const AllDivers = () => {
     getAllDivers();
   }, []);
   return (
-    <Container className="lg:py-20">
+    <Container className="pb-12 lg:pb-20">
       <Grid>
         <Title
           className="col-span-4 lg:col-span-12 flex justify-center pb-4"
