@@ -114,7 +114,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   };
 
   return (
-    <Modal>
+    <Modal height="lg:mt-16 bs:mt-0 h-full lg:h-auto">
       <div className="flex justify-between items-center pt-4 lg:pt-0">
         <h5 className="text-2xl">Edit Profile</h5>
         <button

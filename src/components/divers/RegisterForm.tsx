@@ -174,6 +174,7 @@ const RegisterForm = () => {
             <label htmlFor="terms" className="pt-6">
               By creating an account, I accept the{" "}
               <button
+                type="button"
                 onClick={() => setOpenTermsModal(true)}
                 className="underline text-primary"
               >

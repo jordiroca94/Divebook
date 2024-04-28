@@ -11,7 +11,7 @@ const Modal = ({ children, width, height }: Props) => {
   return (
     <Grid className="fixed z-40 inset-0 lg:bg-black/50 place-items-center px-0 lg:px-[6.25rem]">
       <div
-        className={`pt-header lg:mt-16 bs:mt-0 w-full bg-white ${
+        className={`pt-header w-full bg-white ${
           height ? height : "h-full lg:h-auto"
         } ${
           width ? width : "col-span-4 lg:col-span-8 lg:col-start-3"

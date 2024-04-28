@@ -9,10 +9,14 @@ type Props = {
 
 const TermsModal = ({ setOpenTermsModal }: Props) => {
   return (
-    <Modal height="h-screen md:h-auto md:max-h-[75vh]">
+    <Modal
+      width="col-span-4 lg:col-span-10 lg:col-start-2"
+      height="h-full md:h-auto md:max-h-[75vh]"
+    >
       <div className="flex justify-between items-center pt-4 md:pt-0">
         <h5 className="text-2xl">Terms & conditions</h5>
         <button
+          type="button"
           className="rounded-full border-mediumGray border p-2 "
           onClick={() => setOpenTermsModal(false)}
         >
