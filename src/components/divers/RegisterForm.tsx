@@ -16,6 +16,7 @@ const RegisterForm = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const [openTermsModal, setOpenTermsModal] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState(false);
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);
 
@@ -170,7 +171,13 @@ const RegisterForm = () => {
             </p>
           )}
           <div className="flex gap-2 items-center">
-            <input type="checkbox" id="terms" {...register("terms")} />
+            <input
+              type="checkbox"
+              id="terms"
+              {...register("terms")}
+              checked={isChecked}
+              onChange={() => setIsChecked(!isChecked)}
+            />
             <label htmlFor="terms" className="pt-6">
               By creating an account, I accept the{" "}
               <button
@@ -211,7 +218,12 @@ const RegisterForm = () => {
           </Link>
         </form>
       </div>
-      {openTermsModal && <TermsModal setOpenTermsModal={setOpenTermsModal} />}
+      {openTermsModal && (
+        <TermsModal
+          setOpenTermsModal={setOpenTermsModal}
+          setIsChecked={setIsChecked}
+        />
+      )}
     </div>
   );
 };

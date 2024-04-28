@@ -5,9 +5,10 @@ import { RxCross2 } from "react-icons/rx";
 
 type Props = {
   setOpenTermsModal: (value: boolean) => void;
+  setIsChecked: (value: boolean) => void;
 };
 
-const TermsModal = ({ setOpenTermsModal }: Props) => {
+const TermsModal = ({ setOpenTermsModal, setIsChecked }: Props) => {
   return (
     <Modal
       width="col-span-4 lg:col-span-10 lg:col-start-2"
@@ -102,7 +103,9 @@ const TermsModal = ({ setOpenTermsModal }: Props) => {
         <p>Thank you for using Diverbook!</p>
 
         <Button
-          onClick={() => setOpenTermsModal(false)}
+          onClick={() => {
+            setOpenTermsModal(false), setIsChecked(true);
+          }}
           className="w-fit mt-6"
           label="Accept terms "
         />
