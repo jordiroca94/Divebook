@@ -5,7 +5,6 @@ type Props = {
   link?: string;
   className?: string;
   openNewTab?: boolean;
-  submit?: boolean;
   onClick?: () => void;
   secondary?: Boolean;
 };
@@ -15,7 +14,6 @@ const Button = ({
   link,
   className,
   openNewTab,
-  submit,
   onClick,
   secondary,
 }: Props) => {
