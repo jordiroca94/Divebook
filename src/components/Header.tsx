@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
@@ -10,6 +10,22 @@ const Header = () => {
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const { data: session } = useSession();
+  const ref: any = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+        setMobileMenu(false);
+        console.log("clliiiked");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const navLinks = [
     { label: "Community", link: "/divers" },
@@ -19,13 +35,12 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 z-50 w-full">
+    <header ref={ref} className="fixed top-0 z-50 w-full">
       <div className="relative z-40 flex justify-between items-center px-6 min-h-header lg:px-10 py-4 p-6 border border-mediumGray bg-white">
-        <Link
-          href={"/"}
-          className="font-extrabold text-primary text-base lg:text-2xl"
-        >
-          <span>Diverbook</span>
+        <Link href={"/"}>
+          <span className="font-extrabold text-primary text-xl lg:text-2xl">
+            Diverbook
+          </span>
         </Link>
         <div className="flex justify-between gap-3 lg:gap-8 items-center">
           <div className="hidden lg:flex gap-4">
