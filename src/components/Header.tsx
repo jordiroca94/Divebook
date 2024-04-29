@@ -7,16 +7,13 @@ import BurgerButton from "./BurgerButton";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
-  const [mobileMenu, setMobileMenu] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const { data: session } = useSession();
   const ref: any = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false);
-        setMobileMenu(false);
-        console.log("clliiiked");
+        setOpenModal(false);
       }
     };
 
@@ -75,15 +72,14 @@ const Header = () => {
             </Link>
           )}
           <BurgerButton
-            open={open}
-            setOpen={setOpen}
-            onClick={() => setMobileMenu(!mobileMenu)}
+            openModal={openModal}
+            setOpenModal={setOpenModal}
             className="lg:hidden ml-2"
           />
         </div>
       </div>
       <AnimatePresence>
-        {mobileMenu && (
+        {openModal && (
           <motion.div
             initial={{ y: -250 }}
             animate={{ y: 0 }}
@@ -95,7 +91,7 @@ const Header = () => {
               {navLinks.map((link, index) => (
                 <a
                   onClick={() => {
-                    setMobileMenu(false), setOpen(!open);
+                    setOpenModal(!openModal);
                   }}
                   href={link.link}
                   key={index}
