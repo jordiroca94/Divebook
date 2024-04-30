@@ -11,11 +11,11 @@ import { UserType } from "@/types/common";
 import TermsModal from "../TermsModal";
 
 const RegisterForm = () => {
-  const form: any = useRef();
-  const [error, setError] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
+  const form = useRef<HTMLFormElement>(null);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [openTermsModal, setOpenTermsModal] = useState<boolean>(false);
+  const [openTermsModal, setOpenTermsModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);

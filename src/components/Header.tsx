@@ -7,12 +7,12 @@ import BurgerButton from "./BurgerButton";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState(false);
   const { data: session } = useSession();
-  const ref: any = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         setOpenModal(false);
       }
     };
@@ -24,7 +24,7 @@ const Header = () => {
     };
   }, []);
 
-  const navLinks = [
+  const navLinks: { label: string; link: string }[] = [
     { label: "Community", link: "/divers" },
     { label: "Recommendation", link: "/highlighted-dives" },
     { label: "Dives", link: "/dives" },

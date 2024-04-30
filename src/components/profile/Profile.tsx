@@ -21,7 +21,7 @@ const Profile = () => {
   const { data: session } = useSession();
   const [dives, setDives] = useState<DiveType[]>([]);
   const [userInfo, setUserInfo] = useState<UserType>();
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const getProfileDives = async () => {
     const response = await fetch("api/getDives", {

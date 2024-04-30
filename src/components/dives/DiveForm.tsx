@@ -16,35 +16,29 @@ import BackButton from "../ui/BackButton";
 
 const DiveForm = () => {
   const { data: session } = useSession();
-  const form: any = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const options: any = useMemo(() => countryList().getData(), []);
-  const [countryValue, setCountryValue] = useState<any>("");
-  const [metricSystem, setMetricSystem] = useState<"meeters" | "feet">(
-    "meeters"
-  );
-  const [temperatureSystem, setTemperatureSystem] = useState<
-    "celsius" | "farenheit"
-  >("celsius");
-  const [formSubmitted, setFormSubmitted] = useState<Boolean>(false);
+  const [countryValue, setCountryValue] = useState("");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
-  const [avatarUrl, setAvatarUrl] = useState<any>();
+  const [avatarUrl, setAvatarUrl] = useState<string>();
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
     location: z.string().min(1, { message: "Required" }),
     deepth: z.string().min(1, { message: "Required" }),
     temperature: z.string().min(1, { message: "Required" }),
-    // instructor: z.string(),
+    weights: z.string().min(1, { message: "Required" }),
+    instructor: z.string().optional(),
     suit: z.string().min(1, { message: "Required" }),
     description: z.string().min(1, { message: "Required" }),
-    // imageUrl: z.string(),
+    imageUrl: z.string().optional(),
   });
 
   const changeCountryValue = (value: any) => {
     setCountryValue(value);
   };
-
   const {
     handleSubmit,
     register,
@@ -59,21 +53,14 @@ const DiveForm = () => {
       description: "",
       deepth: "",
       temperature: "",
+      weights: "",
       instructor: "",
       suit: "",
     },
     resolver: zodResolver(diveSchema),
   });
 
-  const handleMetricSystem = (event: any) => {
-    setMetricSystem(event.target.value);
-  };
-
-  const handleTemperatureSystem = (event: any) => {
-    setTemperatureSystem(event.target.value);
-  };
-
-  const uploadFile = async (file: any) => {
+  const uploadFile = async (file: File | undefined) => {
     try {
       if (file) {
         const res = await edgestore.myPublicImages.upload({ file });
@@ -90,8 +77,9 @@ const DiveForm = () => {
       name: values.name,
       country: countryValue,
       location: values.location,
-      deepth: values.deepth.concat(" ", metricSystem),
-      temperature: values.temperature.concat(" ", temperatureSystem),
+      deepth: values.deepth.concat(" ", "m"),
+      temperature: values.temperature.concat(" ", "ºC"),
+      weights: values.weights.concat(" ", "kg"),
       instructor: values.instructor,
       suit: values.suit,
       description: values.description,
@@ -177,33 +165,13 @@ const DiveForm = () => {
             <label htmlFor="deepth" className="font-medium pt-4">
               How deep was it ?
             </label>
-            <fieldset className="flex gap-4 items-center">
-              <input
-                id="deepth"
-                className="border border-mediumGray py-2 px-3 rounded-md w-[100px]"
-                type="number"
-                placeholder="Deepth"
-                {...register("deepth")}
-              />
-              <label htmlFor="meters">meeters</label>
-              <input
-                type="radio"
-                id="meters"
-                name="meters"
-                value="meeters"
-                checked={metricSystem === "meeters"}
-                onChange={handleMetricSystem}
-              />
-              <label htmlFor="feet">feet</label>
-              <input
-                type="radio"
-                id="feet"
-                name="feet"
-                value="feet"
-                checked={metricSystem === "feet"}
-                onChange={handleMetricSystem}
-              />
-            </fieldset>
+            <input
+              id="deepth"
+              className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
+              type="number"
+              placeholder="Deepth in meeters"
+              {...register("deepth")}
+            />
             {errors.deepth?.message && (
               <p aria-describedby="deepth" className="text-red pt-1">
                 {errors.deepth?.message}
@@ -212,37 +180,31 @@ const DiveForm = () => {
             <label htmlFor="deepth" className="font-medium pt-4">
               Water temperature
             </label>
-            <fieldset className="flex gap-4 items-center">
-              <input
-                id="temperature"
-                className="border border-mediumGray py-2 px-3 rounded-md w-[100px]"
-                type="number"
-                placeholder="Water temperature"
-                {...register("temperature")}
-              />
-              <label htmlFor="celsius">celsius</label>
-              <input
-                type="radio"
-                id="celsius"
-                name="celsius"
-                value="celsius"
-                checked={temperatureSystem === "celsius"}
-                onChange={handleTemperatureSystem}
-              />
-              <label htmlFor="farenheit">farenheit</label>
-              <input
-                type="radio"
-                id="farenheit"
-                name="farenheit"
-                value="farenheit"
-                checked={temperatureSystem === "farenheit"}
-                onChange={handleTemperatureSystem}
-              />
-            </fieldset>
-
+            <input
+              id="temperature"
+              className="border border-mediumGray py-2 px-3 rounded-md w-full lg:w-1/2"
+              type="number"
+              placeholder="Temperature in celsius"
+              {...register("temperature")}
+            />
             {errors.temperature?.message && (
               <p aria-describedby="temperature" className="text-red pt-1">
                 {errors.temperature?.message}
+              </p>
+            )}
+            <label htmlFor="weights" className="font-medium pt-4">
+              Belt weights
+            </label>
+            <input
+              id="weight"
+              className="border border-mediumGray py-2 px-3 rounded-md w-full lg:w-1/2"
+              type="number"
+              placeholder="Weights in kg"
+              {...register("weights")}
+            />
+            {errors.weights?.message && (
+              <p aria-describedby="weights" className="text-red pt-1">
+                {errors.weights?.message}
               </p>
             )}
             <label htmlFor="instructor" className="font-medium pt-4">
@@ -260,16 +222,32 @@ const DiveForm = () => {
                 {errors.instructor?.message}
               </p>
             )}
-            <label htmlFor="instructor" className="font-medium pt-4">
+            <label htmlFor="suit" className="font-medium pt-4">
               Tell us about your suit
             </label>
-            <input
+            <select
+              {...register("suit")}
+              className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
+            >
+              <option value="" disabled selected>
+                Select ...
+              </option>
+              <option value="Wet suit 3mm">Wet suit 3mm </option>
+              <option value="Wet suit 5mm">Wet suit 5mm </option>
+              <option value="Wet suit 7mm">Wet suit 7mm </option>
+              <option value="Neoprene dry suit">Neoprene dry suit</option>
+              <option value="Membrane dry suit">Membrane dry suit</option>
+              <option value="Hybrid dry suits"> Hybrid dry suits</option>
+              <option value="Semi-dry suits">Semi-dry suits </option>
+              <option value="Exposure suits">Exposure suits </option>
+            </select>
+            {/* <input
               id="suit"
               className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
               type="text"
               placeholder="Suit"
               {...register("suit")}
-            />
+            /> */}
             {errors.suit?.message && (
               <p aria-describedby="suit" className="text-red pt-1">
                 {errors.suit?.message}

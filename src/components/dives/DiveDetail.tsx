@@ -20,9 +20,9 @@ type Props = {
 
 const DiveDetail = ({ id }: Props) => {
   const [item, setItem] = useState<DiveType>();
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { push } = useRouter();
   const { data: session } = useSession();
   const getDives = async () => {

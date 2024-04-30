@@ -13,7 +13,7 @@ import Title from "./ui/Title";
 type LoginValuesType = { email: string; password: string };
 
 const LoginForm = () => {
-  const form: any = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

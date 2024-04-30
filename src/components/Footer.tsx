@@ -5,7 +5,7 @@ import Link from "next/link";
 import Container from "./ui/Container";
 
 const Footer = () => {
-  const year = new Date().getFullYear();
+  const year: number = new Date().getFullYear();
   return (
     <Container className="bg-primary py-12 lg:py-20">
       <footer className="text-white flex items-center flex-col gap-4">

@@ -32,6 +32,7 @@ export type DiveType = {
   description: string;
   deepth: string;
   temperature: string;
+  weights: string;
   instructor: string;
   suit: string;
   updatedAt: string;

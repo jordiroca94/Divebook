@@ -17,7 +17,7 @@ type Inputs = {
 };
 
 const Contact = () => {
-  const form: any = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -47,7 +47,7 @@ const Contact = () => {
       .sendForm(
         "service_5xbgnoj",
         "template_p41vdq9",
-        form.current,
+        form.current!,
         "0qEytRhXqOf0cpUUe"
       )
       .then(
