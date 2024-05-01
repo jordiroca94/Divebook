@@ -5,6 +5,7 @@ import Dive from "../../../../models/dive";
 export async function POST(req) {
   try {
     const res = await req.json();
+    console.log(res, "reeees");
     const {
       date,
       user,

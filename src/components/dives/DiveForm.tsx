@@ -72,7 +72,6 @@ const DiveForm = () => {
       throw Error("An error ocurred while uploading a file. Please try again ");
     }
   };
-
   const createDive = async (values: DiveType) => {
     const parsedValues = {
       date: values.date,

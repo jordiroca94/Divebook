@@ -2,12 +2,14 @@ import mongoose, { Schema, models } from "mongoose";
 
 const diveSchema = new Schema(
   {
+    date: { type: Date, required: true },
     user: { type: Object, required: true },
     name: { type: String, required: true },
     country: { type: Object, required: true },
     location: { type: String, required: true },
     deepth: { type: String, required: true },
     temperature: { type: String, required: true },
+    weights: { type: String, required: true },
     instructor: { type: String },
     suit: { type: String, required: true },
     description: { type: String, required: true },
