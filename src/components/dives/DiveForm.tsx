@@ -26,6 +26,7 @@ const DiveForm = () => {
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
+    date: z.string().min(1, { message: "Required" }),
     location: z.string().min(1, { message: "Required" }),
     deepth: z.string().min(1, { message: "Required" }),
     temperature: z.string().min(1, { message: "Required" }),
@@ -46,6 +47,7 @@ const DiveForm = () => {
     formState: { errors },
   } = useForm<DiveType>({
     defaultValues: {
+      date: null,
       user: {},
       name: "",
       country: {},
@@ -73,6 +75,7 @@ const DiveForm = () => {
 
   const createDive = async (values: DiveType) => {
     const parsedValues = {
+      date: values.date,
       user: session?.user,
       name: values.name,
       country: countryValue,
@@ -118,6 +121,14 @@ const DiveForm = () => {
             onSubmit={handleSubmit(createDive)}
             className="flex flex-col gap-3 pb-10 lg:pb-20"
           >
+            <label htmlFor="date" className="font-medium pt-4">
+              When where you born?
+            </label>
+            <input
+              {...register("date")}
+              className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
+              type="date"
+            />
             <label htmlFor="name" className="font-medium pt-4">
               Put a name to your dive
             </label>
@@ -241,13 +252,6 @@ const DiveForm = () => {
               <option value="Semi-dry suits">Semi-dry suits </option>
               <option value="Exposure suits">Exposure suits </option>
             </select>
-            {/* <input
-              id="suit"
-              className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
-              type="text"
-              placeholder="Suit"
-              {...register("suit")}
-            /> */}
             {errors.suit?.message && (
               <p aria-describedby="suit" className="text-red pt-1">
                 {errors.suit?.message}

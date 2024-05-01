@@ -6,6 +6,7 @@ export async function POST(req) {
   try {
     const res = await req.json();
     const {
+      date,
       user,
       name,
       country,
@@ -20,6 +21,7 @@ export async function POST(req) {
     } = res.parsedValues;
     await connectMongoDB();
     await Dive.create({
+      date,
       user,
       name,
       country,

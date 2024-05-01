@@ -25,6 +25,7 @@ export type CountryType = {
 
 export type DiveType = {
   _id: string;
+  date: Date | null;
   user: UserType;
   name: string;
   country: CountryType;
