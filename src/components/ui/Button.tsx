@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Loader from "./Loader";
 
 type Props = {
   label: string;
@@ -6,7 +7,9 @@ type Props = {
   className?: string;
   openNewTab?: boolean;
   onClick?: () => void;
-  secondary?: Boolean;
+  loading?: boolean;
+  secondary?: boolean;
+  submit?: boolean;
 };
 
 const Button = ({
@@ -15,7 +18,9 @@ const Button = ({
   className,
   openNewTab,
   onClick,
+  loading,
   secondary,
+  submit,
 }: Props) => {
   const styles =
     "text-sm lg:text-base font-medium text-white border rounded-md py-3 px-6 cursor-pointer hover:bg-primary/80 bg-primary";
@@ -29,7 +34,7 @@ const Button = ({
           className={`${secondary ? secondaryStyles : styles}`}
           href={link}
         >
-          {label}
+          {loading ? <Loader /> : label}
         </Link>
       </div>
     );
@@ -37,11 +42,11 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type={submit ? "submit" : "button"}
       onClick={onClick}
       className={`${className} ${secondary ? secondaryStyles : styles}`}
     >
-      {label}
+      {loading ? <Loader /> : label}
     </button>
   );
 };

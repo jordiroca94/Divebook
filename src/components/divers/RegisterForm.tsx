@@ -9,6 +9,7 @@ import { BiHide } from "react-icons/bi";
 import Title from "../ui/Title";
 import { UserType } from "@/types/common";
 import TermsModal from "../TermsModal";
+import Button from "../ui/Button";
 
 const RegisterForm = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -17,6 +18,7 @@ const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [openTermsModal, setOpenTermsModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);
 
@@ -63,6 +65,7 @@ const RegisterForm = () => {
   const handleRegister = async (values: UserType) => {
     setSuccess(false);
     setError(false);
+    setLoading(true);
 
     try {
       const resUserExists = await fetch("api/userExists", {
@@ -98,6 +101,7 @@ const RegisterForm = () => {
         });
         reset();
         setSuccess(true);
+        setLoading(false);
       }
     } catch {
       throw Error("An error occurred while registering. Please try again");
@@ -194,13 +198,7 @@ const RegisterForm = () => {
               {errors.terms?.message}
             </p>
           )}
-          <button
-            type="submit"
-            className="bg-primary text-white cursor-pointer px-6 py-2 rounded-md mt-4"
-            value="Send"
-          >
-            Register
-          </button>
+          <Button className="mt-4" loading={loading} submit label="Register" />
           {error && (
             <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2 ">
               User already existst

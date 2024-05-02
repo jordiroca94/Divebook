@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
 import Title from "./ui/Title";
+import Button from "./ui/Button";
 
 type LoginValuesType = { email: string; password: string };
 
@@ -17,6 +18,7 @@ const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const loginSchema = z.object({
     email: z.string().email({ message: "An email is required" }),
     password: z.string().min(1, { message: "Insert your password" }),
@@ -35,6 +37,7 @@ const LoginForm = () => {
   });
 
   const handleLogin = async (values: LoginValuesType) => {
+    setLoading(true);
     const { email, password } = values;
     try {
       setError(false);
@@ -47,6 +50,7 @@ const LoginForm = () => {
         return router.replace("/profile");
       } else {
         setError(true);
+        setLoading(false);
       }
     } catch (error) {}
     console.log("There was an error, please try again");
@@ -104,12 +108,7 @@ const LoginForm = () => {
             </p>
           )}
           {error && <p className="text-red pt-1">Wrong email or password</p>}
-          <button
-            type="submit"
-            className="bg-primary cursor-pointer px-6 py-2 text-white rounded-md my-4 "
-          >
-            Login
-          </button>
+          <Button className="mt-4" loading={loading} submit label="Login" />
           <Link className="text-sm mt-3 text-right" href={"/register"}>
             Do not have an account ?<span className="underline"> Register</span>
           </Link>

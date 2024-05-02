@@ -11,6 +11,7 @@ import Select from "react-select";
 import { useSession } from "next-auth/react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import DeleteAccountModal from "./DeleteAccountModal";
+import Button from "../ui/Button";
 
 type EditFormTypes = {
   avatarUrl: string;
@@ -35,6 +36,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   const [countryValue, setCountryValue] = useState<CountryType>();
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [deleteValue, setDeleteValue] = useState<any>();
+  const [loading, setLoading] = useState(false);
   const { handleSubmit, register } = useForm<EditFormTypes>({
     defaultValues: {
       avatarUrl: "",
@@ -51,6 +53,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   };
 
   const editProfile = async (values: EditFormTypes) => {
+    setLoading(true);
     try {
       if (file) {
         const res = await edgestore.myPublicImages.upload({ file });
@@ -222,7 +225,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
           <button
             onClick={() => setDeleteModal(true)}
             type="button"
-            className="group flex justify-center lg:items-center gap-4 text-white border rounded-md px-6 py-3 cursor-pointer bg-red hover:bg-white mt-4 hover:border-red order-2 lg:order-1"
+            className="group flex justify-center lg:items-center gap-4 text-white border rounded-md px-6 py-2.5 lg:py-3 cursor-pointer bg-red hover:bg-white mt-4 hover:border-red order-2 lg:order-1"
           >
             <RiDeleteBinLine className="h-5 w-5 text-white group-hover:text-red" />
             <p className="text-white group-hover:text-red">Delete account</p>
@@ -235,13 +238,12 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
               userInfo={userInfo}
             />
           )}
-          <button
-            type="submit"
-            className="bg-primary text-white cursor-pointer px-6 py-3 rounded-md mt-4  w-full lg:w-auto order-1 lg:order-2"
-            value="Send"
-          >
-            Edit profile
-          </button>
+          <Button
+            className="order-1 lg:order-2 mt-4"
+            loading={loading}
+            submit
+            label="Edit Profile"
+          />
         </div>
       </form>
     </Modal>
