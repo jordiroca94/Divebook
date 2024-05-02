@@ -129,7 +129,7 @@ const Profile = () => {
       </Grid>
       <Grid className="py-10 lg:py-20">
         {dives.map((item) => {
-          const date = formatteDate(item.updatedAt);
+          const date = formatteDate(item.date);
           return (
             <DiveCard
               _id={item._id}

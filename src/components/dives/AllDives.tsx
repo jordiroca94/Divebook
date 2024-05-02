@@ -41,7 +41,7 @@ const AllDives = () => {
 
         {data.length
           ? data.slice(0, loadItems).map((item: DiveType) => {
-              const date = formatteDate(item.updatedAt);
+              const date = formatteDate(item.date);
               return (
                 <DiveCard
                   key={item._id}

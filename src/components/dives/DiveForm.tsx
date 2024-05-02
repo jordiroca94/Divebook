@@ -121,7 +121,7 @@ const DiveForm = () => {
             className="flex flex-col gap-3 pb-10 lg:pb-20"
           >
             <label htmlFor="date" className="font-medium pt-4">
-              When where you born?
+              When was it?
             </label>
             <input
               {...register("date")}

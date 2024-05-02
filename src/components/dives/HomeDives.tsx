@@ -37,7 +37,7 @@ const HomeDives = () => {
         </Title>
 
         {data.slice(0, 4).map((item: DiveType) => {
-          const date = formatteDate(item.updatedAt);
+          const date = formatteDate(item.date);
           return (
             <DiveCard
               key={item._id}

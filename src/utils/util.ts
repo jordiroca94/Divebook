@@ -1,8 +1,7 @@
-const formatteDate = (value: string) => {
-  const date = new Date(value);
-  const formattedDate = `${date.getDate()}-${
-    date.getMonth() + 1
-  }-${date.getFullYear()}`;
+import dayjs from "dayjs";
+
+const formatteDate = (value: string | null | Date) => {
+  const formattedDate = dayjs(value).format("D-MMM-YYYY");
   return formattedDate;
 };
 
