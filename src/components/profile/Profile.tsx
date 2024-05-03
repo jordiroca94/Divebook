@@ -11,11 +11,11 @@ import Link from "next/link";
 import { DiveType, UserType } from "@/types/common";
 import Title from "../ui/Title";
 import DiveCard from "../dives/DiveCard";
-import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
 import { IoSettingsOutline } from "react-icons/io5";
 import EditProfileForm from "./EditProfileForm";
 import ProfileInformation from "./ProfileInformation";
+import { formatteDate } from "@/utils/util";
 
 const Profile = () => {
   const { data: session } = useSession();

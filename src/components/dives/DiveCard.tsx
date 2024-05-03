@@ -52,7 +52,7 @@ const DiveCard = ({
         <h6 className="text-xl font-semibold line-clamp-1">{name}</h6>
         <p className="mt-2">{date}</p>
         <div className="flex gap-2 items-center py-2 text-lg">
-          <p>{country.label}</p>
+          <p className="line-clamp-1">{country.label}</p>
           <small>-</small>
           <p className="line-clamp-1">{location}</p>
         </div>

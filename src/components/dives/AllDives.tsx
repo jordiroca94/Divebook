@@ -6,10 +6,10 @@ import Grid from "../ui/Grid";
 import { DiveType } from "@/types/common";
 import Title from "../ui/Title";
 import DiveCard from "./DiveCard";
-import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
 import Button from "../ui/Button";
 import DiveSkeleton from "./DiveSkeleton";
+import { formatteDate } from "@/utils/util";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);

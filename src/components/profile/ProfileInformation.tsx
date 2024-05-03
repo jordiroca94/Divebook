@@ -1,3 +1,4 @@
+import { getAge } from "@/utils/util";
 import React from "react";
 
 type Props = {
@@ -5,16 +6,6 @@ type Props = {
 };
 
 const ProfileInformation = ({ userInfo }: Props) => {
-  const getBirthDate = (date: any) => {
-    const birthdate: any = new Date(date);
-    const today: any = new Date();
-    const differenceInMilliseconds = today - birthdate;
-    const age = Math.floor(
-      differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
-    );
-    return age;
-  };
-
   return (
     <>
       <div className="col-span-4 lg:col-start-3 text-lg lg:mb-6">
@@ -49,9 +40,7 @@ const ProfileInformation = ({ userInfo }: Props) => {
         {userInfo?.birthDate && (
           <div className="pt-6">
             <p className="font-semibold">Age:</p>
-            <span className="font-light">
-              {getBirthDate(userInfo.birthDate)}
-            </span>
+            <span className="font-light">{getAge(userInfo.birthDate)}</span>
           </div>
         )}
         {userInfo?.certificate && (
