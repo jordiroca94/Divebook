@@ -18,16 +18,26 @@ const ProfileInformation = ({ userInfo }: Props) => {
   return (
     <>
       <div className="col-span-4 lg:col-start-3 text-lg lg:mb-6">
-        {userInfo?.name && (
+        {userInfo?.name ? (
           <div>
             <p className="font-semibold">Name:</p>
             <span className="font-light">{userInfo.name} </span>
           </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            <div className="w-1/5 h-5 bg-mediumGray"></div>
+            <div className="w-2/5 h-5 bg-mediumGray"></div>
+          </div>
         )}
-        {userInfo?.email && (
-          <div className="pt-6">
+        {userInfo?.email ? (
+          <div className="pt-6 animate-pulse">
             <p className="font-semibold">Email:</p>
             <span className="font-light">{userInfo.email} </span>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3 mt-6 animate-pulse">
+            <div className="w-1/5 h-5 bg-mediumGray"></div>
+            <div className="w-2/5 h-5 bg-mediumGray"></div>
           </div>
         )}
         {userInfo?.country?.label && (
@@ -52,11 +62,15 @@ const ProfileInformation = ({ userInfo }: Props) => {
         )}
       </div>
       <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
-        <img
-          className="aspect-square object-cover rounded-full border border-mediumGray"
-          src={userInfo?.avatarUrl && userInfo?.avatarUrl}
-          alt="alt"
-        />
+        {userInfo ? (
+          <img
+            className="aspect-square object-cover rounded-full border border-mediumGray"
+            src={userInfo.avatarUrl}
+            alt="alt"
+          />
+        ) : (
+          <div className="aspect-square rounded-full bg-mediumGray animate-pulse"></div>
+        )}
         {userInfo?.instructor && (
           <div className="flex justify-center pt-3">
             <div className="py-2 px-6 rounded-full font-light bg-green text-white">

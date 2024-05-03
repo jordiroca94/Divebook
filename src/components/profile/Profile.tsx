@@ -98,11 +98,15 @@ const Profile = () => {
       </Title>
       <Grid className="mt-4 lg:mt-16">
         <div className="lg:hidden col-span-4 py-6 px-3">
-          <img
-            className="aspect-square object-cover rounded-full border border-mediumGray"
-            src={userInfo?.avatarUrl && userInfo?.avatarUrl}
-            alt="alt"
-          />
+          {userInfo?.avatarUrl ? (
+            <img
+              className="aspect-square object-cover rounded-full border border-mediumGray"
+              src={userInfo.avatarUrl}
+              alt="alt"
+            />
+          ) : (
+            <div className="aspect-square rounded-full bg-mediumGray animate-pulse"></div>
+          )}
         </div>
         <ProfileInformation userInfo={userInfo} />
         <div className="flex justify-center py-6 lg:hidden col-span-4">
