@@ -30,7 +30,7 @@ const DiveCard = ({
         <div className="flex gap-2 items-center py-2 text-lg">
           <p>{country.label}</p>
           <small>-</small>
-          <p>{location}</p>
+          <p className="line-clamp-1">{location}</p>
         </div>
         <p className="text-base font-thin mb-4 line-clamp-2">{description}</p>
         <div className="flex items-center gap-2 py-4 ">

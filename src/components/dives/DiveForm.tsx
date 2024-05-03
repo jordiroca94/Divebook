@@ -13,16 +13,17 @@ import Title from "../ui/Title";
 import { SingleImageDropzone } from "../ui/SingleImageDropzone";
 import { useEdgeStore } from "../../../lib/edgestore";
 import BackButton from "../ui/BackButton";
+import { useRouter } from "next/navigation";
 
 const DiveForm = () => {
   const { data: session } = useSession();
   const form = useRef<HTMLFormElement>(null);
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState("");
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
   const [avatarUrl, setAvatarUrl] = useState<string>();
+  const { push } = useRouter();
 
   const diveSchema = z.object({
     name: z.string().min(1, { message: "Required" }),
@@ -100,8 +101,8 @@ const DiveForm = () => {
           parsedValues,
         }),
       });
-      setFormSubmitted(true);
       reset();
+      push("/profile");
     } catch {
       throw Error("An error ocurred while registering. Please try again ");
     }
@@ -289,11 +290,6 @@ const DiveForm = () => {
             >
               Submit
             </button>
-            {formSubmitted && (
-              <p className="text-sm mt-3 text-primary">
-                Dive created successfully
-              </p>
-            )}
           </form>
         </div>
       </Grid>
