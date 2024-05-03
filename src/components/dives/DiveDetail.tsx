@@ -13,6 +13,7 @@ import Loader from "../ui/Loader";
 import { RxCross2 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import DiveDetailSkeleton from "./DiveDetailSkeleton";
 
 type Props = {
   id: string;
@@ -77,7 +78,7 @@ const DiveDetail = ({ id }: Props) => {
             </button>
           )}
         </div>
-        {item && (
+        {item ? (
           <>
             <Grid>
               <Title
@@ -86,14 +87,13 @@ const DiveDetail = ({ id }: Props) => {
               >
                 {item.name}
               </Title>
-              <div className="col-span-4 lg:col-start-2 flex flex-col justify-evenly">
+              <div className="col-span-4 lg:col-start-2 flex flex-col justify-between">
                 <div className="flex items-center text-xl font-semibold gap-2 pb-6">
                   <p>{item.location}</p>
                   <p>-</p>
                   <p>{item.country.label}</p>
                 </div>
                 <div>
-                  <p className="text-base uppercase py-3">Datasheet:</p>
                   <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
                     <div className="text-lg font-semibold">Instructor:</div>
                     <p>{item.instructor}</p>
@@ -103,14 +103,18 @@ const DiveDetail = ({ id }: Props) => {
                     <p>{item.deepth}</p>
                   </div>
                   <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
-                    <div className="text-lg font-semibold">Suit:</div>
-                    <p>{item.suit}</p>
-                  </div>
-                  <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
                     <div className="text-lg font-semibold">
                       Water temperature:
                     </div>
                     <p>{item.temperature}</p>
+                  </div>
+                  <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
+                    <div className="text-lg font-semibold">Belt weights:</div>
+                    <p>{item.weights}</p>
+                  </div>
+                  <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
+                    <div className="text-lg font-semibold">Suit:</div>
+                    <p>{item.suit}</p>
                   </div>
                 </div>
               </div>
@@ -118,7 +122,7 @@ const DiveDetail = ({ id }: Props) => {
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="rounded-lg aspect-square object-cover"
+                  className="rounded-lg aspect-[3/2] object-cover"
                 />
               </div>
             </Grid>
@@ -134,6 +138,8 @@ const DiveDetail = ({ id }: Props) => {
               </div>
             </Grid>
           </>
+        ) : (
+          <DiveDetailSkeleton />
         )}
       </Container>
       {openModal && (
