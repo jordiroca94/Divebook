@@ -7,13 +7,10 @@ import Grid from "../ui/Grid";
 import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
 import { IoSettingsOutline } from "react-icons/io5";
-import Modal from "../ui/Modal";
-import { RiDeleteBinLine } from "react-icons/ri";
-import Loader from "../ui/Loader";
-import { RxCross2 } from "react-icons/rx";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import DiveDetailSkeleton from "./DiveDetailSkeleton";
+import EditDiveForm from "./EditDiveForm";
+import DeleteDiveModal from "./DeleteDiveModal";
 
 type Props = {
   id: string;
@@ -23,8 +20,6 @@ const DiveDetail = ({ id }: Props) => {
   const [item, setItem] = useState<DiveType>();
   const [openModal, setOpenModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const { push } = useRouter();
   const { data: session } = useSession();
   const getDives = async () => {
     try {
@@ -37,24 +32,6 @@ const DiveDetail = ({ id }: Props) => {
       });
       const { dive } = await data.json();
       setItem(dive);
-    } catch {
-      throw Error("An error occurred while fetching data.");
-    }
-  };
-
-  const deleteDive = async () => {
-    setLoading(true);
-
-    try {
-      await fetch("/api/deleteDive", {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
-      setLoading(false);
-      push("/profile");
     } catch {
       throw Error("An error occurred while fetching data.");
     }
@@ -94,10 +71,12 @@ const DiveDetail = ({ id }: Props) => {
                   <p>{item.country.label}</p>
                 </div>
                 <div>
-                  <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
-                    <div className="text-lg font-semibold">Instructor:</div>
-                    <p>{item.instructor}</p>
-                  </div>
+                  {item.instructor && (
+                    <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
+                      <div className="text-lg font-semibold">Instructor:</div>
+                      <p>{item.instructor}</p>
+                    </div>
+                  )}
                   <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
                     <div className="text-lg font-semibold">Deepth:</div>
                     <p>{item.deepth}</p>
@@ -143,49 +122,13 @@ const DiveDetail = ({ id }: Props) => {
         )}
       </Container>
       {openModal && (
-        <Modal>
-          <div className="flex justify-between items-center">
-            <h5 className="text-2xl">Edit Dive</h5>
-            <button
-              className="rounded-full border-mediumGray border p-2 "
-              onClick={() => setOpenModal(false)}
-            >
-              <RxCross2 className="size-5" />
-            </button>
-          </div>
-          <button
-            onClick={() => setDeleteModal(true)}
-            type="button"
-            className="hidden group lg:flex items-center gap-4 mt-4"
-          >
-            <RiDeleteBinLine className="h-6 w-6 text-red group-hover:text-red/50" />
-            <p className="text-red border-b-red group-hover:text-red/50 group-hover:border-b-red/50">
-              Delete dive
-            </p>
-          </button>
-        </Modal>
+        <EditDiveForm
+          setOpenModal={setOpenModal}
+          setDeleteModal={setDeleteModal}
+        />
       )}
       {deleteModal && (
-        <Modal>
-          <div className="flex justify-between items-center">
-            <h5 className="text-2xl">
-              Are you sure you want to delete your dive?
-            </h5>
-            <button
-              className="rounded-full border-mediumGray border p-2 "
-              onClick={() => setDeleteModal(false)}
-            >
-              <RxCross2 className="size-5" />
-            </button>
-          </div>
-          <button
-            onClick={deleteDive}
-            type="button"
-            className="text-white cursor-pointer px-6 py-2 rounded-md mt-10  w-full  lg:w-1/2 bg-red "
-          >
-            {loading ? <Loader /> : <div>Delete dive</div>}
-          </button>
-        </Modal>
+        <DeleteDiveModal id={id} setDeleteModal={setDeleteModal} />
       )}
     </>
   );
