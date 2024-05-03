@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import { DiveCardType } from "@/types/common";
 import Button from "../ui/Button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const DiveCard = ({
   _id,
@@ -13,6 +15,28 @@ const DiveCard = ({
   imageUrl,
   user,
 }: DiveCardType) => {
+  const [userId, setUserId] = useState<string | null>(null);
+  const getUser = async () => {
+    try {
+      const userData = await fetch("/api/getUserData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: user.email }),
+      });
+      const data = await userData.json();
+      setUserId(data.user._id);
+    } catch {
+      throw Error("An error occurred while fetching data.");
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      getUser();
+    }
+  }, [user]);
   return (
     <div className="col-span-4 md:col-span-2 lg:col-span-4 xlg:col-span-3 shadow-lg rounded-md border-mediumGray border">
       {imageUrl && (
@@ -35,7 +59,7 @@ const DiveCard = ({
         <p className="text-base font-thin mb-4 line-clamp-2">{description}</p>
         <div className="flex items-center gap-2 py-4 ">
           <p>Posted by:</p>
-          <Link href="/" className="text-gray underline">
+          <Link href={`/divers/${userId}`} className="text-gray underline">
             {user.name}
           </Link>
         </div>

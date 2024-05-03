@@ -20,6 +20,7 @@ const DiveDetail = ({ id }: Props) => {
   const [item, setItem] = useState<DiveType>();
   const [openModal, setOpenModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
   const { data: session } = useSession();
   const getDives = async () => {
     try {
@@ -36,6 +37,28 @@ const DiveDetail = ({ id }: Props) => {
       throw Error("An error occurred while fetching data.");
     }
   };
+
+  const getUser = async () => {
+    try {
+      const userData = await fetch("/api/getUserData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: item?.user.email }),
+      });
+      const data = await userData.json();
+      setUserId(data.user._id);
+    } catch {
+      throw Error("An error occurred while fetching data.");
+    }
+  };
+
+  useEffect(() => {
+    if (item) {
+      getUser();
+    }
+  }, [item]);
 
   useEffect(() => {
     getDives();
@@ -111,7 +134,9 @@ const DiveDetail = ({ id }: Props) => {
               </p>
               <div className="col-span-4 lg:col-span-3 lg:col-start-9 text-lg lg:py-10">
                 <div className="flex lg:flex-col gap-2 justify-end lg:items-end">
-                  <p>{item.user.name}</p>
+                  <a className="hover:underline" href={`/divers/${userId}`}>
+                    {item.user.name}
+                  </a>
                   <p>{formatteDate(item.updatedAt)}</p>
                 </div>
               </div>
