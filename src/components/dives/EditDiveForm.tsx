@@ -68,11 +68,13 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
           name: values.name ? values.name : item?.name,
           country: countryValue ? countryValue : item?.country,
           location: values.location ? values.location : item?.location,
-          deepth: values.deepth ? values.deepth : item?.deepth,
+          deepth: values.deepth ? values.deepth.concat(" ", "m") : item?.deepth,
           temperature: values.temperature
-            ? values.temperature
+            ? values.temperature.concat(" ", "ºC")
             : item?.temperature,
-          weights: values.weights ? values.weights : item?.weights,
+          weights: values.weights
+            ? values.weights.concat(" ", "kg")
+            : item?.weights,
           instructor: values.instructor ? values.instructor : item?.instructor,
           suit: values.suit ? values.suit : item?.suit,
           description: values.description
@@ -97,11 +99,13 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
           name: values.name ? values.name : item?.name,
           country: countryValue ? countryValue : item?.country,
           location: values.location ? values.location : item?.location,
-          deepth: values.deepth ? values.deepth : item?.deepth,
+          deepth: values.deepth ? values.deepth.concat(" ", "m") : item?.deepth,
           temperature: values.temperature
-            ? values.temperature
+            ? values.temperature.concat(" ", "ºC")
             : item?.temperature,
-          weights: values.weights ? values.weights : item?.weights,
+          weights: values.weights
+            ? values.weights.concat(" ", "kg")
+            : item?.weights,
           instructor: values.instructor ? values.instructor : item?.instructor,
           suit: values.suit ? values.suit : item?.suit,
           description: values.description

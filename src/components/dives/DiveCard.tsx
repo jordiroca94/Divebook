@@ -25,7 +25,7 @@ const DiveCard = ({
         </div>
       )}
       <div className="p-6">
-        <h6 className="text-xl font-semibold">{name}</h6>
+        <h6 className="text-xl font-semibold line-clamp-1">{name}</h6>
         <p className="mt-2">{date}</p>
         <div className="flex gap-2 items-center py-2 text-lg">
           <p>{country.label}</p>

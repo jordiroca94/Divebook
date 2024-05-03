@@ -29,7 +29,7 @@ const Footer = () => {
           </Link>
         </div>
 
-        <small>Copyright &copy; {year} Jordi Roca</small>
+        <div className="text-base">Copyright &copy; {year} Jordi Roca</div>
       </footer>
     </Container>
   );
