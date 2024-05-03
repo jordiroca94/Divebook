@@ -123,6 +123,7 @@ const DiveDetail = ({ id }: Props) => {
       </Container>
       {openModal && (
         <EditDiveForm
+          item={item}
           setOpenModal={setOpenModal}
           setDeleteModal={setDeleteModal}
         />

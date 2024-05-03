@@ -15,7 +15,7 @@ export async function POST(req) {
       certificate: parsedValues.certificate,
       instructor: parsedValues.instructor,
     });
-    return NextResponse.json({ message: "Image uploaded" }, { status: 201 });
+    return NextResponse.json({ message: "User updated" }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { message: "An error occurred while uploading an image" },
