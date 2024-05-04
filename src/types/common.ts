@@ -49,6 +49,7 @@ export type DiveCardType = {
   date: string;
   imageUrl: string;
   user: UserType;
+  profileCard?: boolean;
 };
 
 export type HighlightedDestinationType = {

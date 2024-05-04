@@ -14,6 +14,7 @@ const DiveCard = ({
   date,
   imageUrl,
   user,
+  profileCard,
 }: DiveCardType) => {
   const [userId, setUserId] = useState<string | null>(null);
   const getUser = async () => {
@@ -57,12 +58,17 @@ const DiveCard = ({
           <p className="line-clamp-1">{location}</p>
         </div>
         <p className="text-base font-thin mb-4 line-clamp-2">{description}</p>
-        <div className="flex items-center gap-2 py-4 ">
-          <p>Posted by:</p>
-          <Link href={`/divers/${userId}`} className="text-gray underline">
-            {user.name}
-          </Link>
-        </div>
+        {!profileCard && (
+          <div className="flex items-center gap-2 py-3 ">
+            <p>Posted by:</p>
+            <Link
+              href={`/divers/${userId}`}
+              className="hover:text-gray underline"
+            >
+              {user.name}
+            </Link>
+          </div>
+        )}
         <Button
           className="mt-6 mb-2"
           link={`/dives/${_id}`}

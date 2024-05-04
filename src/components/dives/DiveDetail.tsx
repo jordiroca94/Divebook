@@ -134,7 +134,10 @@ const DiveDetail = ({ id }: Props) => {
               </p>
               <div className="col-span-4 lg:col-span-3 lg:col-start-9 text-lg lg:py-10">
                 <div className="flex lg:flex-col gap-2 justify-end lg:items-end">
-                  <a className="hover:underline" href={`/divers/${userId}`}>
+                  <a
+                    className="hover:text-gray underline"
+                    href={`/divers/${userId}`}
+                  >
                     {item.user.name}
                   </a>
                   <p>{formatteDate(item.updatedAt)}</p>

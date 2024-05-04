@@ -145,6 +145,7 @@ const Profile = () => {
               date={date}
               imageUrl={item.imageUrl}
               user={item.user}
+              profileCard={true}
             />
           );
         })}
