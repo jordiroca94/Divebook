@@ -4,7 +4,6 @@ import Container from "../ui/Container";
 import { DiveType } from "@/types/common";
 import Title from "../ui/Title";
 import Grid from "../ui/Grid";
-import formatteDate from "@/utils/util";
 import BackButton from "../ui/BackButton";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useSession } from "next-auth/react";
