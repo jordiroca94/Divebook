@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import DiveDetailSkeleton from "./DiveDetailSkeleton";
 import EditDiveForm from "./EditDiveForm";
 import DeleteDiveModal from "./DeleteDiveModal";
+import { formatteDate } from "@/utils/util";
 
 type Props = {
   id: string;
