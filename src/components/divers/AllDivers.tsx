@@ -23,6 +23,7 @@ const AllDivers = () => {
   useEffect(() => {
     getAllDivers();
   }, []);
+
   return (
     <Container className="pb-12 lg:pb-20">
       <Grid>

@@ -118,7 +118,7 @@ const DiverDetail = ({ id }: Props) => {
               My dives
             </h5>
             {dives?.length == 0 && (
-              <div className="col-span-4 lg:col-span-6 lg:col-start-5 pt-6 lg:pt-16 lg:text-2xl lg:px-32 text-center">
+              <div className="col-span-4 lg:col-span-6 lg:col-start-4 pt-6 lg:pt-16 lg:text-2xl lg:px-6 text-center">
                 {diver.name} did not post any dive
               </div>
             )}
