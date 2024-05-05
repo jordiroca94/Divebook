@@ -7,9 +7,15 @@ export async function POST(req) {
     await connectMongoDB();
     const res = await req.json();
     const { email } = res;
-    console.log(res, "re2222s");
-    // const dives = await Dive.find();
-    // return NextResponse.json({ dives });
+    const divesRes = await Dive.find();
+    const diverDives = [];
+    divesRes.map((el) => {
+      if (el.user.email === email) {
+        return diverDives.push(el);
+      }
+    });
+
+    return NextResponse.json({ diverDives });
   } catch (error) {
     console.log(error);
   }

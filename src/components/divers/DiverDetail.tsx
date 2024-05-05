@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Container from "../ui/Container";
-import { UserType } from "@/types/common";
+import { DiveType, UserType } from "@/types/common";
 import BackButton from "../ui/BackButton";
 import Grid from "../ui/Grid";
 import Title from "../ui/Title";
@@ -15,6 +15,7 @@ type Props = {
 
 const DiverDetail = ({ id }: Props) => {
   const [diver, setDiver] = useState<UserType>();
+  const [dives, setDives] = useState<any>();
   const getUser = async () => {
     try {
       const userData = await fetch("/api/getUserById", {
@@ -45,8 +46,8 @@ const DiverDetail = ({ id }: Props) => {
           email: diver?.email,
         }),
       });
-      const data = await userDives.json();
-      console.log(data, "data-->");
+      const { diverDives } = await userDives.json();
+      setDives(diverDives);
     } catch {
       throw Error("An error ocurred fetching data ");
     }
@@ -80,30 +81,43 @@ const DiverDetail = ({ id }: Props) => {
               />
             </div>
             <div className="col-span-4 lg:col-span-5 lg:col-start-7 text-lg">
-              <div className="mb-4">
-                <div className="font-semibold mb-2">Diving expertice</div>
-                <p>{diver.certificate}</p>
-              </div>
-              <div className="mb-4">
-                <div className="font-semibold mb-2">Country</div>
-                <p>{diver.country?.label}</p>
-              </div>
-              <div className="mb-4">
-                <div className="font-semibold mb-2">Age</div>
-                <p>{getAge(diver.birthDate)}</p>
-              </div>
-              <div className="mb-4 hidden bs:block">
+              {diver.certificate && (
+                <div className="mb-4">
+                  <div className="font-semibold mb-2">Diving expertice</div>
+                  <p>{diver.certificate}</p>
+                </div>
+              )}
+              {diver.country?.label && (
+                <div className="mb-4">
+                  <div className="font-semibold mb-2">Country</div>
+                  <p>{diver.country.label}</p>
+                </div>
+              )}
+              {diver.birthDate && (
+                <div className="mb-4">
+                  <div className="font-semibold mb-2">Age</div>
+                  <p>{getAge(diver.birthDate)}</p>
+                </div>
+              )}
+              {diver?.description && (
+                <div className="mb-4 hidden bs:block">
+                  <div className="font-semibold mb-2">Description</div>
+                  <p>{diver.description}</p>
+                </div>
+              )}
+            </div>
+            {diver?.description && (
+              <div className="mb-4 col-span-4 lg:col-start-2 lg:col-span-10 bs:hidden">
                 <div className="font-semibold mb-2">Description</div>
-                <p>{diver?.description}</p>
+                <p>{diver.description}</p>
               </div>
-            </div>
-            <div className="mb-4 col-span-4 lg:col-start-2 lg:col-span-10 bs:hidden">
-              <div className="font-semibold mb-2">Description</div>
-              <p>{diver?.description}</p>
-            </div>
+            )}
           </Grid>
-          {/* <Grid className="py-10 lg:py-20">
-            {dives.map((item) => {
+          <Grid className="pt-10 bs:pt-20">
+            <h5 className="col-span-full text-lg lg:text-2xl border-b border-b-mediumGray2 pb-4 ">
+              My dives
+            </h5>
+            {dives?.map((item: DiveType) => {
               const date = formatteDate(item.date);
               return (
                 <DiveCard
@@ -120,7 +134,7 @@ const DiverDetail = ({ id }: Props) => {
                 />
               );
             })}
-          </Grid> */}
+          </Grid>
         </>
       ) : (
         <div>DIVER SKELETON </div>
