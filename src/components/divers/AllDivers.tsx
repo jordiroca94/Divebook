@@ -5,7 +5,6 @@ import Grid from "../ui/Grid";
 import Title from "../ui/Title";
 import { UserType } from "@/types/common";
 import DiverCard from "./DiverCard";
-import BackButton from "../ui/BackButton";
 import DiverSkeleton from "./DiverSkeleton";
 
 const AllDivers = () => {

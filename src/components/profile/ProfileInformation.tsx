@@ -58,7 +58,7 @@ const ProfileInformation = ({ userInfo }: Props) => {
             alt="alt"
           />
         ) : (
-          <div className="aspect-square rounded-full bg-mediumGray animate-pulse"></div>
+          <div className="aspect-square rounded-full bg-mediumGray animate-pulse" />
         )}
         {userInfo?.instructor && (
           <div className="flex justify-center pt-3">

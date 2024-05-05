@@ -6,8 +6,8 @@ import BackButton from "../ui/BackButton";
 import Grid from "../ui/Grid";
 import Title from "../ui/Title";
 import { formatteDate, getAge } from "@/utils/util";
-import Link from "next/link";
 import DiveCard from "../dives/DiveCard";
+import DiverDetailSkeleton from "./DiverDetailSkeleton";
 
 type Props = {
   id: string;
@@ -117,6 +117,11 @@ const DiverDetail = ({ id }: Props) => {
             <h5 className="col-span-full text-lg lg:text-2xl border-b border-b-mediumGray2 pb-4 ">
               My dives
             </h5>
+            {dives?.length == 0 && (
+              <div className="col-span-4 lg:col-span-6 lg:col-start-5 pt-6 lg:pt-16 lg:text-2xl lg:px-32 text-center">
+                {diver.name} did not post any dive
+              </div>
+            )}
             {dives?.map((item: DiveType) => {
               const date = formatteDate(item.date);
               return (
@@ -137,7 +142,7 @@ const DiverDetail = ({ id }: Props) => {
           </Grid>
         </>
       ) : (
-        <div>DIVER SKELETON </div>
+        <DiverDetailSkeleton />
       )}
     </Container>
   );

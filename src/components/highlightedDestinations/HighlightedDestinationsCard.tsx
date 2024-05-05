@@ -1,5 +1,6 @@
 import { HighlightedDestinationType } from "@/types/common";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 const HighlightedDestinationCard = ({
   id,
@@ -11,7 +12,10 @@ const HighlightedDestinationCard = ({
   image,
 }: HighlightedDestinationType) => {
   return (
-    <div className="col-span-4 md:col-span-2 lg:col-span-4 shadow-lg rounded-md border-mediumGray border">
+    <Link
+      href={`/highlighted-dives/${id}`}
+      className="group col-span-4 md:col-span-2 lg:col-span-4 shadow-lg hover:shadow-primary rounded-md border-mediumGray border"
+    >
       <img className="rounded-t-md" src={image} alt={name} />
       <div className="p-6">
         <h5 className="text-lg font-semibold">{name}</h5>
@@ -24,14 +28,12 @@ const HighlightedDestinationCard = ({
           <span className="font-semibold line-clamp-1">
             When to go: <span className="font-normal">{season}</span>
           </span>
+          <div className="text-white bg-primary px-6 py-3 rounded-md w-fit mt-4">
+            Read more
+          </div>
         </div>
-        <Button
-          className="mt-6 mb-2"
-          link={`/highlighted-dives/${id}`}
-          label="Read more"
-        />
       </div>
-    </div>
+    </Link>
   );
 };
 
