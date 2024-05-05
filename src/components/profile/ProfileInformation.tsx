@@ -8,7 +8,7 @@ type Props = {
 const ProfileInformation = ({ userInfo }: Props) => {
   return (
     <>
-      <div className="col-span-4 lg:col-start-3 text-lg lg:mb-6">
+      <div className="col-span-4 lg:col-start-2 text-lg lg:mb-6">
         {userInfo?.name ? (
           <div>
             <p className="font-semibold">Name:</p>
@@ -50,10 +50,10 @@ const ProfileInformation = ({ userInfo }: Props) => {
           </div>
         )}
       </div>
-      <div className="hidden lg:block lg:col-span-3 lg:col-start-8">
+      <div className="hidden lg:block lg:col-span-4 lg:col-start-8">
         {userInfo ? (
           <img
-            className="aspect-square object-cover rounded-full border border-mediumGray"
+            className="aspect-square object-cover rounded-full border border-primary"
             src={userInfo.avatarUrl}
             alt="alt"
           />
@@ -69,7 +69,7 @@ const ProfileInformation = ({ userInfo }: Props) => {
         )}
       </div>
       {userInfo?.description && (
-        <div className="lg:col-start-3 lg:col-span-8 col-span-4">
+        <div className="lg:col-start-2 lg:col-span-10 col-span-4">
           <p className="font-semibold">About you:</p>
           <span className="font-light">{userInfo.description} </span>
         </div>

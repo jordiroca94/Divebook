@@ -100,7 +100,7 @@ const Profile = () => {
         <div className="lg:hidden col-span-4 py-6 px-3">
           {userInfo?.avatarUrl ? (
             <img
-              className="aspect-square object-cover rounded-full border border-mediumGray"
+              className="aspect-square object-cover rounded-full border border-primary"
               src={userInfo.avatarUrl}
               alt="alt"
             />
@@ -118,7 +118,7 @@ const Profile = () => {
             <p>Edit profile</p>
           </button>
         </div>
-        <div className="col-span-4 flex justify-between items-center lg:col-start-3 lg:col-span-8 text-lg pt-10 border-t border-mediumGray">
+        <div className="col-span-4 flex justify-between items-center lg:col-start-2 lg:col-span-10 text-lg pt-10 border-t border-mediumGray">
           <h6 className="text-xl">
             Your dives: {dives.length > 0 && dives.length}
           </h6>

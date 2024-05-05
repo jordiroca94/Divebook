@@ -73,14 +73,14 @@ const DiverDetail = ({ id }: Props) => {
             >
               {diver.name}
             </Title>
-            <div className="col-span-4 lg:col-span-4 lg:col-start-2">
+            <div className="col-span-4 lg:hidden">
               <img
-                className="aspect-square object-cover rounded-full border border-mediumGray"
+                className="aspect-square object-cover rounded-full border border-primary"
                 src={diver.avatarUrl}
                 alt="alt"
               />
             </div>
-            <div className="col-span-4 lg:col-span-5 lg:col-start-7 text-lg">
+            <div className="col-span-4 lg:col-span-5 lg:col-start-2 text-lg">
               {diver.certificate && (
                 <div className="mb-4">
                   <div className="font-semibold mb-2">Diving expertice</div>
@@ -106,6 +106,13 @@ const DiverDetail = ({ id }: Props) => {
                 </div>
               )}
             </div>
+            <div className="col-span-4 col-start-8 hidden lg:block">
+              <img
+                className="aspect-square object-cover rounded-full border border-primary"
+                src={diver.avatarUrl}
+                alt="alt"
+              />
+            </div>
             {diver?.description && (
               <div className="mb-4 col-span-4 lg:col-start-2 lg:col-span-10 bs:hidden">
                 <div className="font-semibold mb-2">Description</div>
@@ -115,7 +122,7 @@ const DiverDetail = ({ id }: Props) => {
           </Grid>
           <Grid className="pt-10 bs:pt-20">
             <h5 className="col-span-full text-lg lg:text-2xl border-b border-b-mediumGray2 pb-4 ">
-              My dives
+              {diver.name} dives
             </h5>
             {dives?.length == 0 && (
               <div className="col-span-4 lg:col-span-6 lg:col-start-4 pt-6 lg:pt-16 lg:text-2xl lg:px-6 text-center">
