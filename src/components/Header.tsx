@@ -40,11 +40,11 @@ const Header = () => {
           </span>
         </Link>
         <div className="flex justify-between gap-3 lg:gap-8 items-center">
-          <div className="hidden lg:flex gap-4">
+          <div className="hidden lg:flex gap-8 menu menu-2">
             {navLinks.map((link) => (
-              <Link href={link.link} key={link.label}>
+              <a href={link.link} key={link.label}>
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
           {!session ? (
@@ -65,7 +65,7 @@ const Header = () => {
           ) : (
             <Link
               href="/profile"
-              className="flex gap-2 items-center text-primary"
+              className="flex gap-2 items-center text-primary hover:text-primary/70"
             >
               <CgProfile className="h-7 w-7" />
               <p>Profile</p>
