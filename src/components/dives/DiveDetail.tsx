@@ -140,7 +140,7 @@ const DiveDetail = ({ id }: Props) => {
                   >
                     {item.user.name}
                   </a>
-                  <p>{formatteDate(item.updatedAt)}</p>
+                  <p>{formatteDate(item.date)}</p>
                 </div>
               </div>
             </Grid>
