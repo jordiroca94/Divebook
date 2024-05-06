@@ -13,22 +13,21 @@ const Footer = () => {
           Terms and Conditions
         </a>
         <div className="flex gap-6">
-          <a
+          <Link
             aria-label="Linkedin"
-            href="/https://www.linkedin.com/in/jordi-roca-soler/"
+            href="https://www.linkedin.com/in/jordi-roca-soler/"
             target="_blank"
           >
             <BsLinkedin className="h-8 w-8" />
-          </a>
+          </Link>
           <Link
             aria-label="Github"
-            href="/https://github.com/jordiroca94"
+            href="https://github.com/jordiroca94/Diverbook"
             target="_blank"
           >
             <FaGithub className="h-8 w-8" />
           </Link>
         </div>
-
         <div className="text-base">Copyright &copy; {year} Jordi Roca</div>
       </footer>
     </Container>
