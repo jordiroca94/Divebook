@@ -1,4 +1,3 @@
-import CountComponent from "@/components/CountComponent";
 import HomeDives from "@/components/dives/HomeDives";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -11,7 +10,6 @@ export default function Home() {
     <main>
       <Header />
       <HomeHero />
-      <CountComponent />
       <HighlightedDestinations />
       <JoinUs />
       <HomeDives />

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Grid from "./ui/Grid";
 import Title from "./ui/Title";
+import CountComponent from "./CountComponent";
 
 const HomeHero = () => {
   const { data: session } = useSession();
@@ -38,6 +39,7 @@ const HomeHero = () => {
               and keep track of your dives & more
             </p>
           )}
+          <CountComponent />
         </div>
       </Grid>
     </div>
