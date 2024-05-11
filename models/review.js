@@ -2,9 +2,10 @@ import mongoose, { Schema, models } from "mongoose";
 
 const reviewSchema = new Schema(
   {
+    postedBy: { type: String, required: true },
     userId: { type: String, required: true },
     diveId: { type: String, required: true },
-    review: { type: Number, required: true },
+    rate: { type: Number, required: true },
     description: { type: String, required: true },
   },
   { timestamps: true }

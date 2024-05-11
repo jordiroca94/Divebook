@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
-import Dive from "../../models/dive";
 
 const CountComponent = () => {
-  const [count, setCount] = useState<{ users: number; dives: number }>();
+  const [count, setCount] = useState<{
+    users: number;
+    dives: number;
+    reviews: number;
+  }>();
   const getCounts = async () => {
     try {
       const res = await fetch("/api/getCounts", {
@@ -54,7 +57,7 @@ const CountComponent = () => {
               enableScrollSpy
               duration={3}
               start={0}
-              end={30}
+              end={count.reviews}
             />
             <p className="text-sm font-semibold text-white bs:text-lg">
               REVIEWS

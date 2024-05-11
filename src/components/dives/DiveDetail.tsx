@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Container from "../ui/Container";
 import { DiveType } from "@/types/common";
 import Title from "../ui/Title";
@@ -11,6 +11,11 @@ import DiveDetailSkeleton from "./DiveDetailSkeleton";
 import EditDiveForm from "./EditDiveForm";
 import DeleteDiveModal from "./DeleteDiveModal";
 import { formatteDate } from "@/utils/util";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+// @ts-ignore
+import ReactStars from "react-rating-stars-component";
 
 type Props = {
   id: string;
@@ -21,7 +26,10 @@ const DiveDetail = ({ id }: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [rate, setRate] = useState<number | null>(null);
   const { data: session } = useSession();
+  const form = useRef<HTMLFormElement>(null);
+
   const getDives = async () => {
     try {
       const data = await fetch("/api/getDiveById", {
@@ -51,6 +59,53 @@ const DiveDetail = ({ id }: Props) => {
       setUserId(data.user._id);
     } catch {
       throw Error("An error occurred while fetching data.");
+    }
+  };
+
+  const reviewSchema = z.object({
+    rate: z.number().optional(),
+    description: z.string().optional(),
+  });
+
+  const ratingChanged = (newRating: number) => {
+    setRate(newRating);
+  };
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      description: "",
+    },
+    // resolver: zodResolver(reviewSchema),
+  });
+
+  const createReview = async (values: { description: string }) => {
+    console.log(session?.user?.name, "vale");
+    const parsedValues = {
+      postedBy: session?.user?.name,
+      rate: rate,
+      description: values.description,
+      userId: userId,
+      diveId: id,
+    };
+
+    try {
+      await fetch("/api/createReview", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          parsedValues,
+        }),
+      });
+      reset();
+    } catch {
+      throw Error("An error occurred while creating a review.");
     }
   };
 
@@ -148,6 +203,57 @@ const DiveDetail = ({ id }: Props) => {
         ) : (
           <DiveDetailSkeleton />
         )}
+        <Grid>
+          <div className="col-span-4 lg:col-span-10 lg:col-start-2">
+            <h5 className="text-base lg:text-2xl w-full border-b border-mediumGray2 pb-3">
+              Reviews
+            </h5>
+            {session ? (
+              <form
+                ref={form}
+                onSubmit={handleSubmit(createReview)}
+                className="flex gap-6 mt-10"
+              >
+                <div className="size-20 text-5xl border-mediumGray2 border flex justify-center items-center">
+                  {session?.user?.name && session.user.name.substring(0, 1)}
+                </div>
+                <div className="w-full">
+                  <div className="flex justify-between w-full gap-4">
+                    <textarea
+                      id="description"
+                      className="border border-mediumGray py-2 px-3 rounded-md w-[70%]"
+                      placeholder="Please write your comment"
+                      rows={6}
+                      {...register("description")}
+                    />
+                    <ReactStars
+                      count={5}
+                      onChange={ratingChanged}
+                      size={24}
+                      activeColor="#ffd700"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-primary cursor-pointer px-16 py-2 text-white rounded-md my-4 lg:w-fit"
+                  >
+                    Send Review
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="mt-4">
+                <a
+                  href="/register"
+                  className="text-primary underline hover:text-primary/70 "
+                >
+                  Log in
+                </a>{" "}
+                to add a review
+              </div>
+            )}
+          </div>
+        </Grid>
       </Container>
       {openModal && (
         <EditDiveForm
