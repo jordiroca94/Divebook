@@ -41,8 +41,8 @@ const HomeDives = () => {
         </Title>
 
         {loading
-          ? new Array(8).fill(0).map((_, i) => <DiveSkeleton key={i} />)
-          : data.slice(0, 4).map((item: DiveType) => {
+          ? new Array(3).fill(0).map((_, i) => <DiveSkeleton key={i} />)
+          : data.slice(0, 3).map((item: DiveType) => {
               const date = formatteDate(item.date);
               return (
                 <DiveCard

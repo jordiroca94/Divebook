@@ -39,7 +39,7 @@ const DiveCard = ({
     }
   }, [user]);
   return (
-    <div className="col-span-4 md:col-span-2 lg:col-span-4 xlg:col-span-3 shadow-lg hover:shadow-primary rounded-md border-mediumGray border">
+    <div className="col-span-4 md:col-span-2 lg:col-span-4 shadow-lg hover:shadow-primary rounded-md border-mediumGray border">
       {imageUrl && (
         <div className="flex justify-center border-b border-mediumGray">
           <img

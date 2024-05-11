@@ -3,6 +3,7 @@ import mongoose, { Schema, models } from "mongoose";
 const reviewSchema = new Schema(
   {
     userId: { type: String, required: true },
+    diveId: { type: String, required: true },
     review: { type: Number, required: true },
     description: { type: String, required: true },
   },

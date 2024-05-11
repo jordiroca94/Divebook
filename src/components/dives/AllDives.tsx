@@ -13,7 +13,7 @@ import { formatteDate } from "@/utils/util";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
-  const [loadItems, setLoadItems] = useState<number>(8);
+  const [loadItems, setLoadItems] = useState<number>(6);
   const getAllDives = async () => {
     const data = await fetch("api/getDives", {
       method: "GET",
@@ -56,11 +56,11 @@ const AllDives = () => {
                 />
               );
             })
-          : new Array(8).fill(0).map((_, i) => <DiveSkeleton key={i} />)}
+          : new Array(6).fill(0).map((_, i) => <DiveSkeleton key={i} />)}
         {loadItems < data.length && (
           <div className="col-span-4 lg:col-span-12 flex justify-center text-center mt-4 bs:mt-10">
             <Button
-              onClick={() => setLoadItems(loadItems + 4)}
+              onClick={() => setLoadItems(loadItems + 3)}
               label="See more"
               secondary
             />
