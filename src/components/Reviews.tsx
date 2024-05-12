@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import ReviewForm from "./dives/ReviewForm";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { formatteDate } from "@/utils/util";
 
 type Props = {
   id: string;
@@ -40,7 +41,7 @@ const Reviews = ({ id }: Props) => {
   useEffect(() => {
     getReviews();
   }, []);
-
+  console.log(reviews, "reviews");
   return (
     <Grid>
       <div className="col-span-4 lg:col-span-10 lg:col-start-2">
@@ -50,7 +51,7 @@ const Reviews = ({ id }: Props) => {
         <div>
           {reviews.map((review: any) => (
             <div className="flex gap-3 md:gap-6 mt-6 md:mt-10" key={review._id}>
-              <div className="flex flex-col justify-center items-center gap-2">
+              <div className="flex flex-col justify-start items-center gap-2 pt-2 w-[100px] md:w-auto">
                 <div className="aspect-square size-16 md:size-20 text-3xl lg:text-5xl border-mediumGray2 rounded-full border flex justify-center items-center">
                   {review.postedBy.substring(0, 1)}
                 </div>
@@ -66,15 +67,17 @@ const Reviews = ({ id }: Props) => {
                   <div className=" py-2 px-3 rounded-md w-full">
                     {review.description}
                   </div>
-
-                  <div className="md:hidden mt-2">
-                    <ReactStars
-                      count={5}
-                      value={review.rate}
-                      edit={false}
-                      size={24}
-                      activeColor="#ffd700"
-                    />
+                  <div className="w-full flex justify-between items-center lg:justify-end ">
+                    <div className="md:hidden">
+                      <ReactStars
+                        count={5}
+                        value={review.rate}
+                        edit={false}
+                        size={24}
+                        activeColor="#ffd700"
+                      />
+                    </div>
+                    <span>{formatteDate(review.updatedAt)}</span>
                   </div>
                 </div>
                 <div className="md:block hidden">
