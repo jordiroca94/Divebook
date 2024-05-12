@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../ui/Container";
 import { DiveType } from "@/types/common";
 import Title from "../ui/Title";
@@ -11,9 +11,7 @@ import DiveDetailSkeleton from "./DiveDetailSkeleton";
 import EditDiveForm from "./EditDiveForm";
 import DeleteDiveModal from "./DeleteDiveModal";
 import { formatteDate } from "@/utils/util";
-import ReviewForm from "./ReviewForm";
-// @ts-ignore
-import ReactStars from "react-rating-stars-component";
+import Reviews from "../Reviews";
 
 type Props = {
   id: string;
@@ -25,7 +23,6 @@ const DiveDetail = ({ id }: Props) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const { data: session } = useSession();
-  const [reviews, setReviews] = useState<any>([]);
   const getDives = async () => {
     try {
       const data = await fetch("/api/getDiveById", {
@@ -58,28 +55,6 @@ const DiveDetail = ({ id }: Props) => {
     }
   };
 
-  const getReviews = async () => {
-    try {
-      const reviews = await fetch("/api/getReviews", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const { data } = await reviews.json();
-      const diveReviews: any = [];
-      data.map((item: any) => {
-        if (item.diveId === id) {
-          diveReviews.push(item);
-        }
-      });
-
-      setReviews(diveReviews);
-    } catch {
-      throw Error("An error occurred while fetching data.");
-    }
-  };
-
   useEffect(() => {
     if (item) {
       getUser();
@@ -90,9 +65,6 @@ const DiveDetail = ({ id }: Props) => {
     getDives();
   }, []);
 
-  useEffect(() => {
-    getReviews();
-  }, []);
   return (
     <>
       <Container>
@@ -178,72 +150,7 @@ const DiveDetail = ({ id }: Props) => {
         ) : (
           <DiveDetailSkeleton />
         )}
-        <Grid>
-          <div className="col-span-4 lg:col-span-10 lg:col-start-2">
-            <h5 className="text-base lg:text-2xl w-full border-b border-mediumGray2 pb-3">
-              Reviews
-            </h5>
-            <div>
-              {reviews.map((review: any) => (
-                <div
-                  className="flex gap-3 md:gap-6 mt-6 md:mt-10"
-                  key={review._id}
-                >
-                  <div className="flex flex-col justify-center items-center gap-2">
-                    <div className="aspect-square size-16 md:size-20 text-3xl lg:text-5xl border-mediumGray2 rounded-full border flex justify-center items-center">
-                      {review.postedBy.substring(0, 1)}
-                    </div>
-                    <a
-                      href={`/divers/${review.userId}`}
-                      className="underline  hover:text-gray text-center"
-                    >
-                      {review.postedBy}
-                    </a>
-                  </div>
-                  <div className="flex justify-between w-full gap-4">
-                    <div className="w-full md:w-[70%]">
-                      <div className=" py-2 px-3 rounded-md w-full">
-                        {review.description}
-                      </div>
-
-                      <div className="md:hidden mt-2">
-                        <ReactStars
-                          count={5}
-                          value={review.rate}
-                          edit={false}
-                          size={24}
-                          activeColor="#ffd700"
-                        />
-                      </div>
-                    </div>
-                    <div className="md:block hidden">
-                      <ReactStars
-                        count={5}
-                        value={review.rate}
-                        edit={false}
-                        size={24}
-                        activeColor="#ffd700"
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {session ? (
-              <ReviewForm id={id} userId={userId!} />
-            ) : (
-              <div className="mt-4">
-                <a
-                  href="/register"
-                  className="text-primary underline hover:text-primary/70 "
-                >
-                  Log in
-                </a>{" "}
-                to add a review
-              </div>
-            )}
-          </div>
-        </Grid>
+        <Reviews id={id} />
       </Container>
       {openModal && (
         <EditDiveForm

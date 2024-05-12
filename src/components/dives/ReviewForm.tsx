@@ -9,11 +9,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {
-  userId: string;
   id: string;
 };
 
-const ReviewForm = ({ userId, id }: Props) => {
+const ReviewForm = ({ id }: Props) => {
   const form = useRef<HTMLFormElement>(null);
   const { data: session } = useSession();
   const [rate, setRate] = useState<number | null>(null);
