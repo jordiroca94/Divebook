@@ -103,7 +103,7 @@ const DiveDetail = ({ id }: Props) => {
                     </div>
                   )}
                   <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
-                    <div className="text-lg font-semibold">Deepth:</div>
+                    <div className="text-lg font-semibold">Depth:</div>
                     <p>{item.deepth}</p>
                   </div>
                   <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">

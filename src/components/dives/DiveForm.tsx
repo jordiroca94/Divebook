@@ -180,7 +180,7 @@ const DiveForm = () => {
               id="deepth"
               className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
               type="number"
-              placeholder="Deepth in meeters"
+              placeholder="Depth in meeters"
               {...register("deepth")}
             />
             {errors.deepth?.message && (

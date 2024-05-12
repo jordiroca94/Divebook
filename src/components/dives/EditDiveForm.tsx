@@ -190,7 +190,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
         <div className="flex flex-col lg:flex-row lg:gap-6">
           <div className="flex flex-col gap-4 w-full lg:w-1/2">
             <label htmlFor="deepth" className="font-medium pt-4">
-              Deepth
+              Depth
             </label>
             <input
               id="deepth"
