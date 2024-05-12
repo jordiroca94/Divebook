@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // @ts-ignore
 import ReactStars from "react-rating-stars-component";
 import { useForm } from "react-hook-form";
@@ -17,9 +17,26 @@ const ReviewForm = ({ userId, id }: Props) => {
   const form = useRef<HTMLFormElement>(null);
   const { data: session } = useSession();
   const [rate, setRate] = useState<number | null>(null);
+  const [userReviewId, setUserReviewId] = useState();
   const [loading, setLoading] = useState(false);
   const ratingChanged = (newRating: number) => {
     setRate(newRating);
+  };
+
+  const getUserReviewData = async () => {
+    try {
+      const userReviewerData = await fetch("/api/getUserData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: session?.user?.email }),
+      });
+      const data = await userReviewerData.json();
+      setUserReviewId(data.user._id);
+    } catch {
+      throw Error("An error occurred while fetching data.");
+    }
   };
 
   const reviewSchema = z.object({
@@ -40,13 +57,17 @@ const ReviewForm = ({ userId, id }: Props) => {
     resolver: zodResolver(reviewSchema),
   });
 
+  useEffect(() => {
+    getUserReviewData();
+  }, []);
+
   const createReview = async (values: { description: string }) => {
     setLoading(true);
     const parsedValues = {
       postedBy: session?.user?.name,
       rate: rate,
       description: values.description,
-      userId: userId,
+      userId: userReviewId,
       diveId: id,
     };
     try {
@@ -110,13 +131,6 @@ const ReviewForm = ({ userId, id }: Props) => {
           </div>
         </div>
         <Button className="mt-4" loading={loading} submit label="Send Review" />
-
-        {/* <button
-          type="submit"
-          className="bg-primary cursor-pointer px-16 py-2 text-white rounded-md my-4 lg:w-fit"
-        >
-          Send Review
-        </button> */}
       </div>
     </form>
   );

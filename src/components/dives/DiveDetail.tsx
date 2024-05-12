@@ -12,6 +12,8 @@ import EditDiveForm from "./EditDiveForm";
 import DeleteDiveModal from "./DeleteDiveModal";
 import { formatteDate } from "@/utils/util";
 import ReviewForm from "./ReviewForm";
+// @ts-ignore
+import ReactStars from "react-rating-stars-component";
 
 type Props = {
   id: string;
@@ -23,7 +25,7 @@ const DiveDetail = ({ id }: Props) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const { data: session } = useSession();
-
+  const [reviews, setReviews] = useState<any>([]);
   const getDives = async () => {
     try {
       const data = await fetch("/api/getDiveById", {
@@ -56,6 +58,22 @@ const DiveDetail = ({ id }: Props) => {
     }
   };
 
+  const getReviews = async () => {
+    try {
+      const reviews = await fetch("/api/getReviews", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { data } = await reviews.json();
+      console.log(data, "data");
+      setReviews(data);
+    } catch {
+      throw Error("An error occurred while fetching data.");
+    }
+  };
+
   useEffect(() => {
     if (item) {
       getUser();
@@ -64,6 +82,10 @@ const DiveDetail = ({ id }: Props) => {
 
   useEffect(() => {
     getDives();
+  }, []);
+
+  useEffect(() => {
+    getReviews();
   }, []);
   return (
     <>
@@ -155,6 +177,52 @@ const DiveDetail = ({ id }: Props) => {
             <h5 className="text-base lg:text-2xl w-full border-b border-mediumGray2 pb-3">
               Reviews
             </h5>
+            <div>
+              {reviews.map((review: any) => (
+                <div
+                  className="flex gap-3 md:gap-6 mt-6 md:mt-10"
+                  key={review._id}
+                >
+                  <div className="flex flex-col gap-2">
+                    <div className="aspect-square size-16 md:size-20 text-3xl lg:text-5xl border-mediumGray2 rounded-full border flex justify-center items-center">
+                      {review.postedBy.substring(0, 1)}
+                    </div>
+                    <a
+                      href={`/divers/${review.userId}`}
+                      className="underline  hover:text-gray"
+                    >
+                      {review.postedBy}
+                    </a>
+                  </div>
+                  <div className="flex justify-between w-full gap-4">
+                    <div className="w-full md:w-[70%]">
+                      <div className=" py-2 px-3 rounded-md w-full">
+                        {review.description}
+                      </div>
+
+                      <div className="md:hidden mt-2">
+                        <ReactStars
+                          count={5}
+                          value={review.rate}
+                          edit={false}
+                          size={24}
+                          activeColor="#ffd700"
+                        />
+                      </div>
+                    </div>
+                    <div className="md:block hidden">
+                      <ReactStars
+                        count={5}
+                        value={review.rate}
+                        edit={false}
+                        size={24}
+                        activeColor="#ffd700"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             {session ? (
               <ReviewForm id={id} userId={userId!} />
             ) : (
