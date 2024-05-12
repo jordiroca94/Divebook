@@ -67,8 +67,14 @@ const DiveDetail = ({ id }: Props) => {
         },
       });
       const { data } = await reviews.json();
-      console.log(data, "data");
-      setReviews(data);
+      const diveReviews: any = [];
+      data.map((item: any) => {
+        if (item.diveId === id) {
+          diveReviews.push(item);
+        }
+      });
+
+      setReviews(diveReviews);
     } catch {
       throw Error("An error occurred while fetching data.");
     }
@@ -183,13 +189,13 @@ const DiveDetail = ({ id }: Props) => {
                   className="flex gap-3 md:gap-6 mt-6 md:mt-10"
                   key={review._id}
                 >
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col justify-center items-center gap-2">
                     <div className="aspect-square size-16 md:size-20 text-3xl lg:text-5xl border-mediumGray2 rounded-full border flex justify-center items-center">
                       {review.postedBy.substring(0, 1)}
                     </div>
                     <a
                       href={`/divers/${review.userId}`}
-                      className="underline  hover:text-gray"
+                      className="underline  hover:text-gray text-center"
                     >
                       {review.postedBy}
                     </a>
