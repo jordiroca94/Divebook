@@ -64,7 +64,6 @@ const DiveCard = ({
       throw Error("An error occurred while fetching data.");
     }
   };
-  console.log(rate, "rateee->");
 
   useEffect(() => {
     if (user) {
