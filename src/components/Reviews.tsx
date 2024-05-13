@@ -58,9 +58,9 @@ const Reviews = ({ id }: Props) => {
   }, []);
   return (
     <Grid>
-      <div className="col-span-4 lg:col-span-10 lg:col-start-2">
+      <div className="col-span-4 lg:col-span-10 lg:col-start-2 mt-8">
         <div className="flex justify-between items-center border-b border-mediumGray2 pb-3">
-          <h5 className="text-lg lg:text-2xl">Reviews</h5>
+          <h5 className="text-xl lg:text-2xl">Reviews</h5>
           {typeof rate === "number" && !isNaN(rate) && (
             <div className="flex items-center gap-2">
               <MdStarRate className="size-6 text-primary" />
@@ -70,8 +70,8 @@ const Reviews = ({ id }: Props) => {
         </div>
         <div>
           {reviews.map((review: any) => (
-            <div className="flex gap-3 md:gap-6 mt-6 md:mt-10" key={review._id}>
-              <div className="flex flex-col justify-start items-center gap-2 pt-2 w-[100px] md:w-auto">
+            <div className="flex md:gap-6 mt-6 md:mt-10" key={review._id}>
+              <div className="flex flex-col justify-start items-center gap-2 pt-2 w-[100px]">
                 <div className="aspect-square size-16 md:size-20 text-3xl lg:text-5xl border-mediumGray2 rounded-full border flex justify-center items-center">
                   {review.postedBy.substring(0, 1)}
                 </div>
