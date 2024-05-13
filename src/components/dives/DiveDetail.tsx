@@ -70,9 +70,9 @@ const DiveDetail = ({ id }: Props) => {
       <Container>
         <div className="flex justify-between">
           <BackButton />
-          {session?.user?.email === item?.user.email && (
+          {session?.user?.email && session.user.email === item?.user.email && (
             <button
-              className="pt-6 lg:pt-0 flex gap-2 items-center"
+              className={`pt-6 lg:pt-0 flex gap-2 items-center`}
               onClick={() => setOpenModal(true)}
             >
               <IoSettingsOutline className="h-7 w-7" />
