@@ -34,13 +34,17 @@ const Reviews = ({ id }: Props) => {
         }
       });
 
+      const reviewsWithRate = diveReviews.filter(
+        (review: any) => review.rate !== null
+      );
+
       const rateSum = diveReviews.reduce(
-        (accumulator: any, currentValue: any) =>
-          accumulator + currentValue.rate,
+        (accumulator: any, review: any) => accumulator + review.rate,
         0
       );
 
-      const rateAverage = Math.ceil((rateSum / diveReviews.length) * 10) / 10;
+      const rateAverage =
+        Math.ceil((rateSum / reviewsWithRate.length) * 10) / 10;
       setRate(rateAverage);
 
       setReviews(diveReviews);
@@ -84,27 +88,31 @@ const Reviews = ({ id }: Props) => {
                     {review.description}
                   </div>
                   <div className="w-full flex justify-between items-center lg:justify-end ">
-                    <div className="md:hidden">
-                      <ReactStars
-                        count={5}
-                        value={review.rate}
-                        edit={false}
-                        size={24}
-                        activeColor="#00308F"
-                      />
-                    </div>
+                    {review.rate && (
+                      <div className="md:hidden">
+                        <ReactStars
+                          count={5}
+                          value={review.rate}
+                          edit={false}
+                          size={24}
+                          activeColor="#00308F"
+                        />
+                      </div>
+                    )}
                     <span>{formatteDate(review.updatedAt)}</span>
                   </div>
                 </div>
-                <div className="md:block hidden">
-                  <ReactStars
-                    count={5}
-                    value={review.rate}
-                    edit={false}
-                    size={24}
-                    activeColor="#00308F"
-                  />
-                </div>
+                {review.rate && (
+                  <div className="md:block hidden">
+                    <ReactStars
+                      count={5}
+                      value={review.rate}
+                      edit={false}
+                      size={24}
+                      activeColor="#00308F"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           ))}

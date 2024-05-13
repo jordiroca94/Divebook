@@ -52,13 +52,17 @@ const DiveCard = ({
         }
       });
 
+      const reviewsWithRate = diveReviews.filter(
+        (review: any) => review.rate !== null
+      );
+
       const rateSum = diveReviews.reduce(
-        (accumulator: any, currentValue: any) =>
-          accumulator + currentValue.rate,
+        (accumulator: any, review: any) => accumulator + review.rate,
         0
       );
 
-      const rateAverage = Math.ceil((rateSum / diveReviews.length) * 10) / 10;
+      const rateAverage =
+        Math.ceil((rateSum / reviewsWithRate.length) * 10) / 10;
       setRate(rateAverage);
     } catch {
       throw Error("An error occurred while fetching data.");
