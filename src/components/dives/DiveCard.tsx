@@ -4,6 +4,7 @@ import { DiveCardType } from "@/types/common";
 import Button from "../ui/Button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { MdStarRate } from "react-icons/md";
 
 const DiveCard = ({
   _id,
@@ -17,6 +18,8 @@ const DiveCard = ({
   profileCard,
 }: DiveCardType) => {
   const [userId, setUserId] = useState<string | null>(null);
+  const [rate, setRate] = useState<any>(null);
+
   const getUser = async () => {
     try {
       const userData = await fetch("/api/getUserData", {
@@ -33,11 +36,45 @@ const DiveCard = ({
     }
   };
 
+  const getReviews = async () => {
+    try {
+      const reviews = await fetch("/api/getReviews", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { data } = await reviews.json();
+      const diveReviews: any = [];
+      data.map((item: any) => {
+        if (item.diveId === _id) {
+          diveReviews.push(item);
+        }
+      });
+
+      const rateSum = diveReviews.reduce(
+        (accumulator: any, currentValue: any) =>
+          accumulator + currentValue.rate,
+        0
+      );
+
+      const rateAverage = Math.ceil((rateSum / diveReviews.length) * 10) / 10;
+      setRate(rateAverage);
+    } catch {
+      throw Error("An error occurred while fetching data.");
+    }
+  };
+  console.log(rate, "rateee->");
+
   useEffect(() => {
     if (user) {
       getUser();
     }
   }, [user]);
+
+  useEffect(() => {
+    getReviews();
+  }, []);
   return (
     <div className="col-span-4 md:col-span-2 lg:col-span-4 shadow-lg hover:shadow-primary rounded-md border-mediumGray border">
       {imageUrl && (
@@ -50,7 +87,15 @@ const DiveCard = ({
         </div>
       )}
       <div className="p-6">
-        <h6 className="text-xl font-semibold line-clamp-1">{name}</h6>
+        <div className="flex justify-between">
+          <h6 className="text-xl font-semibold line-clamp-1">{name}</h6>
+          {typeof rate === "number" && !isNaN(rate) && (
+            <div className="flex items-center gap-2">
+              <MdStarRate className="size-6 text-primary" />
+              <div className="text-lg">{rate}</div>
+            </div>
+          )}
+        </div>
         <p className="mt-2">{date}</p>
         <div className="flex gap-2 items-center py-2 text-lg">
           <p className="line-clamp-1">{country.label}</p>

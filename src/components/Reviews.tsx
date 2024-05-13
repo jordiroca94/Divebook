@@ -57,10 +57,12 @@ const Reviews = ({ id }: Props) => {
       <div className="col-span-4 lg:col-span-10 lg:col-start-2">
         <div className="flex justify-between items-center border-b border-mediumGray2 pb-3">
           <h5 className="text-lg lg:text-2xl">Reviews</h5>
-          <div className="flex items-center gap-2">
-            <MdStarRate className="size-6 text-primary" />
-            <div className="text-lg">{rate}</div>
-          </div>
+          {typeof rate === "number" && !isNaN(rate) && (
+            <div className="flex items-center gap-2">
+              <MdStarRate className="size-6 text-primary" />
+              <div className="text-lg">{rate}</div>
+            </div>
+          )}
         </div>
         <div>
           {reviews.map((review: any) => (
