@@ -8,6 +8,7 @@ import ReviewForm from "./dives/ReviewForm";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { formatteDate } from "@/utils/util";
+import { MdStarRate } from "react-icons/md";
 
 type Props = {
   id: string;
@@ -15,6 +16,7 @@ type Props = {
 const Reviews = ({ id }: Props) => {
   const { data: session } = useSession();
   const [reviews, setReviews] = useState<any>([]);
+  const [rate, setRate] = useState<number | null>(null);
 
   const getReviews = async () => {
     try {
@@ -32,6 +34,15 @@ const Reviews = ({ id }: Props) => {
         }
       });
 
+      const rateSum = diveReviews.reduce(
+        (accumulator: any, currentValue: any) =>
+          accumulator + currentValue.rate,
+        0
+      );
+
+      const rateAverage = Math.ceil((rateSum / diveReviews.length) * 10) / 10;
+      setRate(rateAverage);
+
       setReviews(diveReviews);
     } catch {
       throw Error("An error occurred while fetching data.");
@@ -41,13 +52,16 @@ const Reviews = ({ id }: Props) => {
   useEffect(() => {
     getReviews();
   }, []);
-  console.log(reviews, "reviews");
   return (
     <Grid>
       <div className="col-span-4 lg:col-span-10 lg:col-start-2">
-        <h5 className="text-base lg:text-2xl w-full border-b border-mediumGray2 pb-3">
-          Reviews
-        </h5>
+        <div className="flex justify-between items-center border-b border-mediumGray2 pb-3">
+          <h5 className="text-lg lg:text-2xl">Reviews</h5>
+          <div className="flex items-center gap-2">
+            <MdStarRate className="size-6 text-primary" />
+            <div className="text-lg">{rate}</div>
+          </div>
+        </div>
         <div>
           {reviews.map((review: any) => (
             <div className="flex gap-3 md:gap-6 mt-6 md:mt-10" key={review._id}>
@@ -74,7 +88,7 @@ const Reviews = ({ id }: Props) => {
                         value={review.rate}
                         edit={false}
                         size={24}
-                        activeColor="#ffd700"
+                        activeColor="#00308F"
                       />
                     </div>
                     <span>{formatteDate(review.updatedAt)}</span>
@@ -86,7 +100,7 @@ const Reviews = ({ id }: Props) => {
                     value={review.rate}
                     edit={false}
                     size={24}
-                    activeColor="#ffd700"
+                    activeColor="#00308F"
                   />
                 </div>
               </div>

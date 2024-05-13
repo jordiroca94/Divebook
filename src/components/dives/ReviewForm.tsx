@@ -116,7 +116,7 @@ const ReviewForm = ({ id }: Props) => {
                 count={5}
                 onChange={ratingChanged}
                 size={24}
-                activeColor="#ffd700"
+                activeColor="#00308F"
               />
             </div>
           </div>
@@ -125,7 +125,7 @@ const ReviewForm = ({ id }: Props) => {
               count={5}
               onChange={ratingChanged}
               size={24}
-              activeColor="#ffd700"
+              activeColor="#00308F"
             />
           </div>
         </div>
