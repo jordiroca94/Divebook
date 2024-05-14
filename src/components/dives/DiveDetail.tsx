@@ -131,7 +131,7 @@ const DiveDetail = ({ id }: Props) => {
               </div>
             </Grid>
             <Grid>
-              <p className="col-span-4 lg:col-span-7 lg:col-start-2 text-lg pt-2 lg:py-10">
+              <p className="col-span-4 lg:col-span-7 lg:col-start-2 text-lg pt-2 lg:py-10 text-justify">
                 {item.description}
               </p>
               <div className="col-span-4 lg:col-span-3 lg:col-start-9 text-lg lg:py-10">

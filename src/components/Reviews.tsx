@@ -84,10 +84,14 @@ const Reviews = ({ id }: Props) => {
               </div>
               <div className="flex justify-between w-full gap-4">
                 <div className="w-full md:w-[70%]">
-                  <div className=" py-2 px-3 rounded-md w-full">
+                  <div className=" py-2 pl-3 rounded-md w-full text-justify">
                     {review.description}
                   </div>
-                  <div className="w-full flex justify-between items-center lg:justify-end ">
+                  <div
+                    className={`w-full flex items-center ${
+                      !review.rate ? "justify-end" : "justify-between"
+                    } lg:justify-end px-3 py-2`}
+                  >
                     {review.rate && (
                       <div className="md:hidden">
                         <ReactStars
