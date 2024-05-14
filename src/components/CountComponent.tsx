@@ -12,7 +12,6 @@ const CountComponent = () => {
   const getCounts = async () => {
     try {
       const res = await fetch("/api/getCounts", {
-        next: { tags: ["User", "Dive", "Review"] },
         method: "GET",
         headers: {
           "Content-Type": "application/json",
