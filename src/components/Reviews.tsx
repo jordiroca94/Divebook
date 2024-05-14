@@ -17,7 +17,7 @@ const Reviews = ({ id }: Props) => {
   const { data: session } = useSession();
   const [reviews, setReviews] = useState<any>([]);
   const [rate, setRate] = useState<number | null>(null);
-
+  const [reviewsWithRate, setReviewsWithRate] = useState<number | null>();
   const getReviews = async () => {
     try {
       const reviews = await fetch("/api/getReviews", {
@@ -48,6 +48,7 @@ const Reviews = ({ id }: Props) => {
       setRate(rateAverage);
 
       setReviews(diveReviews);
+      setReviewsWithRate(reviewsWithRate.length);
     } catch {
       throw Error("An error occurred while fetching data.");
     }
@@ -65,6 +66,7 @@ const Reviews = ({ id }: Props) => {
             <div className="flex items-center gap-2">
               <MdStarRate className="size-6 text-primary" />
               <div className="text-lg">{rate}</div>
+              <div className="text-lg text-gray">({reviewsWithRate})</div>
             </div>
           )}
         </div>

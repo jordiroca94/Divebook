@@ -19,7 +19,7 @@ const DiveCard = ({
 }: DiveCardType) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [rate, setRate] = useState<any>(null);
-
+  const [reviewsWithRate, setReviewsWithRate] = useState<number | null>(null);
   const getUser = async () => {
     try {
       const userData = await fetch("/api/getUserData", {
@@ -64,6 +64,7 @@ const DiveCard = ({
       const rateAverage =
         Math.ceil((rateSum / reviewsWithRate.length) * 10) / 10;
       setRate(rateAverage);
+      setReviewsWithRate(reviewsWithRate.length);
     } catch {
       throw Error("An error occurred while fetching data.");
     }
@@ -96,6 +97,7 @@ const DiveCard = ({
             <div className="flex items-center gap-2">
               <MdStarRate className="size-6 text-primary" />
               <div className="text-lg">{rate}</div>
+              <div className="text-lg text-gray">({reviewsWithRate})</div>
             </div>
           )}
         </div>
