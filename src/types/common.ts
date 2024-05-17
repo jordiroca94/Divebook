@@ -16,6 +16,7 @@ export type UserType = {
   birthDate?: string | null;
   instructor?: Boolean;
   terms?: boolean;
+  geolocation?: { latitude: number; longitude: number };
 };
 
 export type CountryType = {

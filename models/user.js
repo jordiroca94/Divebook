@@ -11,6 +11,7 @@ const userSchema = new Schema(
     birthDate: { type: Date || null },
     certificate: { type: String },
     instructor: { type: Boolean },
+    geolocation: { type: Object },
   },
   { timestamps: true }
 );

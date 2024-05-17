@@ -16,6 +16,7 @@ export async function POST(req) {
       certificate,
       birthDate,
       instructor,
+      geolocation,
     } = res;
     const hashedPassword = await bcrypt.hash(password, 10);
     await connectMongoDB();
@@ -29,6 +30,7 @@ export async function POST(req) {
       certificate,
       birthDate,
       instructor,
+      geolocation,
     });
     return NextResponse.json({ message: "User registered." }, { status: 201 });
   } catch (error) {

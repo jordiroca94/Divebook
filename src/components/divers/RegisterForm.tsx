@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -19,6 +19,8 @@ const RegisterForm = () => {
   const [openTermsModal, setOpenTermsModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [geolocation, setGeolocation] = useState<any>();
+  console.log(location, "Location->");
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);
 
@@ -97,6 +99,7 @@ const RegisterForm = () => {
             certificate: "",
             birthDate: null,
             instructor: false,
+            geolocation: geolocation,
           }),
         });
         reset();
@@ -107,6 +110,15 @@ const RegisterForm = () => {
       throw Error("An error occurred while registering. Please try again");
     }
   };
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude, longitude } = coords;
+        setGeolocation({ latitude, longitude });
+      });
+    }
+  }, []);
 
   return (
     <div className="grid pt-20 md:pt-0 place-items-center h-screen">
