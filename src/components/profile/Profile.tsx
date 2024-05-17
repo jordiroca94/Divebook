@@ -97,7 +97,7 @@ const Profile = () => {
         Profile
       </Title>
       <Grid className="mt-4 lg:mt-16">
-        <div className="lg:hidden col-span-4 py-6 px-3">
+        <div className="lg:hidden col-span-4 md:col-span-2 md:col-start-2 py-6 px-3">
           {userInfo?.avatarUrl ? (
             <img
               className="aspect-square object-cover rounded-full border border-primary"
