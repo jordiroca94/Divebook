@@ -73,9 +73,12 @@ const DiverDetail = ({ id }: Props) => {
             >
               {diver.name}
             </Title>
-            <div className="col-span-4 lg:hidden">
+            <div
+              className="col-span-4 lg:hidden flex justify-center 
+            "
+            >
               <img
-                className="aspect-square object-cover rounded-full border border-primary"
+                className="aspect-square object-cover rounded-full border border-primary md:w-1/2"
                 src={diver.avatarUrl}
                 alt="alt"
               />
