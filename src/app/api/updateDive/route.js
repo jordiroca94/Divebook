@@ -18,6 +18,7 @@ export async function POST(req) {
           deepth: parsedValues.deepth,
           temperature: parsedValues.temperature,
           weights: parsedValues.weights,
+          time: parsedValues.time,
           instructor: parsedValues.instructor,
           suit: parsedValues.suit,
           description: parsedValues.description,

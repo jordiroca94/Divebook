@@ -35,6 +35,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
       deepth: "",
       temperature: "",
       weights: "",
+      time: "",
       instructor: "",
       suit: "",
       description: "",
@@ -75,6 +76,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
           weights: values.weights
             ? values.weights.concat(" ", "kg")
             : item?.weights,
+          time: values.time ? values.time.concat(" ", "min") : item?.time,
           instructor: values.instructor ? values.instructor : item?.instructor,
           suit: values.suit ? values.suit : item?.suit,
           description: values.description
@@ -106,6 +108,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
           weights: values.weights
             ? values.weights.concat(" ", "kg")
             : item?.weights,
+          time: values.time ? values.time.concat(" ", "min") : item?.time,
           instructor: values.instructor ? values.instructor : item?.instructor,
           suit: values.suit ? values.suit : item?.suit,
           description: values.description
@@ -241,17 +244,15 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
         </div>
         <div className="flex flex-col lg:flex-row lg:gap-6">
           <div className="flex flex-col gap-4 w-full lg:w-1/2">
-            <label htmlFor="file" className="font-medium pt-4">
-              Add an Image
+            <label htmlFor="time" className="font-medium pt-4">
+              Duration
             </label>
-            <SingleImageDropzone
-              width={100}
-              height={100}
-              value={file}
-              onChange={(file) => {
-                setFile(file);
-                uploadFile(file);
-              }}
+            <input
+              id="time"
+              className="border border-mediumGray py-2 px-3 rounded-md w-full"
+              type="number"
+              placeholder="Duration in min"
+              {...register("time")}
             />
           </div>
           <div className="flex flex-col gap-4 w-full lg:w-1/2">
@@ -274,6 +275,22 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
               <option value="Semi-dry suits">Semi-dry suits </option>
               <option value="Exposure suits">Exposure suits </option>
             </select>
+          </div>
+        </div>
+        <div className="flex flex-col lg:flex-row lg:gap-6">
+          <div className="flex flex-col gap-4 w-full lg:w-1/2">
+            <label htmlFor="file" className="font-medium pt-4">
+              Add an Image
+            </label>
+            <SingleImageDropzone
+              width={100}
+              height={100}
+              value={file}
+              onChange={(file) => {
+                setFile(file);
+                uploadFile(file);
+              }}
+            />
           </div>
         </div>
         <div className="flex flex-col lg:flex-row lg:gap-6">
