@@ -10,6 +10,7 @@ const diveSchema = new Schema(
     deepth: { type: String, required: true },
     temperature: { type: String, required: true },
     weights: { type: String, required: true },
+    time: { type: String, required: true },
     instructor: { type: String },
     suit: { type: String, required: true },
     description: { type: String, required: true },

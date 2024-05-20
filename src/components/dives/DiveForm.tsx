@@ -32,6 +32,7 @@ const DiveForm = () => {
     deepth: z.string().min(1, { message: "Required" }),
     temperature: z.string().min(1, { message: "Required" }),
     weights: z.string().min(1, { message: "Required" }),
+    time: z.string().min(1, { message: "Required" }),
     instructor: z.string().optional(),
     suit: z.string().min(1, { message: "Required" }),
     description: z.string().min(1, { message: "Required" }),
@@ -57,6 +58,7 @@ const DiveForm = () => {
       deepth: "",
       temperature: "",
       weights: "",
+      time: "",
       instructor: "",
       suit: "",
     },
@@ -83,6 +85,7 @@ const DiveForm = () => {
       deepth: values.deepth.concat(" ", "m"),
       temperature: values.temperature.concat(" ", "ºC"),
       weights: values.weights.concat(" ", "kg"),
+      time: values.time.concat(" ", "min"),
       instructor: values.instructor,
       suit: values.suit,
       description: values.description,
@@ -129,6 +132,11 @@ const DiveForm = () => {
               className="border border-mediumGray py-2 px-3 rounded-md lg:w-1/2"
               type="date"
             />
+            {errors.date?.message && (
+              <p aria-describedby="date" className="text-red pt-1">
+                {errors.date?.message}
+              </p>
+            )}
             <label htmlFor="name" className="font-medium pt-4">
               Put a name to your dive
             </label>
@@ -216,6 +224,21 @@ const DiveForm = () => {
             {errors.weights?.message && (
               <p aria-describedby="weights" className="text-red pt-1">
                 {errors.weights?.message}
+              </p>
+            )}
+            <label htmlFor="time" className="font-medium pt-4">
+              Dive duration
+            </label>
+            <input
+              id="time"
+              className="border border-mediumGray py-2 px-3 rounded-md w-full lg:w-1/2"
+              type="number"
+              placeholder="Duration in min"
+              {...register("time")}
+            />
+            {errors.time?.message && (
+              <p aria-describedby="time" className="text-red pt-1">
+                {errors.time?.message}
               </p>
             )}
             <label htmlFor="instructor" className="font-medium pt-4">

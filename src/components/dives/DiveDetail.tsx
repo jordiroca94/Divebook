@@ -117,6 +117,10 @@ const DiveDetail = ({ id }: Props) => {
                     <p>{item.weights}</p>
                   </div>
                   <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
+                    <div className="text-lg font-semibold">Duration:</div>
+                    <p>{item.time}</p>
+                  </div>
+                  <div className="flex justify-between border-b border-mediumGray items-center gap-2 py-3">
                     <div className="text-lg font-semibold">Suit:</div>
                     <p>{item.suit}</p>
                   </div>
