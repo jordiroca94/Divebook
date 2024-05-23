@@ -12,12 +12,16 @@ import DiveSkeleton from "./DiveSkeleton";
 import { formatteDate } from "@/utils/util";
 import { RiSortAsc } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
+import { MdFilterAlt } from "react-icons/md";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
   const [loadItems, setLoadItems] = useState<number>(6);
   const [sort, setSort] = useState<"date" | "rate">("date");
   const [openSortModal, setOpenSortModal] = useState<boolean>(false);
+  const [filter, setFilter] = useState<"country" | "">("");
+
+  const [openFilterModal, setOpenFilterModal] = useState<boolean>(false);
 
   const getAllDives = async () => {
     const data = await fetch("api/getDives", {
@@ -64,46 +68,63 @@ const AllDives = () => {
         >
           Dives of Our Users
         </Title>
-        <span className="col-span-full flex justify-end">
-          <div className="relative">
-            <button
-              onClick={() => setOpenSortModal(!openSortModal)}
-              className="flex gap-2 items-center text-base lg:text-lg hover:text-black/70"
-            >
-              <RiSortAsc className="size-6" />
-              <div>Sort by:</div>
-              <div className="capitalize">{sort}</div>
-            </button>
-            {openSortModal && (
-              <div className="border-2 bg-white border-mediumGray shadow-md rounded-md absolute top-10 right-0 ">
-                <div className="text-base lg:text-lg divide-y divide-mediumGray py-2">
-                  <button
-                    disabled={sort === "date" && true}
-                    onClick={() => {
-                      setSort("date"), setOpenSortModal(false);
-                    }}
-                    className="px-4 pb-1 flex items-center gap-3 hover:text-black/70"
-                  >
-                    <div>Date</div>
-                    <FaCheck
-                      className={sort === "date" ? "visible" : "invisible"}
-                    />
-                  </button>
-                  <button
-                    disabled={sort === "rate" && true}
-                    onClick={() => {
-                      setSort("rate"), setOpenSortModal(false);
-                    }}
-                    className="px-4 pt-1 flex items-center gap-3 hover:text-black/70"
-                  >
-                    <div>Rate</div>
-                    <FaCheck
-                      className={sort === "rate" ? "visible" : "invisible"}
-                    />
-                  </button>
+        <span className="col-span-full flex justify-center lg:justify-end">
+          <div className="flex gap-6">
+            <div className="relative">
+              <button
+                onClick={() => setOpenFilterModal(!openFilterModal)}
+                className="flex gap-2 items-center text-base lg:text-lg hover:text-black/70"
+              >
+                <MdFilterAlt className="size-6" />
+                <div>Filter</div>
+              </button>
+              {openFilterModal && (
+                <div className="p-5 border-2 bg-white border-mediumGray shadow-md rounded-md absolute top-10 right-0 ">
+                  Country:
                 </div>
-              </div>
-            )}
+              )}
+              ,
+            </div>
+            <div className="relative">
+              <button
+                onClick={() => setOpenSortModal(!openSortModal)}
+                className="flex gap-2 items-center text-base lg:text-lg hover:text-black/70"
+              >
+                <RiSortAsc className="size-6" />
+                <div>Sort by:</div>
+                <div className="capitalize">{sort}</div>
+              </button>
+              {openSortModal && (
+                <div className="border-2 bg-white border-mediumGray shadow-md rounded-md absolute top-10 right-0 ">
+                  <div className="text-base lg:text-lg divide-y divide-mediumGray">
+                    <button
+                      disabled={sort === "date" && true}
+                      onClick={() => {
+                        setSort("date"), setOpenSortModal(false);
+                      }}
+                      className="py-3 px-5 flex items-center gap-3 hover:text-black/70"
+                    >
+                      <div>Date</div>
+                      <FaCheck
+                        className={sort === "date" ? "visible" : "invisible"}
+                      />
+                    </button>
+                    <button
+                      disabled={sort === "rate" && true}
+                      onClick={() => {
+                        setSort("rate"), setOpenSortModal(false);
+                      }}
+                      className="py-3 px-5 flex items-center gap-3 hover:text-black/70"
+                    >
+                      <div>Rate</div>
+                      <FaCheck
+                        className={sort === "rate" ? "visible" : "invisible"}
+                      />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </span>
 
