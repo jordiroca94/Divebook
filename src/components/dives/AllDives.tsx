@@ -30,9 +30,30 @@ const AllDives = () => {
     setData(dives);
   };
 
+  const getDivesByRate = async () => {
+    const data = await fetch("api/getDivesByRate", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const { divesWithRate } = await data.json();
+    const dives = divesWithRate.map((item: any) => {
+      item.dive.rate = item.rate;
+      return item.dive;
+    });
+    const sortedRates = dives.sort((a: any, b: any) => b.rate - a.rate);
+
+    setData(sortedRates);
+  };
+
   useEffect(() => {
-    getAllDives();
-  }, []);
+    if (sort === "date") {
+      getAllDives();
+    } else if (sort === "rate") {
+      getDivesByRate();
+    }
+  }, [sort]);
   return (
     <Container>
       <BackButton />
@@ -57,6 +78,7 @@ const AllDives = () => {
               <div className="border-2 bg-white border-mediumGray shadow-md rounded-md absolute top-10 right-0 ">
                 <div className="text-base lg:text-lg divide-y divide-mediumGray py-2">
                   <button
+                    disabled={sort === "date" && true}
                     onClick={() => {
                       setSort("date"), setOpenSortModal(false);
                     }}
@@ -68,6 +90,7 @@ const AllDives = () => {
                     />
                   </button>
                   <button
+                    disabled={sort === "rate" && true}
                     onClick={() => {
                       setSort("rate"), setOpenSortModal(false);
                     }}
@@ -84,7 +107,7 @@ const AllDives = () => {
           </div>
         </span>
 
-        {data.length
+        {data && data.length
           ? data.slice(0, loadItems).map((item: DiveType) => {
               const date = formatteDate(item.date);
               return (
@@ -102,7 +125,7 @@ const AllDives = () => {
               );
             })
           : new Array(6).fill(0).map((_, i) => <DiveSkeleton key={i} />)}
-        {loadItems < data.length && (
+        {data && loadItems < data.length && (
           <div className="col-span-4 lg:col-span-12 flex justify-center text-center mt-4 bs:mt-10">
             <Button
               onClick={() => setLoadItems(loadItems + 3)}
