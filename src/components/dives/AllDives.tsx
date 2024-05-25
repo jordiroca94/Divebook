@@ -12,7 +12,6 @@ import DiveSkeleton from "./DiveSkeleton";
 import { formatteDate } from "@/utils/util";
 import { RiSortAsc } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
-import { MdFilterAlt } from "react-icons/md";
 
 const AllDives = () => {
   const [data, setData] = useState<DiveType[]>([]);
