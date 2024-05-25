@@ -34,15 +34,15 @@ const TermsModal = ({ setOpenTermsModal, setIsChecked }: Props) => {
         </p>
         <br></br>
         <p>
-          <strong>1. Age Restriction:</strong> Users under the age of 14 are not
+          <strong>1. Age Restriction:</strong> Users under the age of 13 are not
           permitted to use Diverbook. By accessing or using Diverbook, you
-          confirm that you are at least 14 years old.
+          confirm that you are at least 13 years old.
         </p>
         <br></br>
         <p>
           <strong>2. User Conduct:</strong> Diverbook aims to provide a safe and
           enjoyable environment for all users. You agree not to engage in any
-          conduct that violates these Terms or any applicable laws. In
+          conduct that violates these terms or any applicable laws. In
           particular, you agree not to post, upload, or share any content that
           is unlawful, harmful, threatening, abusive, harassing, defamatory,
           vulgar, obscene, or otherwise objectionable.
@@ -53,22 +53,22 @@ const TermsModal = ({ setOpenTermsModal, setIsChecked }: Props) => {
           for your use of Diverbook and any content you post, upload, or share
           on the platform. Diverbook does not endorse or control the content
           posted by users, but reserves the right to remove any content that it
-          considers inappropriate or in violation of these Terms.
+          considers inappropriate or in violation of these terms.
         </p>
         <br></br>
         <p>
           <strong>4. Account Termination:</strong> Diverbook reserves the right
           to terminate or suspend your account and access at any time and for
-          any reason, including but not limited to violations of these Terms or
+          any reason, including but not limited to violations of these terms or
           misuse of the platform.
         </p>
         <br></br>
         <p>
-          <strong>5. Modification of Terms:</strong> Diverbook may modify these
-          Terms at any time without prior notice. It is your responsibility to
-          review these Terms regularly to stay informed of any changes. Your
+          <strong>5. Modification of terms:</strong> Diverbook may modify these
+          terms at any time without prior notice. It is your responsibility to
+          review these terms regularly to stay informed of any changes. Your
           continued use of Diverbook after the posting of changes constitutes
-          your acceptance of the modified Terms.
+          your acceptance of the modified terms.
         </p>
         <br></br>
         <p>
@@ -87,14 +87,14 @@ const TermsModal = ({ setOpenTermsModal, setIsChecked }: Props) => {
         </p>
         <br></br>
         <p>
-          <strong>8. Governing Law:</strong> These Terms shall be governed by
+          <strong>8. Governing Law:</strong> These terms shall be governed by
           and construed in accordance with the laws of Spain. Any disputes
-          arising under these Terms shall be subject to the exclusive
+          arising under these terms shall be subject to the exclusive
           jurisdiction of the courts of Spain.
         </p>
         <br></br>
         <p>
-          If you have any questions or concerns about these Terms, please{" "}
+          If you have any questions or concerns about these terms, please{" "}
           <a className="text-primary underline" href="/contact">
             contact us.
           </a>
