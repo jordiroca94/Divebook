@@ -2,7 +2,7 @@
 
 ## Stack
 
-Diverbook is a full-stack website built with Next.js and TypeScript, styled with Tailwind CSS. The back-end is implemented using MongoDB and Node.js (REST Api). The login system is managed with NextAuth, and images are stored in Edgestore.
+Diverbook is a full-stack website built with Next.js and TypeScript, styled with Tailwind CSS. The back-end is implemented using MongoDB, Node.js & a REST API. The login system is managed with NextAuth, and images are stored in Edgestore.
 
 ## What is about?
 
