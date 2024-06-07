@@ -5,10 +5,10 @@ export const formatteDate = (value: string | null | Date) => {
   return formattedDate;
 };
 
-export const getAge = (date: any) => {
-  const birthdate: any = new Date(date);
-  const today: any = new Date();
-  const differenceInMilliseconds = today - birthdate;
+export const getAge = (date: string | number | Date) => {
+  const birthdate: Date = new Date(date);
+  const today: Date = new Date();
+  const differenceInMilliseconds = today.getTime() - birthdate.getTime();
   const age = Math.floor(
     differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
   );

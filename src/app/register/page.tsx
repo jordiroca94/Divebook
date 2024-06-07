@@ -5,8 +5,10 @@ import { redirect } from "next/navigation";
 // @ts-ignore
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Header from "@/components/Header";
+import { Session } from "next-auth";
+
 const page = async () => {
-  const session = await getServerSession<any>(authOptions);
+  const session: Session | null = await getServerSession(authOptions);
   if (session) redirect("/");
   return (
     <div>

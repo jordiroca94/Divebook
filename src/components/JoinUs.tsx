@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 const JoinUs = () => {
   const { data: session } = useSession();
-
   if (session) return null;
 
   return (

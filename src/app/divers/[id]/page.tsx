@@ -1,9 +1,9 @@
-import DiveDetail from "@/components/dives/DiveDetail";
 import DiverDetail from "@/components/divers/DiverDetail";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { ParamsType } from "@/types/common";
 
-const page = ({ params }: any) => {
+const page = ({ params }: ParamsType) => {
   return (
     <div>
       <Header />

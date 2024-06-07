@@ -4,13 +4,18 @@ import { connectMongoDB } from "../../../../../lib/mongodb";
 import User from "../../../../../models/user";
 import bcrypt from "bcryptjs";
 
+interface Credentials {
+  email: string;
+  password: string;
+}
+
 const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-      async authorize(credentials: any) {
-        const { email, password } = credentials;
+      async authorize(credentials) {
+        const { email, password } = credentials as Credentials;
 
         try {
           await connectMongoDB();

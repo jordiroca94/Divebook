@@ -20,7 +20,6 @@ const RegisterForm = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [geolocation, setGeolocation] = useState<any>();
-  console.log(location, "Location->");
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);
 
