@@ -1,7 +1,7 @@
 "use client";
 import { RxCross2 } from "react-icons/rx";
 import Modal from "../ui/Modal";
-import { CountryType } from "@/types/common";
+import { CountryType, UserType } from "@/types/common";
 import { useMemo, useRef, useState } from "react";
 import { useEdgeStore } from "../../../lib/edgestore";
 import countryList from "react-select-country-list";
@@ -31,7 +31,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   const { data: session } = useSession();
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
-  const form: any = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<CountryType>();
   const [deleteModal, setDeleteModal] = useState<boolean>(false);

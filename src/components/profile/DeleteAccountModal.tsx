@@ -5,12 +5,13 @@ import { RxCross2 } from "react-icons/rx";
 import { useSession } from "next-auth/react";
 import Loader from "../ui/Loader";
 import { signOut } from "next-auth/react";
+import { UserType } from "@/types/common";
 
 type Props = {
   setDeleteModal: (value: boolean) => void;
   deleteValue: string;
   setDeleteValue: (value: string) => void;
-  userInfo: any;
+  userInfo: UserType;
 };
 
 const DeleteAccountModal = ({

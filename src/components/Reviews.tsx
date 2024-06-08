@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Grid from "./ui/Grid";
 // @ts-ignore
@@ -9,13 +8,14 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { formatteDate } from "@/utils/util";
 import { MdStarRate } from "react-icons/md";
+import { ReviewType } from "@/types/common";
 
 type Props = {
   id: string;
 };
 const Reviews = ({ id }: Props) => {
   const { data: session } = useSession();
-  const [reviews, setReviews] = useState<any>([]);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [rate, setRate] = useState<number | null>(null);
   const [reviewsWithRate, setReviewsWithRate] = useState<number | null>();
   const getReviews = async () => {
@@ -27,19 +27,19 @@ const Reviews = ({ id }: Props) => {
         },
       });
       const { data } = await reviews.json();
-      const diveReviews: any = [];
-      data.map((item: any) => {
+      const diveReviews: ReviewType[] = [];
+      data.map((item: ReviewType) => {
         if (item.diveId === id) {
           diveReviews.push(item);
         }
       });
 
       const reviewsWithRate = diveReviews.filter(
-        (review: any) => review.rate !== null
+        (review: ReviewType) => review.rate !== null
       );
 
       const rateSum = diveReviews.reduce(
-        (accumulator: any, review: any) => accumulator + review.rate,
+        (accumulator: number, review: ReviewType) => accumulator + review.rate,
         0
       );
 
@@ -71,7 +71,7 @@ const Reviews = ({ id }: Props) => {
           )}
         </div>
         <div>
-          {reviews.map((review: any) => (
+          {reviews.map((review: ReviewType) => (
             <div className="flex md:gap-6 mt-6 md:mt-10" key={review._id}>
               <div className="flex flex-col justify-start items-center gap-2 pt-2 w-[100px]">
                 <div className="aspect-square size-16 md:size-20 text-3xl lg:text-5xl border-mediumGray2 rounded-full border flex justify-center items-center">
@@ -105,7 +105,7 @@ const Reviews = ({ id }: Props) => {
                         />
                       </div>
                     )}
-                    <span>{formatteDate(review.updatedAt)}</span>
+                    <span>{formatteDate(review.createdAt)}</span>
                   </div>
                 </div>
                 {review.rate && (

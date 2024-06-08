@@ -67,3 +67,13 @@ export type HighlightedDestinationType = {
 export type ParamsType = {
   params: { id: string };
 };
+
+export type ReviewType = {
+  _id: string;
+  postedBy: string;
+  userId: string;
+  diveId: string;
+  rate: number;
+  description: string;
+  createdAt: Date;
+};

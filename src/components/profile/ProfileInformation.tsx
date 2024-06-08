@@ -70,7 +70,7 @@ const ProfileInformation = ({ userInfo }: Props) => {
       </div>
       {userInfo?.description && (
         <div className="lg:col-start-2 lg:col-span-10 col-span-4">
-          <p className="font-semibold">About you:</p>
+          <p className="font-semibold lg:mb-3">About you:</p>
           <span className="font-light">{userInfo.description} </span>
         </div>
       )}

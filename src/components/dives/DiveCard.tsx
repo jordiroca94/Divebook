@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { DiveCardType } from "@/types/common";
+import { DiveCardType, ReviewType } from "@/types/common";
 import Button from "../ui/Button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const DiveCard = ({
   profileCard,
 }: DiveCardType) => {
   const [userId, setUserId] = useState<string | null>(null);
-  const [rate, setRate] = useState<any>(null);
+  const [rate, setRate] = useState<number | null>(null);
   const [reviewsWithRate, setReviewsWithRate] = useState<number | null>(null);
   const getUser = async () => {
     try {
@@ -45,19 +45,19 @@ const DiveCard = ({
         },
       });
       const { data } = await reviews.json();
-      const diveReviews: any = [];
-      data.map((item: any) => {
+      const diveReviews: ReviewType[] = [];
+      data.map((item: ReviewType) => {
         if (item.diveId === _id) {
           diveReviews.push(item);
         }
       });
 
       const reviewsWithRate = diveReviews.filter(
-        (review: any) => review.rate !== null
+        (review: ReviewType) => review.rate !== null
       );
 
       const rateSum = diveReviews.reduce(
-        (accumulator: any, review: any) => accumulator + review.rate,
+        (accumulator: number, review: ReviewType) => accumulator + review.rate,
         0
       );
 

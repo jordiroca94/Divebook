@@ -21,10 +21,10 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
   const [loading, setLoading] = useState(false);
   const [countryValue, setCountryValue] = useState<CountryType>();
   const [file, setFile] = useState<File>();
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [_imageUrl, setImageUrl] = useState<string>();
 
   const { edgestore } = useEdgeStore();
-  const form: any = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const options: any = useMemo(() => countryList().getData(), []);
   const { handleSubmit, register } = useForm<DiveType>({
     defaultValues: {
@@ -320,7 +320,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
             className="order-1 lg:order-2 mt-4"
             loading={loading}
             submit
-            label="Edit Profile"
+            label="Edit Dive"
           />
         </div>
       </form>
