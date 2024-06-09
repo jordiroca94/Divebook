@@ -160,7 +160,7 @@ const Profile = () => {
           </div>
         )}
       </Grid>
-      {openModal && (
+      {openModal && userInfo && (
         <EditProfileForm userInfo={userInfo} setOpenModal={setOpenModal} />
       )}
     </Container>

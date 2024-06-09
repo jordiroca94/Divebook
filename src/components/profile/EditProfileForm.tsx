@@ -23,7 +23,7 @@ type EditFormTypes = {
 };
 
 type Props = {
-  userInfo: any;
+  userInfo: UserType;
   setOpenModal: (value: boolean) => void;
 };
 
@@ -32,6 +32,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
   const form = useRef<HTMLFormElement>(null);
+
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<CountryType>();
   const [deleteModal, setDeleteModal] = useState<boolean>(false);

@@ -1,8 +1,9 @@
+import { UserType } from "@/types/common";
 import { getAge } from "@/utils/util";
 import React from "react";
 
 type Props = {
-  userInfo: any;
+  userInfo: UserType | undefined;
 };
 
 const ProfileInformation = ({ userInfo }: Props) => {

@@ -38,12 +38,15 @@ const AllDives = () => {
       },
     });
     const { divesWithRate } = await data.json();
-    const dives = divesWithRate.map((item: any) => {
-      item.dive.rate = item.rate;
-      return item.dive;
-    });
-    const sortedRates = dives.sort((a: any, b: any) => b.rate - a.rate);
-
+    const dives = divesWithRate.map(
+      (item: { dive: DiveType; rate: number }) => {
+        item.dive.rate = item.rate;
+        return item.dive;
+      }
+    );
+    const sortedRates = dives.sort(
+      (a: DiveType, b: DiveType) => b.rate! - a.rate!
+    );
     setData(sortedRates);
   };
 

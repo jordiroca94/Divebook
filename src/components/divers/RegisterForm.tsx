@@ -7,7 +7,7 @@ import { z } from "zod";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
 import Title from "../ui/Title";
-import { UserType } from "@/types/common";
+import { GeolocationType, UserType } from "@/types/common";
 import TermsModal from "../TermsModal";
 import Button from "../ui/Button";
 
@@ -19,7 +19,7 @@ const RegisterForm = () => {
   const [openTermsModal, setOpenTermsModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [geolocation, setGeolocation] = useState<any>();
+  const [geolocation, setGeolocation] = useState<GeolocationType>();
   const hasUppercase = RegExp(/[A-Z]/);
   const hasNumber = RegExp(/\d/);
 

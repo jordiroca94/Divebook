@@ -12,7 +12,7 @@ import countryList from "react-select-country-list";
 import { SingleImageDropzone } from "../ui/SingleImageDropzone";
 
 type Props = {
-  item: any;
+  item: DiveType | undefined;
   setOpenModal: (data: boolean) => void;
   setDeleteModal: (data: boolean) => void;
 };
@@ -82,7 +82,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
           description: values.description
             ? values.description
             : item?.description,
-          imageUrl: imageUrl ? imageUrl : item.imageUrl,
+          imageUrl: imageUrl ? imageUrl : item?.imageUrl,
         };
         await fetch("/api/updateDive", {
           method: "POST",
@@ -91,7 +91,7 @@ const EditDiveForm = ({ item, setOpenModal, setDeleteModal }: Props) => {
           },
           body: JSON.stringify({
             parsedValues,
-            id: item._id,
+            id: item?._id,
           }),
         });
         window.location.reload();

@@ -16,8 +16,10 @@ export type UserType = {
   birthDate?: string | null;
   instructor?: Boolean;
   terms?: boolean;
-  geolocation?: { latitude: number; longitude: number };
+  geolocation?: GeolocationType;
 };
+
+export type GeolocationType = { latitude: number; longitude: number };
 
 export type CountryType = {
   value: string;
@@ -40,6 +42,7 @@ export type DiveType = {
   suit: string;
   updatedAt: string;
   imageUrl: string;
+  rate?: number;
 };
 
 export type DiveCardType = {
