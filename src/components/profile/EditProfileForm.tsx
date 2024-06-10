@@ -36,7 +36,7 @@ const EditProfileForm = ({ userInfo, setOpenModal }: Props) => {
   const options: any = useMemo(() => countryList().getData(), []);
   const [countryValue, setCountryValue] = useState<CountryType>();
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  const [deleteValue, setDeleteValue] = useState<any>();
+  const [deleteValue, setDeleteValue] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const { handleSubmit, register } = useForm<EditFormTypes>({
     defaultValues: {
