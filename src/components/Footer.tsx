@@ -30,7 +30,11 @@ const Footer = () => {
         </div>
         <div className="text-base">
           Copyright &copy; {year}{" "}
-          <a className="hover:underline" href="https://jordirocasoler.com/">
+          <a
+            className="hover:underline"
+            target="_blank"
+            href="https://jordirocasoler.com/"
+          >
             Jordi Roca
           </a>
         </div>
