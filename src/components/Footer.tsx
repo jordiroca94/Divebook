@@ -28,7 +28,12 @@ const Footer = () => {
             <FaGithub className="size-8 hover:text-primary hover:bg-white hover:border-white hover:border rounded-full transform duration-300" />
           </Link>
         </div>
-        <div className="text-base">Copyright &copy; {year} Jordi Roca</div>
+        <div className="text-base">
+          Copyright &copy; {year}{" "}
+          <a className="hover:underline" href="https://jordirocasoler.com/">
+            Jordi Roca
+          </a>
+        </div>
       </footer>
     </Container>
   );
